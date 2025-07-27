@@ -1,0 +1,128 @@
+![](assets/header.png)
+
+
+# **Welcome to Web Library for CadenzaFlow**
+
+
+
+##  <a name='Announcements'></a>📢 Announcements
+We are proud to announce that CadenzaFlow - grounded in decades of workflow management and real-world project experience of our teams - is evolving into a leading-edge Workflow Management product: open, powerful, intuitive, and uncompromising. 
+
+It upholds our commitment to open-source values and customer sovereignty, without having to sacrifice operational manageability or performance. Designed for flexibility, CadenzaFlow can be deployed in the cloud, on-premises, or in local environments - entirely on your terms as the Customer.
+
+Stay tuned for more updates as we approach the initial release and upcoming releases.
+
+  * Follow us on **[TODO: LinkedIn](todo_link.md)** for updates 
+  * subscribe to our **[TODO: mailing list](todo_link.md)** to be the first to hear the news
+  * or **[TODO: email](todo_link.md)** us with any questions or feedback!
+
+---
+
+##  <a name='AboutCadenzaFlow'></a>About CadenzaFlow?
+
+CadenzaFlow is a secure, enterprise-grade Workflow Management product by PiA. In response to Camunda's recent strategic shift - including the discontinuation of support for Camunda 7 Community Edition and renounce of some key principles - it is a modern, stable fork of Camunda 7 with a robust Enterprise grade roadmap fully supported and maintained by PiA commited to retain the best features and to-be discountinued open source freedom of Camunda.
+
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 50%; vertical-align: bottom; padding-right: 20px; background-color: white;">
+      <div style="text-align: center;">
+        <h2>Enterprise Grade, long-term and open-source Workflow Platform</h2>
+      </div>
+      <p>
+        <ul>
+          <li>✅ <b>Truly open-source Community Edition</b> - no hidden licensing restrictions for production use, aligning with what our customers expect.</li>
+          <li>✅ <b>Optional Enterprise Edition</b> - available for organizations requiring advanced features and support.</li>
+          <li>✅ <b>Long-Term Support (LTS) and maintenance</b> - actively maintained for both Community and Enterprise Editions.</li>
+          <li>✅ <b>Uncompromising operational manageability</b> - built-in capabilities for robust process governance and observability.</li>
+          <li>✅ <b>AI-powered and agentic orchestration features</b> - coming soon to enhance automation and decision-making.</li>
+          <li>✅ <b>Enterprise-grade human task management</b> - streamlined, scalable, and built for real-world workflows.</li>
+          <li>✅ <b>Full backward compatibility</b> - ensuring seamless migration paths from Camunda 7.</li>
+        </ul>      
+      </p>
+    </td>
+    <td style="width: 50%; text-align: center;">
+      <img src="assets/cadenzaflow.png" alt="CadenzaFlow" width=400>
+    </td>
+  </tr>
+</table>
+
+
+---
+
+
+##  <a name='OurManifestoandWhyCadenzaFlow'></a>Our Manifesto and Why CadenzaFlow?
+
+<table style="width: 100%;">  
+  <tr>
+    <td style="width: 50%; vertical-align: bottom; padding-right: 20px; background-color: orange;">
+
+      <div style="text-align: center;">
+        <h2>Enterprise Workflow Management (EWfM) Manifesto</h2>
+        <p>
+          A fully functional, scalable, governable, and operationally manageable workflow platform should not be a privilege - it should be a right in the open-source, cloud computing world.
+        </p>
+      </div>
+      <br>
+      <div style="text-align: center;">
+        <a href="10-HOME/enterprise-wfm-manifesto/" class="md-button md-button--primary">
+          Enterprise Workflow Management<br>(EWfM)<br>Manifesto
+        </a>
+      </div>   
+    </td>
+    <td style="width: 50%; vertical-align: bottom; padding-right: 20px; background-color: grey; color: white;">
+
+      <div style="text-align: center;">
+        <h2>Why transform to CadenzaFlow from Camunda 7?</h2>
+        <p>
+          Facts and insights to understand the driving factors for transitioning to CadenzaFlow.
+        </p>
+      </div>
+      <br>
+      <div style="text-align: center;">
+        <a href="10-HOME/why-cadenzaflow/" class="md-button md-button--primary">
+          <br>Why CadenzaFlow?<br> <br>
+        </a>      
+      </div>  
+    </td>
+  </tr>
+</table>
+
+---
+
+##  <a name='CadenzaFlow Roadmap'></a>CadenzaFlow Editions, Release Cycles & Roadmap
+
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 50%; text-align: center;">
+          <img src="/assets/roadmap.png" alt="CadenzaFlow" >
+    </td>
+    <td style="width: 50%; vertical-align: bottom; padding-right: 20px; background-color: lightgreen;">
+        <div style="text-align: center;  font-size: 20px; font-weight: bold;">
+          <i>Editions & Release Cycles Overview</i>
+        </div>
+        <div style="text-align: center;">
+          <a href="20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-button md-button--primary"
+          style="display: inline-block; width: 200px;">
+            Editions &<br>Release Cycles<br>Overview<br>
+          </a>    
+        </div>  
+        <br><br>
+        <div style="text-align: center;">
+        <div style="text-align: center;  font-size: 20px; font-weight: bold;">
+          <i>Shaping the Future, One Release at a Time.</i>
+        </div>           
+        <div style="text-align: center;">
+          <a href="20-ED-REL-ROADMAP/cadenzaflow-roadmap/" class="md-button md-button--primary"
+          style="display: inline-block; width: 200px;">
+            CadenzaFlow<br> Roadmap<br>
+          </a>    
+        </div>  
+    </td>
+
+  </tr>
+</table>
+
+
+---
+
+
