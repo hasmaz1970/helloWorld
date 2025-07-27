@@ -1,0 +1,966 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: Pchg_Offline
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PUBLIC WS (http-REST) API SPECIFICATION:**
+      * **Reference Point Name:** Pchg*
+      * **API Name:** Pchg_Offline-Offline Charging
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/public/pchg/offlineCharging/{version}
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+tags:
+  - name: File
+    description: "Submit File of CSV and/or Delimited Records"
+  - name: CSV
+    description: "Submit List of CSV and/or Delimited Records"
+  - name: String Array
+    description: "Submit List of String Array Records"
+  - name: NVL
+    description: "Submit List of Name-Value-List Records"
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+  /fileDataStream:
+
+    post:
+      summary: 
+        Creates FileDataStream Resource as Charging Information Record to Offline Charging
+      operationId: chargingFileDataStream
+      tags:
+        - "File"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: FileDataStream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileDataStream"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/FileDataStreamRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /fileDataStream/{id}/file:
+
+    post:
+      summary: 
+        Uploads the file for the created FileDataStream Resource
+      operationId: chargingFileDataStreamUpload
+      tags:
+        - "File"
+      parameters:
+        - $ref: "#/components/parameters/id"        
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: File Upload
+        content:
+          application/octet-stream:
+            schema:
+              # a binary file of any type
+              type: string
+              format: binary
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /csvDataStream:
+
+    post:
+      summary: 
+        Creates/Registers CsvDataStream (Comma or Other Delimiter Seperated Values) Charging Information Records to Offline Charging
+      operationId: chargingCsvDataStream
+      tags:
+        - "CSV"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: CsvDataStream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CsvDataStream"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/CsvDataStreamRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+  /stringArrayDataStream:
+
+    post:
+      summary: 
+        Creates/Registers StringArrayDataStream Charging Information Records to Offline Charging
+      operationId: chargingStringArrayDataStream
+      tags:
+        - "String Array"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: StringArrayDataStream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StringArrayDataStream"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/StringArrayDataStreamRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+  /nvlDataStream:
+
+    post:
+      summary: 
+        Creates/Registers NvlDataStream (Name Value List) Charging Information Records to Offline Charging
+      operationId: chargingNvlDataStream
+      tags:
+        - "NVL"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: NvlDataStream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NvlDataStream"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/NvlDataStreamRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+          
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+#############################################################################
+## 5.x. HEADERS
+#############################################################################
+  headers:
+
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/transactionId'
+    X-Total-Count:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/X-Total-Count'
+    Location:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/Location'
+
+
+
+#############################################################################
+## 5.x. PARAMETERS
+#############################################################################
+  parameters:
+    id:
+      name: id
+      in: path
+      description: ID of Entity
+      required: true
+      schema:
+        type: string
+
+    
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/transactionId'   
+    fields:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/fields'
+    limit:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/limit'
+    offset:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/offset'
+    sort:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sort'
+    depth:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/depth'
+    expand:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/expand'
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response400'
+    Response401:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response401'
+    Response403:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response403'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response404'
+    Response405:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response405'
+    Response406:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response406'
+    Response409:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response409'
+    Response410:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response410'
+    Response411:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response411'
+    Response412:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response412'
+    Response413:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response413'
+    Response414:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response414'
+    Response415:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response415'
+    Response422:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response422'
+    Response429:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response429'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response500'
+    Response501:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response501'
+    Response502:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response502'
+    Response503:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response503'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response504'
+
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+
+
+    FileDataStream:        
+      description:
+        File DataStream.
+
+      allOf:
+        - $ref: "#/components/schemas/DataStream"
+        - type: object
+          properties:
+            fieldDelimiter:
+              description: |
+                Delimiter for CSV. 
+              type: string
+              example: ","
+            recordDelimiter:
+              description: |
+                Record Delimiter for CSV. Default newline.
+              type: string
+              example: "\n"
+              default: "\n"
+            data:
+              type: object
+              $ref: "#/components/schemas/FileDocumentStream"
+
+    FileDataStreamRef:
+      description: 
+        Reference. FileStream.
+
+      allOf:
+        - $ref: "#/components/schemas/EntityRef"
+#############################################################################
+
+    CsvDataStream:        
+      description:
+        CSV DataStream. 
+      allOf:
+        - $ref: "#/components/schemas/DataStream"
+        - type: object
+          properties:
+            fieldDelimiter:
+              description: |
+                Delimiter for CSV. 
+              type: string
+              example: ","
+            data:
+              type: object
+              $ref: "#/components/schemas/CsvStream"
+
+    CsvDataStreamRef:
+      description: 
+        Reference. CsvDataStream.
+
+      allOf:
+        - $ref: "#/components/schemas/EntityRef"
+#############################################################################
+
+    StringArrayDataStream:
+      description:
+        String Array DataStream
+      allOf:
+        - $ref: "#/components/schemas/DataStream"
+        - type: object
+          properties:
+            data:
+              type: object
+              $ref: "#/components/schemas/StringArrayStream"
+
+    StringArrayDataStreamRef:
+      description: 
+        Reference. StringArrayDataStream. 
+      allOf:
+        - $ref: "#/components/schemas/EntityRef"
+
+#############################################################################
+                  
+    NvlDataStream:
+      description: 
+        Name Value DataStream
+      allOf:
+        - $ref: "#/components/schemas/DataStream"
+        - type: object
+          properties:
+            data:
+              type: object
+              $ref: "#/components/schemas/NvlStream"
+
+    NvlDataStreamRef:
+      description: 
+        Reference.  NvlDataStream.
+      allOf:
+        - $ref: "#/components/schemas/EntityRef"
+
+#############################################################################
+
+  
+
+#############################################################################
+
+    DataStream:
+      description:
+        Represents **Data Model** for the Resource; without any identity, reference or type descriptor metadata.
+      allOf:
+        - $ref: "#/components/schemas/Entity"
+        - type: object
+          properties:
+            chargingEventStreamRef:
+              description: |
+                Used to assign the correct mapper/converter to the stream prior to charging          
+              $ref: "#/components/schemas/RelatedEntityRef"
+
+#############################################################################
+##  5.x Event TYPES
+#############################################################################
+
+
+#############################################################################
+## 5.x. MODEL HELPERs
+#############################################################################
+
+
+
+
+    FileDocumentStream:
+        description:
+          A stream of CSVListRecord(s)
+        type: array
+        items:
+          $ref: "#/components/schemas/FileDocument" 
+
+    CsvStream:
+        description:
+          A stream of CSVListRecord(s)
+        type: array
+        items:
+          $ref: "#/components/schemas/CsvListRecord"  
+        example: [ 
+                  "recordDateTime=2020-09-29T19:20:30+01:00, serviceCode=Telephony, startTime=2020-09-29T19:18:30+01:00, qty=115, destination=+1-425-6233333, typeOfNumber=1",
+                  "recordDateTime=2020-09-29T19:20:30+01:00, serviceCode=ShortMesg, startTime=2020-09-29T21:18:30+01:00, qty=1  , destination=+1-425-6233333, typeOfNumber=1"
+        ]
+
+
+    StringArrayStream:
+        description:
+          A stream of StringArrayRecord(s)
+        type: array
+        items:
+          $ref: "#/components/schemas/StringArrayRecord"  
+        example: [ 
+                  [ "recordDateTime=2020-09-29T19:20:30+01:00", "serviceCode=Telephony", "startTime=2020-09-29T19:18:30+01:00", "qty=115", "destination=+1-425-6233333", "typeOfNumber=1"],
+                  [ "recordDateTime=2020-09-29T19:20:30+01:00", "serviceCode=ShortMesg", "startTime=2020-09-29T21:18:30+01:00", "qty=1"  , "destination=+1-425-6233333", "typeOfNumber=1"]
+        ]
+
+
+    NvlStream:
+        description:
+          A stream of CharacteristicArrayRecord(s)
+        type: array
+        items:
+          $ref: "#/components/schemas/NvlListRecord"
+        example: [ 
+                  [                                         
+                    { "name": "recordDateTime", "valueType": "DateTime", "value": "2020-09-29T19:20:30+01:00" },
+                    { "name": "serviceCode",    "valueType": "String", "value": "Telephony" },
+                    { "name": "startTime",      "valueType": "DateTime", "value": "2020-09-29T19:18:30+01:00" },
+                    { "name": "qty",            "valueType": "Int32", "value": "115" },
+                    { "name": "destination",    "valueType": "String", "value": "1-425-6233333" },
+                    { "name": "typeOfNumber",   "valueType": "Int32", "value": "1" }
+                  ],
+                  [                                         
+                    { "name": "recordDateTime", "valueType": "DateTime", "value": "2020-09-29T19:20:30+01:00" },
+                    { "name": "serviceCode",    "valueType": "String", "value": "ShortMesg" },
+                    { "name": "startTime",      "valueType": "DateTime", "value": "2020-09-29T21:18:30+01:00" },
+                    { "name": "qty",            "valueType": "Int32", "value": "1" },
+                    { "name": "destination",    "valueType": "String", "value": "1-425-6233333" },
+                    { "name": "typeOfNumber",   "valueType": "Int32", "value": "1" }
+                  ]                  
+        ]
+
+    CsvListRecord:
+      description: 
+        Comma seperated list of values. Note leading/trailing spaces before/after commas will be removed.
+      type: string
+    
+    StringArrayRecord:
+      type: array
+      items:
+        type: string
+
+    NvlListRecord:
+      type: array
+      items:
+        $ref: "#/components/schemas/Characteristic"
+
+
+
+#############################################################################
+##  5.x Event TYPES
+#############################################################################
+
+
+    OfflineCharging_EventsType:
+      description:
+        Payment_EventsType
+      oneOf:
+        - $ref: "#/components/schemas/FileDataStreamEvent"
+        - $ref: "#/components/schemas/CsvDataStreamEvent"
+        - $ref: "#/components/schemas/StringArrayDataStreamEvent"
+        - $ref: "#/components/schemas/NvlDataStreamEvent"
+
+
+    FileDataStreamEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/FileDataStream"
+
+    CsvDataStreamEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/CsvDataStream"
+
+
+    StringArrayDataStreamEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/StringArrayDataStream"
+
+
+    NvlDataStreamEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/NvlDataStream"
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+    FileDocument:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/FileDocument'
+
+    ValueType:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/ValueType'
+    UnitType:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/UnitType'
+
+
+    Event:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################

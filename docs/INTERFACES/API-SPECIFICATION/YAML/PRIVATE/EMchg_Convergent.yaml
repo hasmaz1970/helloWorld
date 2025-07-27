@@ -1,0 +1,565 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: EMchg_Convergent
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PRIVATE MESSAGING API SPECIFICATION:**
+      * **Reference Point Name:** EMchg*
+      * **API Name:** EMchg_Convergent-Event Message Bus API
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/private
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - ''
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+tags:
+  - name: "CH_MTMF"
+    description: "API: [EMSP <-> CH_MTMF]"
+  - name: "CH_xRF"
+    description: "API: [EMSP <-> CH_RF, CH_REC_RF, CH_PAR_RF]"
+  - name: "CH_ABMF"
+    description: "API: [EMSP <-> CH_ABMF]"
+  - name: "CH_SF"
+    description: "API: [EMSP <-> CH_SF]"
+  - name: "CH_ABSF"
+    description: "API: [EMSP <-> CH_ABSF]"
+
+
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+  /eventMessageBus/topic/chargingMtmf/event:
+
+    get:
+      summary: 
+        Read Converted MonE CDS-Charging Data Stream Base (Uncharged, MonE Templated NOT applied)
+      operationId: Read-CH_MTMF
+      tags:
+        - CH_MTMF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/MTMF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /eventMessageBus/topic/charging-xRf/event:
+
+    post:
+      summary:
+        Publish MonE CDS-Charging Data Stream with Monetization Template (Uncharged, MonE Template applied)
+
+      operationId: Post-CH_MTMF
+      tags:
+        - CH_MTMF
+
+      requestBody:
+        description: MonE Charging Data Stream (CDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MTMF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE CDS-Charging Data Stream with Monetization Template (Uncharged, MonE Template applied)
+      operationId: Read-CH_xRF
+      tags:
+        - CH_xRF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/RF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"          
+
+
+  /eventMessageBus/topic/chargingAbmf/event:
+
+    post:
+      summary:
+        Publish MonE Rated CDS-Charging Data Stream (Contains MonE Template Info, Charge Parts)
+
+      operationId: Post-CH_xRF
+      tags:
+        - CH_xRF
+
+      requestBody:
+        description: MonE Charging Data Stream (CDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Rated CDS-Charging Data Stream (Contains MonE Template Info, Charge Parts)
+      operationId: Read-CH_ABMF
+      tags:
+        - CH_ABMF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ABMF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"       
+
+
+  /eventMessageBus/topic/chargingSf/event:
+
+    post:
+      summary:
+        Publish MonE Rated and Discounted CDS-Charging Data Stream (Contains MonE Template Info, Charge Parts and/or Discount Parts)
+
+      operationId: Post-CH_ABMF
+      tags:
+        - CH_ABMF
+
+      requestBody:
+        description: MonE Charging Data Stream (CDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ABMF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Rated and Discounted CDS-Charging Data Stream (Contains MonE Template Info, Charge Parts and/or Discount Parts)
+      operationId: Read-CH_SF
+      tags:
+        - CH_SF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/SF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"   
+
+
+  /eventMessageBus/topic/chargingAbsf/event:
+
+    post:
+      summary:
+        Publish MonE ABMDS-Account Balance Management Data Stream (Persist Balance Delta Updates on DB)
+
+      operationId: Post-CH_ABMF-ABSF
+      tags:
+        - CH_ABMF
+
+      requestBody:
+        description: ABMDS-Account Balance Management Data Stream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ABMF_Output_Event_ABSF"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE ABMDS-Account Balance Management Data Stream (Persist Balance Delta Updates on DB)
+      operationId: Read-CH_ABSF
+      tags:
+        - CH_ABSF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ABSF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"   
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response400'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response404'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response500'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response504'
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+## 5.x. CHARGING DATA MODEL DEFINITIONS
+#############################################################################
+
+
+
+#############################################################################
+## 5.x. EVENT MODEL DEFINITIONs
+#############################################################################
+
+
+
+    MTMF_Input_Event:
+      description:
+        Input Event for CH_MTMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDSBase"
+
+    MTMF_Output_Event:
+      description:
+        Output Event for CH_MTMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDSMonETemplate"
+
+
+    RF_Input_Event:
+      description:
+        Input Event for CH_RF, CH_REC_RF, CH_PAR_RF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDSMonETemplate"
+
+    RF_Output_Event:
+      description:
+        Output Event for CH_RF, CH_REC_RF, CH_PAR_RF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDS"
+
+
+    ABMF_Input_Event:
+      description:
+        Input Event for CH_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDS"
+
+    ABMF_Output_Event:
+      description:
+        Output Event for CH_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDS"
+
+    ABMF_Output_Event_ABSF:
+      description:
+        Output Event for CH_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/ABMDS"
+
+    SF_Input_Event:
+      description:
+        Input Event for CH_SF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/CDS"
+
+    ABSF_Input_Event:
+      description:
+        Input Event for CH_ABSF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/ABMDS"
+
+
+#############################################################################
+## 5.x. MODEL HELPERs
+#############################################################################
+
+#############################################################################
+## 5.x. EXTERNAL EMSP API REFERENCES
+#############################################################################
+
+
+    CDSBase:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/CDSBase'
+    CDSMonETemplate:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/CDSMonETemplate'
+    CDS:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/CDS'
+
+    ABMDS:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/ABMDS'
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+    Event:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+    Collection:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Collection'
+
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################

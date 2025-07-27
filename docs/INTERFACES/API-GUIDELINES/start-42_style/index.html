@@ -1,0 +1,2134 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.12">
+    
+    
+      
+        <title>Start 42 style - CadenzaFlow 360-Library(v1.1.0)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#url-path-structure-and-api-style" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-header__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CadenzaFlow 360-Library(v1.1.0)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Start 42 style
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-tabs__link">
+          
+  
+  Editions, Releases & Roadmap
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30-PLATFORM/todo_link/" class="md-tabs__link">
+          
+  
+  Platform
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-tabs__link">
+          
+  
+  Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../50-RESOURCES/resources-starter/" class="md-tabs__link">
+          
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../60-PRICING/pricing-starter/" class="md-tabs__link">
+          
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/contact-us/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/login/" class="md-tabs__link">
+        
+  
+    
+  
+  Login
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-nav__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CadenzaFlow 360-Library(v1.1.0)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Editions, Releases & Roadmap
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Editions, Releases & Roadmap
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editions & Releases Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/categorization-of-repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Categorization of SW repositories
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/cadenzaflow-roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI & Agentic Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Design & Implement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integrations & Connectivity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test & Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability, O&AM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features & Marketplace
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Features & Marketplace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifical Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Human Tasks, Forms & Backoffice Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intelligent Notification & Communication Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RPA (Robotic Process Automation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutions Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Industry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            By Industry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunciations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public Sector & Government
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Finance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insurance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Media & Entertainment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manufacturing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Purpose
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            By Purpose
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transition from Camunda 7 to CadenzaFlow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Process Optimization & Build a Centralized  Automation Platform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Commercial Order Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Order Mgmt & Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workforce Augmentation & Human Task Automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microservice Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy Systems Modernization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/resources-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/51-DOWNLOAD/download-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/52-DOC/documentation-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/53-COMMUNITY-HUB/community-hub-starter.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Hub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/54-MARKETPLACE/marketplace-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Marketplace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/55-EVENTS/events-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/white-papers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    White Papers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/case-studies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Studies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/57-SERVICES-SUPPORT/services-support-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services & Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/58-TRAINING-CERT/training-certification-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training & Certification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Pricing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/pricing-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pricing Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LTS Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ISV/ASL Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/contact-us/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact Us
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/login/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Login
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p><img alt="" src="/assets/header.png" /></p>
+<h1 id="url-path-structure-and-api-style">URL Path Structure and API Style</h1>
+<p>This section details the naming and JSON style guidelines supported by MonE APIs.</p>
+<h2 id="1-api-url-path-structure-and-versioning">1. API URL Path Structure and Versioning</h2>
+<p>The following pattern constitutes the MonE service endpoint URL Path structure including versioning, in which <b><span style="color:darkgreen">[optional]</span></b> imply the optional parts.</p>
+<p><b><span style="color:red">{protocol}://</span><span style="color:red">{serverRoot}</span><span style="color:darkgreen">[:port]</span><span style="color:orange">/{apiRoot}</span><span style="color:orange">/{VERSION}</span><span style="color:darkblue">/{resourceName}</span><span style="color:darkgreen">/[{resourceID}]</span></b></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p>The following is an example WITHOUT the <b><span style="color:darkgreen">[optional]</span></b> parts.</p>
+<p><span style="color:red">https://</span><span style="color:red">bss.operator.com</span><span style="color:orange">/MonE/customerManagement</span><span style="color:orange">/v4</span><span style="color:darkblue">/customer</span> where;<br></p>
+<ul>
+<li><strong>customer</strong> denotes <strong>Resource Name</strong></li>
+</ul>
+<p><br>
+The following is an example INCLUDING the <b><span style="color:darkgreen">[optional]</span></b> parts.</p>
+<p><span style="color:red">https://</span><span style="color:red">bss.operator.com</span><span style="color:darkgreen">:8080</span><span style="color:orange">/MonE/customerManagement</span><span style="color:orange">/v4</span><span style="color:darkblue">/customer</span><span style="color:darkgreen">/42</span> where;<br></p>
+<ul>
+<li><strong>customer</strong> denotes <strong>Resource Name</strong></li>
+<li><strong>42</strong> denotes the resource <strong>Identifier</strong></li>
+</ul>
+<p><br></p>
+<p><strong>API Versioning adheres to the following principles:</strong></p>
+<ul>
+<li>MonE APIs state version with “v” following the API Name, e.g.: APIName/v1/resource.</li>
+<li>Schema associated with has its version number aligned with that of the API.</li>
+<li>The version number has major, minor and revision numbers. E.g. v1.0.0</li>
+<li>Only the <strong>major</strong> version number is held in the URI. E.g customerManagement/v1/customer. </li>
+<li>Any change that causes backward incompatibility results in an increment of the version number:</li>
+<li>Major changes are such as an existing sub part structure change or element type changes resulting in the client logic to break.</li>
+<li>Minor backward compatible changes are such as; new optional elements added, cardinality of attributes from mandatory to optional or from lower to greater etc. do NOT impact backward compatibility and does not result in major number increment.</li>
+</ul>
+<h2 id="2-api-resource-archetypes">2. API Resource Archetypes</h2>
+<p>MonE REST APIs resource archetypes align each resource to just one of these:</p>
+<ul>
+<li><strong>Collection Resource</strong> – set or collection of resources. A resource with no identifier represents the <strong>Collection Resource</strong>, such as <strong>https://bss.operator.com/MonE/customerManagement/v4/customer</strong></li>
+<li><strong>Managed Resource</strong> – an object instance (that may represent a persisted database record etc.). A resource with identifier represents <strong>Managed Resource</strong>. Its representation includes: fields with values and links to related resources. Can have child resources, of different resource types. Client can create, query, update and delete resources. Example: <strong>https://bss.operator.com/MonE/customerManagement/v4/customer/42</strong></li>
+<li><strong>Task Resource</strong> – resources that are executable functions – with associated input and output parameters. Necessary where the required action cannot be mapped to standard CRUD methods. Tasks play the role of Controllers e.g. ProductOfferingQualification, ServiceQualification. Example: <strong>https://bss.operator.com/MonE/productOfferingQualification/v4/productOfferingQualification</strong></li>
+</ul>
+<h2 id="3-resource-name-guidelines">3.   Resource Name Guidelines</h2>
+<p>Resource names must conform to the following guidelines:</p>
+<ul>
+<li>Resource names should be meaningful names with defined semantics, derived from TMF Open APIs and Information Framework Resource name MUST NOT expose technical or implementation details. For example, <strong>resourceSpecification</strong>, NOT resourceSpec</li>
+<li>Resource names must be camel case, ascii strings.</li>
+<li>Each <strong>Collection Resource</strong> or <strong>Managed Resource</strong> name must be a <strong>NOUN</strong>, except for <strong>Tasks</strong> which must be a verb.</li>
+<li><strong>Collection Resource</strong> names MUST NOT have a specific notation, such as <strong>"Collection" postfix</strong> or <strong>plural</strong> form. For example, API/ticket represents the Ticket Collection and GET API/ticket retrieves all the items from the Ticket Collection (i.e. all the resources of type Ticket contained within the application). So forms like API/ticketCollection or API/tickets MUST NOT be used.</li>
+</ul>
+<h2 id="4-json-style-and-resource-fields-property">4.   JSON Style and Resource Fields (Property)</h2>
+<h3 id="41-definitions">4.1.    Definitions</h3>
+<p><strong>The readers familiar with JSON syntax can skip this section.</strong></p>
+<p>JSON syntax is derived from JavaScript object notation syntax:</p>
+<ul>
+<li>Data is in name/value pairs</li>
+<li>Data is separated by commas</li>
+<li>Curly braces hold objects</li>
+<li>Square brackets hold arrays</li>
+</ul>
+<p>For the purposes of this style guide, the definitions of the following terms are important:</p>
+<ul>
+<li>resource field (aka property) - a name/value pair inside a JSON object.</li>
+<li>field name (aka property name) - the name (or key) portion of the property.</li>
+<li>field value (aka property value) - the value portion of the property.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p>The following is a simple JSON object specifying values of <strong>field/property</strong> names: name and surname
+<div class="highlight"><pre><span></span><code>{
+  &quot;name&quot;: &quot;John&quot;,
+  &quot;lastName&quot;: &quot;Doe&quot;
+}
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p>The following is a more complex conceptualJSON object specifying a conceptual <strong>resourceX</strong> that is related to two items
+<div class="highlight"><pre><span></span><code>{
+  &quot;id&quot;: &quot;123&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com:8080/MonE/xyzManagement/v4/resourceX/123&quot;,
+  &quot;description&quot;: &quot;resourceX&quot;,
+  &quot;isActive&quot;: true,
+  &quot;lastUpdate&quot;: &quot;2020-07-01T06:11:00.281Z&quot;,
+  &quot;lifecycleStatus&quot;: &quot;retired&quot;,
+  &quot;name&quot;: &quot;resourceX_123&quot;,
+  &quot;version&quot;: &quot;v1&quot;,
+  &quot;attachment&quot;: [
+    {
+      &quot;id&quot;: &quot;54&quot;,
+      &quot;attachmentType&quot;: &quot;file&quot;,
+      &quot;mimeType&quot;: &quot;application/json&quot;,
+      &quot;name&quot;: &quot;file54.json&quot;,
+      &quot;url&quot;: &quot;ftp://ftp.myCatalog.com/itemCatalog/54&quot;
+    },
+    {
+      &quot;id&quot;: &quot;55&quot;,
+      &quot;attachmentType&quot;: &quot;file&quot;,
+      &quot;mimeType&quot;: &quot;application/json&quot;,
+      &quot;name&quot;: &quot;file55.json&quot;,
+      &quot;url&quot;: &quot;ftp://ftp.myCatalog.com/itemCatalog/55&quot;
+    }
+  ]
+}
+</code></pre></div></p>
+<h3 id="42-resource-field-property-naming-guidelines">4.2.    Resource Field (Property) Naming Guidelines</h3>
+<p>Property names must conform to the following guidelines:</p>
+<ul>
+<li>Property names should be meaningful names with defined semantics.</li>
+<li>Property names must be camel case, ascii strings.</li>
+<li>The first character can be a letter, an (at sign) "@", (an underscore) "_" or (a dollar sign) "$".</li>
+<li>Subsequent characters can be a letter, a digit, an underscore, or a dollar sign.</li>
+</ul>
+<h3 id="43-resource-field-property-value-guidelines">4.3.    Resource Field (Property) Value Guidelines</h3>
+<p>Field values must contain one of:</p>
+<ul>
+<li>a string</li>
+<li>a number</li>
+<li>a JSON object</li>
+<li>an array</li>
+<li>
+<p>a boolean</p>
+</li>
+<li>
+<p>Property values conform the JSON spec, which details exactly what type of data is allowed in a property value. This includes Unicode booleans, numbers, strings, objects, arrays, and null.</p>
+</li>
+<li>JavaScript expressions are not allowed.</li>
+<li>MonE APIs choose the data type most appropriate for a particular property (numbers to represent numbers, etc.). Javascript's number type encompasses all floating-point numbers, which is a broad designation. Numbers refer to JavaScript's number type, while integer will refer to integers.</li>
+</ul>
+<p>Good example  ( <strong>//</strong> are for comments only and NOT part of the JSON):
+<div class="highlight"><pre><span></span><code>{
+  &quot;canCowsFly&quot;: null,   // null
+  &quot;isThisOK&quot;: false,    // boolean
+  &quot;yourID&quot;: 42,         // number-integer
+  &quot;actualValue&quot;: 79.82, // number-float  
+  &quot;name&quot;: &quot;John&quot;,       // string
+  &quot;moreData&quot;: {         // object
+      &quot;dataVal1&quot;: 12,
+      &quot;dataVal2&quot;: 22
+  },
+  &quot;things&quot;: [
+      &quot;thing1&quot;, &quot;thing2&quot;
+  ]           
+}
+</code></pre></div></p>
+<p>Bad example:
+<div class="highlight"><pre><span></span><code>{
+  &quot;aVariableName&quot;: aVariableName,         // Bad - JavaScript identifier
+  &quot;functionFoo&quot;: function() { return 1; }    // Bad - JavaScript expressions not allowed
+}
+</code></pre></div></p>
+<h3 id="44-reserved-resource-field-property-names">4.4. Reserved Resource Field (Property) Names</h3>
+<p>The words below are reserved by the JavaScript language and cannot be referred to using dot notation. The list represents best knowledge of keywords at this time; the list may change or vary based on your specific execution environment.
+Referenced from the ECMAScript Language Specification 5th Edition, below are the reserved keywords that shall be avoided to be used as a property name:</p>
+<div class="highlight"><pre><span></span><code>abstract
+boolean break byte
+case catch char class const continue
+debugger default delete do double
+else enum export extends
+false final finally float for function
+goto return
+if implements import in instanceof int interface
+let long
+native new null
+package private protected public
+short static super switch synchronized
+this throw throws transient true try typeof
+var volatile void
+while with
+yield
+</code></pre></div>
+<h3 id="45-date-and-datetime-property-values">4.5.    Date and DateTime Property Values</h3>
+<p>Dates are formatted as recommended by RFC 3339 and conformant to ISO 8601 as the following:</p>
+<ul>
+<li>YYYY-MM-DDThh:mm:ss.SSSTZD</li>
+<li>YYYY = four-digit year</li>
+<li>MM = two-digit month (01=January, etc.)</li>
+<li>DD = two-digit day of month (01 through 31)</li>
+<li>T = optional delimiter</li>
+<li>hh = two digits of hour (00 through 23) (am/pm NOT allowed)</li>
+<li>mm = two digits of minute (00 through 59)</li>
+<li>ss = two digits of second (00 through 59)</li>
+<li>SSS = up to 3 digits representing a decimal fraction of a second</li>
+<li>
+<p>TZD = time zone designator (Z or +hh:mm or -hh:mm)</p>
+</li>
+<li>
+<p>All the following examples will be supported. Unless otherwise specified the default will be “dateTime”.</p>
+</li>
+<li>If the southbound returns the time in epoch time format and the value returned is 0 then the relevant fields associated with the southbound attribute should be shown as blank in MonE Northbound API.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{
+  “date”:       “2014-02-20”
+  “dateTime”:           “2014-02-20T16:30:00”,
+  “dateTimeGMT”:    “2014-02-20T16:30:00GMT+5”,
+  “dateTimeStamp”:  “2014-02-20T16:30:00.135GMT+5”,
+  “dateTimeStampGMT”:   “2014-02-20T16:30:00.135GMT+5”
+}
+</code></pre></div>
+<h3 id="46-time-duration-property-values">4.6. Time Duration Property Values</h3>
+<p>By default, unless otherwise specified in API documentation, time duration values are in milliseconds.
+<div class="highlight"><pre><span></span><code>“executionTime”: “2321”     // 2 seconds and 321 milliseconds
+</code></pre></div></p>
+<h3 id="47-latitudelongitude-property-values">4.7. Latitude/Longitude Property Values</h3>
+<p>Latitudes/Longitudes are formatted as recommended by ISO 6709. Furthermore, they favor the following formats</p>
+<p><em><strong>Latitude</strong></em>
+Latitude is a number preceded by a sign character. A plus sign (+) denotes northern hemisphere or the equator, and a minus sign (-) denotes southern hemisphere.</p>
+<p><em><strong>Longitude</strong></em>
+Longitude is a number preceded by a sign character. A plus sign (+) denotes east longitude or the prime meridian, and a minus sign (-) denotes west longitude or 180° meridian (opposite of the prime meridian).</p>
+<p>The following table depicts the geolocation object and attributes.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th><strong>Property<br>Name</strong></th>
+<th><strong>units</strong></th>
+<th><strong>format</strong></th>
+<th><strong>example(s)</strong></th>
+<th><strong>Required or Optional</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>“latitude”</strong></td>
+<td>deg</td>
+<td>±Decimal</td>
+<td>
++40.20361<br>
++00.20361<br>
+0.20361<br>
+</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>“longitude”</strong></td>
+<td>deg</td>
+<td>±Decimal</td>
+<td>
+-075.00417<br>
+-75.00417<br>
+</td>
+<td>Required</td>
+</tr>
+<tr>
+<td><strong>“altitude”</strong></td>
+<td>meter</td>
+<td>±Integer</td>
+<td>
+183<br>
+-25<br>
+0<br>
+</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td><strong>“uncertainty”</strong></td>
+<td>meter</td>
+<td>
++Integer<br>
+(incl. zero)
+</td>
+<td>
+10<br>
+150<br>
+0<br>
+</td>
+<td>Optional</td>
+</tr>
+</tbody>
+</table>
+
+<p>For specifying geolocation information, the following approach is used in MonE APIs:
+<div class="highlight"><pre><span></span><code>{
+  // The latitude/longitude location of the statue of liberty.
+  &quot;statueOfLiberty&quot;: {
+          “location”: {
+                &quot;lattitude&quot;: &quot;+40.6894&quot;,
+                &quot;longitude&quot;: &quot;-074.0447&quot;,
+                &quot;altitude&quot;: &quot;5&quot;,         // optional
+                &quot;uncertainty&quot;: &quot;100&quot;     // optional
+          }
+   }
+}
+</code></pre></div></p>
+<h3 id="48-emptynull-property-values">4.8. Empty/Null Property Values</h3>
+<p>If a property is optional or has an empty or null value, by default it will be dropped from the JSON, unless there's a strong semantic reason for its existence.</p>
+<div class="highlight"><pre><span></span><code>{
+  &quot;volume&quot;: 10,
+
+  // Even though the &quot;balance&quot; property&#39;s value is zero, it should be left in,
+  // since &quot;0&quot; signifies &quot;even balance&quot; (the value could be &quot;-1&quot; for left
+  // balance and &quot;+1&quot; for right balance.
+  &quot;balance&quot;: 0,
+
+  // The &quot;currentlyPlaying&quot; property will by default be left out since in response since it is null.
+  // &quot;currentlyPlaying&quot;: null
+}
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 PiA-TEAM INC. USA<br> All rights reserved. Proprietary and confidential material. No part of this document may be reproduced, used or disclosed in any form without written permission of PiA-TEAM INC. All trademarks referenced are the property of their respective owners.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../../javascripts/external-links.js"></script>
+      
+    
+  </body>
+</html>

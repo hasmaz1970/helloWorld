@@ -1,0 +1,1998 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.12">
+    
+    
+      
+        <title>Start 42 headers - CadenzaFlow 360-Library(v1.1.0)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#http-headers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-header__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CadenzaFlow 360-Library(v1.1.0)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Start 42 headers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-tabs__link">
+          
+  
+  Editions, Releases & Roadmap
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30-PLATFORM/todo_link/" class="md-tabs__link">
+          
+  
+  Platform
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-tabs__link">
+          
+  
+  Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../50-RESOURCES/resources-starter/" class="md-tabs__link">
+          
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../60-PRICING/pricing-starter/" class="md-tabs__link">
+          
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/contact-us/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/login/" class="md-tabs__link">
+        
+  
+    
+  
+  Login
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-nav__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CadenzaFlow 360-Library(v1.1.0)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Editions, Releases & Roadmap
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Editions, Releases & Roadmap
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editions & Releases Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/categorization-of-repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Categorization of SW repositories
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/cadenzaflow-roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI & Agentic Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Design & Implement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integrations & Connectivity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test & Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability, O&AM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features & Marketplace
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Features & Marketplace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifical Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Human Tasks, Forms & Backoffice Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intelligent Notification & Communication Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RPA (Robotic Process Automation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutions Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Industry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            By Industry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunciations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public Sector & Government
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Finance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insurance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Media & Entertainment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manufacturing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Purpose
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            By Purpose
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transition from Camunda 7 to CadenzaFlow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Process Optimization & Build a Centralized  Automation Platform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Commercial Order Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Order Mgmt & Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workforce Augmentation & Human Task Automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microservice Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy Systems Modernization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/resources-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/51-DOWNLOAD/download-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/52-DOC/documentation-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/53-COMMUNITY-HUB/community-hub-starter.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Hub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/54-MARKETPLACE/marketplace-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Marketplace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/55-EVENTS/events-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/white-papers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    White Papers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/case-studies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Studies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/57-SERVICES-SUPPORT/services-support-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services & Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/58-TRAINING-CERT/training-certification-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training & Certification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Pricing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/pricing-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pricing Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LTS Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ISV/ASL Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/contact-us/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact Us
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/login/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Login
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p><img alt="" src="/assets/header.png" /></p>
+<h1 id="http-headers">HTTP Headers</h1>
+<p>This section provides information with regards to headers as supported by MonE API. In web-based solutions, HTTP headers allow the client and the server to pass additional information with the request or the response. An HTTP header consists of its case-insensitive name followed by a colon ':', then by its value (without line breaks). Leading white space before the value is ignored. Thus, headers can be grouped according to their contexts:</p>
+<ul>
+<li><strong>General HTTP Headers</strong>: Headers applying to both requests and responses but with no relation to the data eventually transmitted in the body.</li>
+<li><strong>Request HTTP Headers</strong>: Headers containing more information about the resource to be fetched or about the client itself. Request HTTP headers are submitted by the client in requests. The superset of such HTTP headers must comply to as specified in [RFC2730], [RFC2731], [RFC2732],[RFC2734],[RFC2735].</li>
+<li><strong>Response HTTP Header</strong>: Headers with additional information about the response, like its location or about the server itself (name and version etc.). Response HTTP Headers are provided by the server in responses. The superset of such HTTP headers must comply to as specified in [RFC2730], [RFC2731], [RFC2732],[RFC2734],[RFC2735].</li>
+<li><strong>Entity HTTP Headers</strong>: Headers containing more information about the body of the entity, like its content length.</li>
+</ul>
+<p>The following sub sections provide details for each HTTP Header specific to MonE API.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+</div>
+<p>As per RFC2616, header information is case-insensitive. </p>
+<h2 id="1-general-headers">1. General headers</h2>
+<h3 id="11-cache-control">1.1. Cache-Control</h3>
+<p><strong>The following response Cache-Control Header directives are supported by MonE APIs as per [RFC7234] with 200 ("OK") responses to http GET requests</strong>.</p>
+<ul>
+<li><strong>must-revalidate</strong>: This directive indicates that once it has become stale, a cache MUST NOT use the response to satisfy subsequent requests without successful validation on the origin server (MonE Component API). <strong>Default: must-revalidate is set</strong></li>
+<li><strong>max-age</strong>: This directive indicates that the response is to be considered stale after its age is greater than the specified number of <strong>seconds</strong>. <strong>Default: 60</strong></li>
+<li><strong>no-cache</strong>: This directive indicates that the response MUST NOT be used to satisfy a subsequent request without successful validation on the origin server (MonE Component API).  This allows an origin server to prevent a cache from using it to satisfy a request without contacting it, even by caches that have been configured to send stale responses. <strong>Default: non-cache is not set</strong></li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK
+Content-Type: application/json 
+Cache-control: max-age=60, must-revalidate
+</code></pre></div>
+<h3 id="12-correlationcontext">1.2. CorrelationContext</h3>
+<p><strong>correlationContext</strong> is an optional http-Header directive supported by all MonE Public APIs that contains a collection of related properties. Once provided by external API client,  <strong>correlationContext</strong> context is carried into MonE operational LOG streams and also echoed back in response http-Header for all 2xx, 3xx and 4xx responses. Even though not mandatory, <strong>providing all the properties of correlationContext is vital;</strong> enables correlation of MonE operations to business transactions initiated by external applications/process management platforms; enables enriched analytical capabilities, such as: time profiling, root cause analysis etc.
+<br>
+<strong>correlationContext</strong> http-Header object contains the following properties.</p>
+<hr />
+<p><strong>site</strong>: All requests to MonE APIs may contain <strong>site</strong> that may be provided by external API client. <strong>site</strong> identifier denotes a specific site specific info.</p>
+<p>Example:</p>
+<ul>
+<li>"West-Coast"</li>
+<li>"Texas"</li>
+</ul>
+<hr />
+<p><strong>domain</strong>: All requests to MonE APIs may contain <strong>domain</strong> that may be provided by external API client. <strong>domain</strong> identifier denotes a specific application domain info.</p>
+<p>Example:</p>
+<ul>
+<li>"Customer Management"</li>
+<li>"Order Management"</li>
+</ul>
+<hr />
+<p><strong>channel</strong>: All requests to MonE APIs may contain <strong>channel</strong> that may be provided by external API client. <strong>channel</strong> identifier denotes a specific channel info. The channel may be used to indicate a specific business sub market that may be used for correlation purposes.</p>
+<p>Example:</p>
+<ul>
+<li>"Walmart"</li>
+<li>"Lakers"</li>
+</ul>
+<hr />
+<p><strong>source</strong>: All requests to MonE APIs shall contain <strong>source</strong> provided by external API client. <strong>source</strong> identifier denotes a specific Enterprise Application that issues a series of MonE Public API calls.</p>
+<p>Examples:</p>
+<ul>
+<li>For an Enterprise Application "OrderManagement-AppA", deployed on West Coast, it may be orchestrated (via an API Manager) to issue MonE API calls with <strong>source=XYZ-Billing</strong></li>
+<li>For a Business Management Platform "BPM-A-CustomerCare", it may be orchestrated (via an API Manager) to issue MonE API calls with <strong>source=BPM-A-CustomerCare</strong></li>
+</ul>
+<p><strong>source</strong> is a free format string, such as: OrderManagement-AppA, BPM-A-CustomerCare. If NOT provided, it will be populated as NULL into MonE LOG streams limiting end2end operational analytics capabilities.</p>
+<hr />
+<p><strong>sessionId</strong>: All requests to MonE APIs shall contain <strong>sessionId</strong> provided by external API client. <strong>sessionId</strong> identifier denotes a Business Session of an Enterprise User/Application Account having logged in/accessed an Enterprise Application/Domain that results a series of MonE Public API calls until logout/end of access.</p>
+<p>Example:</p>
+<ul>
+<li>For an Enterprise Application "OrderManagement-AppA", deployed on West Coast, and for Enterprise User "John Doe" having logged in on 2020-10-10 12:30:00 PST until logout on 2020-10-10 17:30:00, it may be orchestrated (via an API Manager) to issue MonE API calls with the same unique <strong>sessionId=df592340-ff9a-11ea-adc1-0242ac120002</strong> (<strong>sourceId=OrderManagement-AppA</strong>)</li>
+</ul>
+<p>SessionId can be a free format string; typically compliant to [RFC4122], sessionId is recommended to conform to UUID universally unique identifier as a 128-bit number, such as:<br> 
+<strong>df592340-ff9a-11ea-adc1-0242ac120002</strong>. If NOT provided, it will be populated as NULL into MonE LOG streams limiting end2end operational analytics capabilities.</p>
+<hr />
+<p><strong>interactionId</strong>: All requests to MonE APIs shall contain <strong>interactionId</strong> provided by external API client. <strong>interactionId</strong> identifier denotes a Business Interaction within a Business Session that results a series of MonE Public API calls <strong>all related to the same customer or account</strong>.</p>
+<p>Example:</p>
+<ul>
+<li>For an Enterprise Application "OrderManagement-AppA", deployed on West Coast, and for Enterprise User "John Doe" having logged in on 2020-10-10 12:30:00 PST until logout on 2020-10-10 17:30:00, and having served for billingAccount-A, billingAccount-B and again billingAccount-A respectively and each resulting in 3 MonE API calls, it may be orchestrated (via an API Manager) to issue MonE API calls with (<strong>sourceId=OrderManagement-AppA</strong>, <strong>sessionId=df592340-ff9a-11ea-adc1-0242ac120002</strong>):<ul>
+<li><strong>interactionId=1111a054-ff9b-11ea-adc1-0242ac120002</strong> for the first set of three MonE API calls related to billingAccount-A</li>
+<li><strong>interactionId=2222a054-ff9b-11ea-adc1-0242ac120002</strong> for the second set of three MonE API calls related to billingAccount-B</li>
+<li><strong>interactionId=3333a054-ff9b-11ea-adc1-0242ac120002</strong> for the third set of three MonE API calls related to billingAccount-A</li>
+<li>etc.</li>
+</ul>
+</li>
+</ul>
+<p>InteractionId can be a free format string; typically compliant to [RFC4122], interactionId is recommended to conform to UUID universally unique identifier as a 128-bit number, such as:<br> 
+<strong>3333a054-ff9b-11ea-adc1-0242ac120002</strong>. If NOT provided, it will be populated as NULL into MonE LOG streams limiting end2end operational analytics capabilities.</p>
+<hr />
+<p><strong>transactionId</strong>: All requests to MonE APIs shall contain <strong>transactionId</strong> provided by external API client. <strong>transactionId</strong> identifier denotes an operational unique Transaction Number within a Business Interaction for a MonE Public API call.</p>
+<p>TransactionId can be a free format string; typically compliant to [RFC4122], transactionId is recommended to conform to UUID universally unique identifier as a 128-bit number, such as:<br> 
+<strong>788ca97e-56dd-44ad-ae0b-6edbb2759ec6</strong>. If NOT provided, <strong>a UUID will be generated by MonE</strong> and will be echoed back in response http-Header to calling client.</p>
+<hr />
+<h2 id="3-request-headers">3. Request headers</h2>
+<p>The following are critical HTTP headers to be provided by the MonE API clients as part of <strong>requests</strong>.</p>
+<ul>
+<li><strong>Accept</strong>: This header informs the informs the server (MonE component that provides the relevant API) about the media type(s) required and supported by the client. MonE API(s) supported media type is <strong>application/json</strong> and charset is <strong>utf-8</strong>. If a media type is specified that is not supported by the server then the response returned by MonE API will be using the default, <strong>application/json</strong>, i.e. as if no media type was specified in header. <strong>Default: application/json; charset=utf-8</strong>. Please note that <strong>charset</strong> directive is optional, default encoding being utf-8.</li>
+<li><strong>Accept-Language</strong>: This header informs the server (MonE component that provides the relevant API) about the human language the server is expected to send back. If a language is specified that is not supported by the server then the response returned by MonE API will be using the default, <strong>en_GB</strong>, i.e. as if no language type was specified in header. <strong>Default: en_GB</strong></li>
+<li><strong>Authorization</strong>: MonE supports API Key based authentication used together with HTTPS for public APIs. An API key is a unique identifier token/secret that a client provides as part of http-REST call parameter when making MonE Public API calls. <strong>Authorization is only used in cases of OAuth</strong>. In this case, The HTTP Authorization request header contains the credentials to authenticate/authorize API user agent with a server, usually, but not necessarily, after the server has responded with a 401 Unauthorized status and the WWW-Authenticate response header. <strong>Authorization</strong> header value contains <strong>TYPE_space_CREDENTIALS</strong> where;<ul>
+<li><strong>TYPE</strong>: Indicates authentication method type, such as <strong>Basic</strong> or <strong>Bearer</strong> </li>
+<li><strong>space</strong>: space</li>
+<li><strong>CREDENTIALS</strong>: Indicates credentials context required for authentication/authorization depending on type. For details regarding MonE API supported security capabilities, please refer to <a href="../start-42_security/">Protocol Security</a>. </li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code>...
+
+Accept: application/json; charset=utf-8
+Accept-Language: en_GB
+
+...
+</code></pre></div>
+<h2 id="4-response-headers">4. Response headers</h2>
+<p>The following are critical HTTP headers to be provided to to client requests in MonE API <strong>responses</strong>.</p>
+<ul>
+<li><strong>WWW-Authenticate</strong>: The HTTP WWW-Authenticate response header is sent along <strong>401 Unauthorized</strong> response and defines the authentication method that should be used to gain access to a resource. <strong>WWW-Authenticate</strong> header value contains <strong>TYPE_space_REALM</strong> where;<ul>
+<li><strong>TYPE</strong>: Indicates authentication method type, such as <strong>Basic</strong>, <strong>Bearer</strong> or <strong>OAuth</strong></li>
+<li><strong>space</strong>: space</li>
+<li><strong>REALM</strong>: In the form of "realm=[realm context]" provides a description of protected area. For details regarding MonE API supported security capabilities, please refer to <a href="../start-42_security/">Protocol Security</a>. </li>
+</ul>
+</li>
+<li><strong>Location</strong>: Typically provided when served with 201 (Created) in response to resource creation, or when served with 3xx (redirection). It provides created resource URL or redirection URL. This is not a guaranteed supported response header by MonE APIs for resource creation. For resource creation responses, instead the reference URL in response payload shall be used by the client.</li>
+<li><strong>ETag</strong>: This header allows caches to be more efficient, and saves bandwidth, as a web server does not need to send a full response if the content has not changed. On the other side, if the content has changed, ETag(s) are useful to help prevent simultaneous updates of a resource from overwriting each other ("mid-air collisions"). If the resource at a given URL changes, a new Etag value must be generated. ETag(s) are therefore similar to fingerprints and might also be used for tracking purposes by some servers. A comparison of them allows to quickly determine whether two representations of a resource are the same, but they might also be set to persist indefinitely by a tracking server.</li>
+<li><strong>X-Total-Count</strong>: Regarding query of Collection Resource types, the response is an array of entities. For query-based pagination, the HTTP header “X-Total-Count” in a response is returned, with the total number of matching resources so that the client can calculate the next page.</li>
+<li><strong>Link</strong>: This header allows response information to contain a <strong>comma</strong> separated list of <strong>href</strong> and <strong>rel</strong> (relation) information. This header is used in responses, such as for paginated queries. This header allows a way for the API server to tell the API client what HTTP requests the client might want to make in the future. It is like a menu, provided by the server, from which the client is free to choose. </li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code>206 Partial Content
+Content-Type: application/json
+X-Total-Count:9
+Link: &lt; /geographicAddressManagement/validate/8313/iterator?offset=3&amp;limit=3&gt;; rel=&quot;self&quot;,
+&lt; /geographicAddressManagement/validate/8313/iterator?offset=0&amp;limit=3&gt;; rel=&quot;first&quot;,
+&lt; /geographicAddressManagement/ validate/8313/iterator?offset=6&amp;limit=3&gt;; rel=&quot;next&quot;, 
+&lt; /geographicAddressManagement/ validate/8313/iterator?offset=0&amp;limit=3&gt;; rel=&quot;prev&quot;, 
+&lt;/geographicAddressManagement/ validate/8313/iterator?offset=6&amp;limit=3&gt;; rel=&quot;last&quot;
+...
+
+
+
+...
+</code></pre></div>
+<h2 id="5-entity-http-headers">5. Entity HTTP headers</h2>
+<p>The following are critical HTTP headers that are about the body of the entity.</p>
+<ul>
+<li><strong>Content-Length</strong>: If in response, this header informs the client about the length of response in decimal number of octets//bytes. If in request, this header informs the MonE API provider about length of the message-body in the request message.</li>
+<li><strong>Content-Type</strong>: This header informs the informs the client about the media type of the resource in response. MonE API(s) supported media type is <strong>application/json</strong> and charset is <strong>utf-8</strong>.<strong>Default: application/json; charset=utf-8</strong>. Please note that <strong>charset</strong> directive is optional, default encoding being utf-8.</li>
+<li><strong>Content-Language</strong>: This header informs the client about the  about the human language the server is expected to send back. <strong>Default: en_GB</strong></li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code>HTTP/1.1 200 OK 
+Content-Type: application/json; charset=utf-8
+Content-Language: en_GB 
+Content-Length: 1024
+ETag: “customer_24_a11”
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 PiA-TEAM INC. USA<br> All rights reserved. Proprietary and confidential material. No part of this document may be reproduced, used or disclosed in any form without written permission of PiA-TEAM INC. All trademarks referenced are the property of their respective owners.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../../javascripts/external-links.js"></script>
+      
+    
+  </body>
+</html>

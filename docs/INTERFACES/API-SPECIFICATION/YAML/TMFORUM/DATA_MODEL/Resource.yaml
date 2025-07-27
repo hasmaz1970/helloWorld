@@ -1,0 +1,569 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: TMFORUM Common Schema (Data Type) Definitions for APIs
+  contact:
+    name: MonetizeHub.IO Project Support
+    
+  license:
+    name: TMFORUM RAND
+    url: https://github.com/tmforum-rand/RAND-LICENSE 
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **This Open API specification does NOT contain any valid PATHS/OPERATIONS!!!. It ONLY contains COMMON SCHEMA (TYPE) DEFINITIONS referred by other API specifications.**
+
+    Thus, in this context COMMON SCHEMA (TYPE) DEFINITIONS mean shared entity models or baseline objects that can be reused with or without extension.
+    
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://monetizehub.io/demos/current/apis/private/
+    description: MonE Private APIs and Schemas Specification
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+  /readMe:
+    get:
+      summary: This is a placeholder nouse operation. (to bypass Swagger UI limitation of a specification with ONLY data models without operation)
+      operationId: readMe
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+  schemas:
+
+
+    Resource:
+      description: "Resource is an abstract entity that describes the common set of\
+        \ attributes shared by all concrete resources (e.g. TPE, EQUIPMENT) in the inventory."
+      type: "object"
+      properties:
+        category:
+          type: "string"
+          description: "Category of the concrete resource. e.g Gold, Silver for MSISDN\
+            \ concrete resource"
+        description:
+          type: "string"
+          description: "free-text description of the resource"
+        endDate:
+          type: "string"
+          format: "date-time"
+          description: "A date time( DateTime). The date till the resource is effective"
+        href:
+          type: "string"
+          description: "The URI for the object itself."
+        id:
+          type: "string"
+          description: "Identifier of an instance of the resource. Required to be unique\
+            \ within the resource type.  Used in URIs as the identifier for specific\
+            \ instances of a type."
+        lifecycleState:
+          type: "string"
+          description: "The life cycle state of the resource."
+        name:
+          type: "string"
+          description: "A string used to give a name to the resource"
+        startDate:
+          type: "string"
+          format: "date-time"
+          description: "A date time( DateTime). The date from which the resource is\
+            \ effective"
+        version:
+          type: "string"
+          description: "A field that identifies the specific version of an instance\
+            \ of a resource."
+        resourceRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceRelationship'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceCharacteristic'
+        place:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Place'
+        partyRole:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyRoleRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceSpecificationRef:
+      description: "Resource Specification reference: The ResourceSpecification is required\
+        \ to realize a ProductSpecification."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the resource specification"
+        id:
+          type: "string"
+          description: "Unique identifier of the resource specification"
+        name:
+          type: "string"
+          description: "Name of the requiredResourceSpecification"
+        version:
+          type: "string"
+          description: "Resource specification version"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    RealizingResourceRef:
+      type: "object"
+      description: "RealizingResource reference. RealizingResource is a link to the\
+        \ resource that realizes the product."
+      properties: {}
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    PhysicalResource:
+      description: "Physical resource is a type of resource that describes the common\
+        \ set of attributes shared by all concrete physical resources (e.g. EQUIPMENT)\
+        \ in the inventory."
+      type: "object"
+      properties:
+        manufactureDate:
+          type: "string"
+          format: "date-time"
+          description: "This is a string attribute that defines the date of manufacture\
+            \ of this item in the fixed format \"dd/mm/yyyy\". This is an optional attribute."
+        powerState:
+          type: "string"
+          description: "This defines the current power status of the hardware item.\
+            \ Values include:\n\n  0:  Unknown\n  1:  Not Applicable\n  2:  No Power\
+            \ Applied\n  3: Full Power Applied\n  4:  Power Save - Normal\n  5:  Power\
+            \ Save - Degraded\n  6:  Power Save - Standby\n  7:  Power Save - Critical\n\
+            \  8:  Power Save - Low Power Mode\n  9:  Power Save - Unknown\n 10: Power\
+            \ Cycle\n 11: Power Warning\n 12: Power Off"
+        serialNumber:
+          type: "string"
+          description: "This is a string that represents a manufacturer-allocated number\
+            \ used to identify different instances of the same hardware item. The ModelNumber\
+            \ and PartNumber attributes are used to identify different types of hardware\
+            \ items. This is a REQUIRED attribute."
+        versionNumber:
+          type: "string"
+          description: "This is a string that identifies the version of this object.\
+            \ This is an optional attribute."
+        category:
+          type: "string"
+          description: "Category of the concrete resource. e.g Gold, Silver for MSISDN\
+            \ concrete resource"
+        description:
+          type: "string"
+          description: "free-text description of the resource"
+        endDate:
+          type: "string"
+          format: "date-time"
+          description: "A date time( DateTime). The date till the resource is effective"
+        href:
+          type: "string"
+          description: "The URI for the object itself."
+        id:
+          type: "string"
+          description: "Identifier of an instance of the resource. Required to be unique\
+            \ within the resource type.  Used in URIs as the identifier for specific\
+            \ instances of a type."
+        lifecycleState:
+          type: "string"
+          description: "The life cycle state of the resource."
+        name:
+          type: "string"
+          description: "A string used to give a name to the resource"
+        startDate:
+          type: "string"
+          format: "date-time"
+          description: "A date time( DateTime). The date from which the resource is\
+            \ effective"
+        version:
+          type: "string"
+          description: "A field that identifies the specific version of an instance\
+            \ of a resource."
+        resourceRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceRelationship'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceCharacteristic'
+        place:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Place'
+        partyRole:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyRoleRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceRef:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "Name of the resource"
+        value:
+          type: "string"
+          description: "The resource value that can be used to identify a resource with\
+            \ a public key (e.g.: a tel nr, an msisdn)"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    ResourceOrderItemRelationship:
+      type: "object"
+      properties:
+        relationshipType:
+          type: "string"
+          description: "Type of the order item relationship"
+        orderItem:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceOrderItemRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    LogicalResource:
+      description: "Logic resource is a type of resource that describes the common set\
+        \ of attributes shared by all concrete logical resources (e.g. TPE, MSISDN,\
+        \ IP Addresses) in the inventory."
+      type: "object"
+      properties:
+        value:
+          type: "string"
+          description: "The value of the logical resource, such as: 0044746712345 for\
+            \ an MSISDN"
+        category:
+          type: "string"
+          description: "Category of the concrete resource, such as: Gold, Silver for\
+            \ MSISDN concrete resource"
+        description:
+          type: "string"
+          description: "Free-text description of the resource"
+        endDate:
+          type: "string"
+          format: "date-time"
+          description: "The date till the resource is effective"
+        href:
+          type: "string"
+          description: "The URI for the object itself."
+        id:
+          type: "string"
+          description: "Identifier of an instance of the resource. Required to be unique\
+            \ within the resource type.  Used in URIs as the identifier for specific\
+            \ instances of a type"
+        lifecycleState:
+          type: "string"
+          description: "The life cycle state of the resource"
+        name:
+          type: "string"
+          description: "A string used to give a name to the resource"
+        startDate:
+          type: "string"
+          format: "date-time"
+          description: "A date time( DateTime). The date from which the resource is\
+            \ effective"
+        version:
+          type: "string"
+          description: "A field that identifies the specific version of an instance\
+            \ of a resource"
+        resourceRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceRelationship'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceCharacteristic'
+        place:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Place'
+        partyRole:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyRoleRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceCharacteristic:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "name of the characteristic"
+        value:
+          type: "string"
+          description: "value of the characteristic"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    SupportingResource:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the supporting resource"
+        id:
+          type: "string"
+          description: "Unique identifier of the supporting resource"
+        name:
+          type: "string"
+          description: "Name of the resource supporting the service"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceOrderItemRef:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Identifier of the line item (generally it is a sequence number\
+            \ 01, 02, 03, ...)"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceRelationship:
+      description: "Describes links between resources"
+      type: "object"
+      properties:
+        relationshipType:
+          type: "string"
+          description: "Semantic of the relationship"
+        resource:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceRef'
+          description: "A reference to the resource"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceOrderItem:
+      description: "An identified part of the order. A resource order is decomposed\
+        \ into one or more order items."
+      type: "object"
+      properties:
+        action:
+          type: "string"
+          description: "Can be \"add\" / \"modify\" / \"no_change\"/ \"delete\""
+        id:
+          type: "string"
+          description: "Identifier of the line item (generally it is a sequence number\
+            \ 01, 02, 03, ...)"
+        quantity:
+          type: "integer"
+          description: "Quantity ordered"
+        state:
+          type: "string"
+          description: "State of the order item : described in the state machine diagram"
+        resourceSpecification:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceSpecificationRef'
+        orderItemRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceOrderItemRelationship'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceAlarmRef:
+      type: "object"
+      description: "A set of alarm ids identifying the alarms that are underlying this\
+        \ problem."
+      properties:
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+        changeRequest:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+        href:
+          type: "string"
+          description: "Reference of the Alarm"
+        id:
+          type: "string"
+          description: "Unique identifier of the Alarm"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceCandidateRef:
+      description: "ResourceCandidate reference: A resource candidate is an entity that\
+        \ makes a ResourceSpecification available to a catalog."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the resource candidate"
+        id:
+          type: "string"
+          description: "Unique identifier of the resource candidate"
+        name:
+          type: "string"
+          description: "Name of the resource candidate"
+        version:
+          type: "string"
+          description: "Version of the resource candidate"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceOrderRelationship:
+      type: "object"
+      properties:
+        relationshipType:
+          type: "string"
+          description: "The type of related order item, such as [dependency] if the\
+            \ order item needs to be [not started] until another order item is complete;\
+            \ [cross-reference] to keep track of the source order (service order)"
+        resourceOrder:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceOrderRef'
+        serviceOrder:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Service.yaml#/components/schemas/ServiceOrderRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceOrderRef:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Hyperlink to access the related Resource Order"
+        id:
+          type: "string"
+          description: "The unique identifier of the related resource order"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ResourceOrder:
+      description: "A Resource Order is a request to provision a set of Resources (logical\
+        \ and physical) triggered by the request to provision a Service through a Service\
+        \ Order"
+      type: "object"
+      properties:
+        category:
+          type: "string"
+          description: "Used to categorize the order from a business perspective that\
+            \ can be useful for the OM system."
+        completionDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the order was completed"
+        correlationId:
+          type: "string"
+          description: "ID given by the consumer and only understandable by him (to\
+            \ facilitate his searches afterwards)"
+        description:
+          type: "string"
+          description: "free-text description of the Resource Order"
+        href:
+          type: "string"
+          description: "Hyperlink to access the order"
+        id:
+          type: "string"
+          description: "Identifier of an instance of the Resource Order. Required to\
+            \ be unique within the resource type.  Used in URIs as the identifier for\
+            \ specific instances of a type."
+        name:
+          type: "string"
+          description: "A string used to give a name to the Resource Order"
+        orderDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the order was created"
+        priority:
+          type: "integer"
+          description: "A way that can be used by consumers to prioritize orders in\
+            \ OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
+        requestedCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "Requested delivery date from the requestor perspective"
+        requestedStartDate:
+          type: "string"
+          format: "date-time"
+          description: "Order start date wished by the requestor"
+        state:
+          type: "string"
+          description: "The life cycle state of the resource."
+        orderType:
+          type: "string"
+          description: "Name of the Resource Order type"
+        orderRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceOrderRelationship'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+

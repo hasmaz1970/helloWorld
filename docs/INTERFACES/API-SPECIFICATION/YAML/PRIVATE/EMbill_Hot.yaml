@@ -1,0 +1,563 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: EMbill_Hot
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PRIVATE MESSAGING API SPECIFICATION:**
+      * **Reference Point Name:** EMbill*
+      * **API Name:** EMbill_Hot-Event Message Bus API
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/private
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - ''
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+tags:
+  - name: HB_MTMF
+    description: "API: [EMSP <-> HB_MTMF]"
+  - name: HB_BTF
+    description: "API: [EMSP <-> HB_BTF]"
+  - name: HB_ABMF
+    description: "API: [EMSP <-> HB_ABMF]"
+  - name: HB_SF
+    description: "API: [EMSP <-> HB_SF]"
+  - name: HB_ABSF
+    description: "API: [EMSP <-> HB_ABSF]"
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+  /eventMessageBus/topic/hotBillMtmf/event:
+
+    get:
+      summary: 
+        Read MonE BDS-Billing Data Stream Base (MonE Templated NOT applied)
+      operationId: Read-HB_MTMF
+      tags:
+        - HB_MTMF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/HB_MTMF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+  /eventMessageBus/topic/hotBillBtf/event:
+
+    post:
+      summary:
+        Publish MonE Billing Monetization Template Applied BDS-Billing Data Stream (Contains MonE Template Info)
+
+      operationId: Post-HB_MTMF
+      tags:
+        - HB_MTMF
+
+      requestBody:
+        description: MonE Billing Data Stream (BDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HB_MTMF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Billing Monetization Template Applied BDS-Billing Data Stream (Contains MonE Template Info)
+      operationId: Read-HB_BTF
+      tags:
+        - HB_BTF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/HB_BTF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"       
+
+  /eventMessageBus/topic/hotBillAbmf/event:
+
+    post:
+      summary:
+        Publish MonE Billing Monetization Template Applied BDS-Billing Data Stream (Contains MonE Template Info, BillLineItem, BillGlCodeItem etc. parts)
+
+      operationId: Post-HB_BTF
+      tags:
+        - HB_BTF
+
+      requestBody:
+        description: MonE Billing Data Stream (BDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HB_BTF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Billing Monetization Template Applied BDS-Billing Data Stream (Contains MonE Template Info, BillLineItem, BillGlCodeItem etc. parts)
+      operationId: Read-HB_ABMF
+      tags:
+        - HB_ABMF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/HB_ABMF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"       
+
+
+  /eventMessageBus/topic/hotBillSf/event:
+
+    post:
+      summary:
+        Publish MonE Rated and Discounted BDS-Charging Data Stream (Contains MonE Template Info, BillLineItem, BillGlCodeItem etc. and bill-time applied discount parts)
+
+      operationId: Post-HB_ABMF
+      tags:
+        - HB_ABMF
+
+      requestBody:
+        description: MonE Billing Data Stream (BDS)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HB_ABMF_Output_Event"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Rated and Discounted BDS-Charging Data Stream (Contains MonE Template Info, BillLineItem, BillGlCodeItem etc. and bill-time applied discount parts)
+      operationId: Read-HB_SF
+      tags:
+        - HB_SF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/HB_SF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"   
+
+
+  /eventMessageBus/topic/hotBillAbsf/event:
+
+    post:
+      summary:
+        Publish MonE Hotbill_ABMDS-Account Balance Management Data Stream (Persist Balance Delta Updates on DB)
+
+      operationId: Post-HB_ABMF-ABSF
+      tags:
+        - HB_ABMF
+
+      requestBody:
+        description: Hotbill_ABMDS-Account Balance Management Data Stream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HB_ABMF_Output_Event_ABSF"
+
+      responses:
+        202:
+          description: "No Content in Response / Event Message Published"
+        400:
+          $ref: "#/components/responses/Response400"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: 
+        Read MonE Hotbill_ABMDS-Account Balance Management Data Stream (Persist Balance Delta Updates on DB)
+      operationId: Read-HB_ABSF
+      tags:
+        - HB_ABSF
+
+      responses:
+        200:
+          description: "Success"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/HB_ABSF_Input_Event"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        404:
+          $ref: "#/components/responses/Response404"
+        500:
+          $ref: "#/components/responses/Response500"
+        504:
+          $ref: "#/components/responses/Response504"   
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response400'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response404'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response500'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_emsp_api_schemas.yaml#/components/responses/Response504'
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+## 5.x. CHARGING DATA MODEL DEFINITIONS
+#############################################################################
+
+
+
+#############################################################################
+## 5.x. EVENT MODEL DEFINITIONs
+#############################################################################
+
+
+
+    HB_MTMF_Input_Event:
+      description:
+        Input Event for HB_MTMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS_Base"
+
+    HB_MTMF_Output_Event:
+      description:
+        Output Event for HB_MTMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS_MonE_Template"
+
+
+
+    HB_BTF_Input_Event:
+      description:
+        Input Event for HB_BTF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS_MonE_Template"
+
+    HB_BTF_Output_Event:
+      description:
+        Output Event for HB_BTF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS"
+
+    HB_ABMF_Input_Event:
+      description:
+        Input Event for HB_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS"
+
+    HB_ABMF_Output_Event:
+      description:
+        Output Event for HB_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS"
+
+    HB_ABMF_Output_Event_ABSF:
+      description:
+        Output Event for HB_ABMF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/Hotbill_ABMDS"
+
+    HB_SF_Input_Event:
+      description:
+        Input Event for HB_SF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/BDS"
+
+    HB_ABSF_Input_Event:
+      description:
+        Input Event for HB_ABSF
+
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              type: array
+              items:
+                $ref: "#/components/schemas/Hotbill_ABMDS"
+
+
+#############################################################################
+## 5.x. MODEL HELPERs
+#############################################################################
+
+#############################################################################
+## 5.x. EXTERNAL EMSP API REFERENCES
+#############################################################################
+
+
+    BDS_Base:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/BDS_Base'
+    BDS_MonE_Template:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/BDS_MonE_Template'
+    BDS:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/BDS'
+
+    Hotbill_ABMDS:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/Hotbill_ABMDS'
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+    Event:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+    Collection:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Collection'
+
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################

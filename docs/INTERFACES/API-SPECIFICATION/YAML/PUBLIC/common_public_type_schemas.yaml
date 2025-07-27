@@ -1,0 +1,128 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: Common Public Schema (Data Type) Definitions
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **This Open API specification does NOT contain any valid PATHS/OPERATIONS!!!. It ONLY contains COMMON SCHEMA (TYPE) DEFINITIONS referred by other API specifications.**
+
+    Thus, in this context COMMON SCHEMA (TYPE) DEFINITIONS mean shared entity models or baseline objects that can be reused with or without extension.
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/public/COMMON_TYPE_DEFINITION
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+  /readMe:
+    get:
+      summary: This is a placeholder nouse operation. (to bypass Swagger UI limitation of a specification with ONLY data models without operation)
+      operationId: readMe
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################

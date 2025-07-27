@@ -1,0 +1,2679 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: Pacct_Mgmt 
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PUBLIC WS (http-REST) API SPECIFICATION:**
+      * **Reference Point Name:** Pacct*
+      * **API Name:** Pacct_Mgmt-Account Management
+      * Utilizes TMFORUM Open API: TMF666-Account Management (v4)
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/public/pacct/accountManagement/{version}
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v4'
+
+tags:
+  - name: BillingCycleingAccount
+    description: "Billing Account Management"  
+
+  - name: settlementAccount
+    description: "Settlement Account Management"  
+
+  - name: billingCycleSpecification  
+  - name: billFormat
+  - name: billPresentationMedia
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+#############################################################################
+
+
+  /billingAccount:
+
+    post:
+      operationId: createBillingAccount
+      summary: Creates a BillingAccount
+      description: This operation creates a BillingAccount entity.
+      tags:
+        - billingAccount
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingAccount"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingAccount"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      operationId: listBillingAccount
+      summary: List or find BillingAccount objects
+      description: This operation list or find BillingAccount entities
+      tags:
+        - billingAccount
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillingAccount"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillingAccount"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /billingAccount/{id}:
+    get:
+      operationId: retrieveBillingAccount
+      summary: Retrieves a BillingAccount by ID
+      description: This operation retrieves a BillingAccount entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - billingAccount
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingAccount"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patchBillingAccount
+      summary: Updates partially a BillingAccount
+      description: This operation updates partially a BillingAccount entity.
+      tags:
+        - billingAccount
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingAccount"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingAccount"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    delete:
+      operationId: deleteBillingAccount
+      summary: Deletes a BillingAccount
+      description: This operation deletes a BillingAccount entity.
+      tags:
+        - billingAccount
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+  /settlementAccount:
+
+    post:
+      operationId: createSettlementAccount
+      summary: Creates a SettlementAccount
+      description: This operation creates a SettlementAccount entity.
+      tags:
+        - settlementAccount
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettlementAccount"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/SettlementAccount"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      operationId: listSettlementAccount
+      summary: List or find SettlementAccount objects
+      description: This operation list or find SettlementAccount entities
+      tags:
+        - settlementAccount
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/SettlementAccount"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/SettlementAccount"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /settlementAccount/{id}:
+    get:
+      operationId: retrieveSettlementAccount
+      summary: Retrieves a SettlementAccount by ID
+      description: This operation retrieves a SettlementAccount entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - settlementAccount
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/SettlementAccount"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patchSettlementAccount
+      summary: Updates partially a SettlementAccount
+      description: This operation updates partially a SettlementAccount entity.
+      tags:
+        - settlementAccount
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettlementAccount"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/SettlementAccount"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    delete:
+      operationId: deleteSettlementAccount
+      summary: Deletes a SettlementAccount
+      description: This operation deletes a SettlementAccount entity.
+      tags:
+        - settlementAccount
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+################################################################################
+
+
+
+#############################################################################
+
+  /billingCycleSpecification:
+    post:
+      operationId: createBillingCycleSpecification
+      summary: Creates a BillingCycleSpecification
+      description: This operation creates a BillingCycleSpecification entity.
+      tags:
+        - billingCycleSpecification
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingCycleSpecification"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingCycleSpecification"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      operationId: listBillingCycleSpecification
+      summary: List or find BillingCycleSpecification objects
+      description: This operation list or find BillingCycleSpecification entities
+      tags:
+        - billingCycleSpecification
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillingCycleSpecification"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillingCycleSpecification"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /billingCycleSpecification/{id}:
+    get:
+      operationId: retrieveBillingCycleSpecification
+      summary: Retrieves a BillingCycleSpecification by ID
+      description: This operation retrieves a BillingCycleSpecification entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - billingCycleSpecification
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingCycleSpecification"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patchBillingCycleSpecification
+      summary: Updates partially a BillingCycleSpecification
+      description: This operation updates partially a BillingCycleSpecification entity.
+      tags:
+        - billingCycleSpecification
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingCycleSpecification"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillingCycleSpecification"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    delete:
+      operationId: deleteBillingCycleSpecification
+      summary: Deletes a BillingCycleSpecification
+      description: This operation deletes a BillingCycleSpecification entity.
+      tags:
+        - billingCycleSpecification
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+#############################################################################
+
+
+  /billFormat:
+
+    post:
+      operationId: createBillFormat
+      summary: Creates a BillFormat
+      description: This operation creates a BillFormat entity.
+      tags:
+        - billFormat
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillFormat"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillFormat"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      operationId: listBillFormat
+      summary: List or find BillFormat objects
+      description: This operation list or find BillFormat entities
+      tags:
+        - billFormat
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillFormat"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillFormat"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /billFormat/{id}:
+    get:
+      operationId: retrieveBillFormat
+      summary: Retrieves a BillFormat by ID
+      description: This operation retrieves a BillFormat entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - billFormat
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillFormat"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patchBillFormat
+      summary: Updates partially a BillFormat
+      description: This operation updates partially a BillFormat entity.
+      tags:
+        - billFormat
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillFormat"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillFormat"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    delete:
+      operationId: deleteBillFormat
+      summary: Deletes a BillFormat
+      description: This operation deletes a BillFormat entity.
+      tags:
+        - billFormat
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+#############################################################################
+
+
+  /billPresentationMedia:
+
+    post:
+      operationId: createBillPresentationMedia
+      summary: Creates a BillPresentationMedia
+      description: This operation creates a BillPresentationMedia entity.
+      tags:
+        - billPresentationMedia
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillPresentationMedia"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillPresentationMedia"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      operationId: listBillPresentationMedia
+      summary: List or find BillPresentationMedia objects
+      description: This operation list or find BillPresentationMedia entities
+      tags:
+        - billPresentationMedia
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillPresentationMedia"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/BillPresentationMedia"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /billPresentationMedia/{id}:
+    get:
+      operationId: retrieveBillPresentationMedia
+      summary: Retrieves a BillPresentationMedia by ID
+      description: This operation retrieves a BillPresentationMedia entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - billPresentationMedia
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillPresentationMedia"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patchBillPresentationMedia
+      summary: Updates partially a BillPresentationMedia
+      description: This operation updates partially a BillPresentationMedia entity.
+      tags:
+        - billPresentationMedia
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillPresentationMedia"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/BillPresentationMedia"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    delete:
+      operationId: deleteBillPresentationMedia
+      summary: Deletes a BillPresentationMedia
+      description: This operation deletes a BillPresentationMedia entity.
+      tags:
+        - billPresentationMedia
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+################################################################################
+
+
+
+
+#############################################################################
+
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+#############################################################################
+## 5.x. HEADERS
+#############################################################################
+  headers:
+
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/transactionId'
+    X-Total-Count:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/X-Total-Count'
+    Location:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/Location'
+
+
+
+#############################################################################
+## 5.x. PARAMETERS
+#############################################################################
+  parameters:
+    id:
+      name: id
+      in: path
+      description: ID of Entity
+      required: true
+      schema:
+        type: string
+
+    
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/transactionId'
+    fields:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/fields'
+    limit:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/limit'
+    offset:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/offset'
+    sort:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sort'
+    depth:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/depth'
+    expand:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/expand'
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response400'
+    Response401:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response401'
+    Response403:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response403'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response404'
+    Response405:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response405'
+    Response406:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response406'
+    Response409:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response409'
+    Response410:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response410'
+    Response411:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response411'
+    Response412:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response412'
+    Response413:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response413'
+    Response414:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response414'
+    Response415:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response415'
+    Response422:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response422'
+    Response429:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response429'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response500'
+    Response501:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response501'
+    Response502:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response502'
+    Response503:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response503'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response504'
+
+
+#############################################################################
+
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+
+
+
+#############################################################################
+##  5.x Event TYPES
+#############################################################################
+
+
+    AccountManagement_EventsType:
+      description:
+        AccountManagement_EventsType
+      oneOf:
+        - $ref: "#/components/schemas/BillingAccountEvent"
+        - $ref: "#/components/schemas/SettlementAccountEvent"
+        - $ref: "#/components/schemas/BillingCycleSpecificationEvent"
+        - $ref: "#/components/schemas/BillFormatEvent"
+        - $ref: "#/components/schemas/BillPresentationMediaEvent"
+
+
+
+    BillingAccountEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/BillingAccount"
+
+    SettlementAccountEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/SettlementAccount"
+
+
+
+    BillingCycleSpecificationEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/BillingCycleSpecification"
+
+    BillFormatEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/BillFormat"
+
+    BillPresentationMediaEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/BillPresentationMedia"
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+    BillingAccount:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/BillingAccount'
+    SettlementAccount:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/SettlementAccount'
+    BillingCycleSpecification:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/BillingCycleSpecification'
+    BillFormat:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/BillFormat'
+    BillPresentationMedia:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/BillPresentationMedia'
+
+
+
+
+    Hub:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Hub'
+    Event:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################      

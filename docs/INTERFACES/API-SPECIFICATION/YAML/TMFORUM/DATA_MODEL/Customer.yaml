@@ -1,0 +1,3496 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: TMFORUM Common Schema (Data Type) Definitions for APIs
+  contact:
+    name: MonetizeHub.IO Project Support
+    
+  license:
+    name: TMFORUM RAND
+    url: https://github.com/tmforum-rand/RAND-LICENSE 
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **This Open API specification does NOT contain any valid PATHS/OPERATIONS!!!. It ONLY contains COMMON SCHEMA (TYPE) DEFINITIONS referred by other API specifications.**
+
+    Thus, in this context COMMON SCHEMA (TYPE) DEFINITIONS mean shared entity models or baseline objects that can be reused with or without extension.
+    
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://monetizehub.io/demos/current/apis/private/
+    description: MonE Private APIs and Schemas Specification
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+  /readMe:
+    get:
+      summary: This is a placeholder nouse operation. (to bypass Swagger UI limitation of a specification with ONLY data models without operation)
+      operationId: readMe
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+  schemas:
+
+
+    BalanceAdjustment:
+      description: "#TODO"
+      type: "object"
+
+
+    BillingAccountRef:
+      description: "BillingAccount reference. A BillingAccount is a detailed description\
+        \ of a bill structure."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the billing account"
+        id:
+          type: "string"
+          description: "Unique identifier of the billing account"
+        name:
+          type: "string"
+          description: "Name of the billing account"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppliedBillingRate:
+      description: "An applied billing rate presented on a bill. It is created before\
+        \ or during the billing process"
+      type: "object"
+      properties:
+        date:
+          type: "string"
+          format: "date-time"
+          description: "Creation date of the applied billing charge"
+        description:
+          type: "string"
+          description: "Additional data to be displayed on the bill for this applied\
+            \ billing charge"
+        href:
+          type: "string"
+          description: "Reference of the applied billing charge"
+        id:
+          type: "string"
+          description: "Unique identifier of the applied billing charge"
+        name:
+          type: "string"
+          description: "Name of the applied billing rate"
+        taxExcludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Tax excluded amount to be charged on the bill (expresses in\
+            \ the given currency) for this applied billing rate"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "All taxes included amount to be charged on the bill (expressed\
+            \ in the given currency) for this applied billing rate"
+        rateType:
+          type: "string"
+          description: "Type of the applied billing rate : appliedBillingCharge (any\
+            \ kind of charge except taxation charges : recurringCharge, oneTimeCharge,\
+            \ usageCharge),  appliedBillingCredit (any kind of credit : rebate or productAlteration)\
+            \ or appliedPenaltyCharge (penalty charges such as late fees, payment rejection\
+            \ fees,...)"
+        appliedTax:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingTaxRate'
+        bill:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillRef'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingRateCharacteristic'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillPresentationMediaRef:
+      description: "PresentationMedia reference. A mean of communicating a bill, supported\
+        \ by the associated bill format. For example, post mail, email, web page."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the bill presentation media"
+        id:
+          type: "string"
+          description: "Unique identifier of the bill presentation media"
+        name:
+          type: "string"
+          description: "A short descriptive name"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillFormat:
+      description: "A detailed description of the way in which a bill is presented."
+      type: "object"
+      required:
+      - "name"
+      properties:
+        description:
+          type: "string"
+          description: "An explanatory text for this bill format"
+        href:
+          type: "string"
+          description: "Reference of the bill format"
+        id:
+          type: "string"
+          description: "Unique identifier of the bill format"
+        name:
+          type: "string"
+          description: "A short descriptive name"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    PaymentMethodRef:
+      description: "PaymentMethod reference. A payment method defines a specific mean\
+        \ of payment (e.g direct debit)."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the payment mean"
+        id:
+          type: "string"
+          description: "Unique identifier of the payment mean"
+        name:
+          type: "string"
+          description: "Name of the payment mean"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    QuoteItemRelationship:
+      description: "Used to describe relationship between quote item. These relationship\
+        \ could have an impact on pricing and conditions"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "ID of the related order item (must be in the same quote)"
+        relationshipType:
+          type: "string"
+          description: "Relationship type as relies on, bundles, etc..."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ProductOrderItem:
+      type: "object"
+      description: "An identified part of the order. A product order is decomposed into\
+        \ one or more order items."
+      properties:
+        id:
+          type: "string"
+          description: "Identifier of the line item (generally it is a sequence number\
+            \ 01, 02, 03, ...)"
+        quantity:
+          type: "integer"
+          description: "Quantity ordered"
+        action:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderItemActionType'
+          description: "The action to be carried out on the Product. Can be: add, modify,\
+            \ delete, noChange"
+        appointment:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppointmentRef'
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        itemPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderPrice'
+        itemTerm:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderTerm'
+        itemTotalPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderPrice'
+        payment:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentRef'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRefOrValue'
+        productOffering:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingRef'
+        productOfferingQualificationItem:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingQualificationItemRef'
+        quoteItem:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuoteItemRef'
+        productOrderItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ProductOrderItem'
+        productOrderItemRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderItemRelationship'
+        qualification:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingQualificationRef'
+        state:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ProductOrderItemStateType'
+          description: "State of the order item : described in the state machine diagram"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceAdjustmentBody:
+      properties:
+        amount:
+          description: "Amount (can be monetary or non-monetary) to be recharged in\
+            \ the bucket. It could refer to positive (increment) or negative (decrement)\
+            \ values"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        product:
+          description: "A reference to the product related to the bucket that is impacted\
+            \ by the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        reason:
+          type: "string"
+          description: "Text describing the reason for the adjustment"
+        type:
+          type: "string"
+          description: "A preconfigured value that describes a TopUp type which determines\
+            \ the prepay balance bucket in which the top-up is done (national-voice,\
+            \ roaming-voice, promotional-voice, data, ....)"
+      required:
+      - "type"
+      - "reason"
+      - "amount"
+      type: "object"
+
+
+    BillingCycleSpecification:
+      description: "A detailed description of when to initiate a billing cycle and the\
+        \ various sub steps of a billing cycle."
+      type: "object"
+      required:
+      - "name"
+      properties:
+        billingDateShift:
+          type: "integer"
+          description: "An offset of a billing/settlement date. The offset is expressed\
+            \ as number of days with regard to the start of the billing/settlement period."
+        billingPeriod:
+          type: "string"
+          description: "A billing time period. It can be recurring, for example: week,\
+            \ month, quarter of year, year ."
+        chargeDateOffset:
+          type: "integer"
+          description: "An offset of a date through which charges previously received\
+            \ by the billing system will appear on the bill. The offset is expressed\
+            \ as number of days with regard to the start of the BillingPeriod."
+        creditDateOffset:
+          type: "integer"
+          description: "An offset of a date through which credits previously received\
+            \ by the billing system will appear on the bill. The offset is expressed\
+            \ as number of days with regard to the start of the BillingPeriod."
+        description:
+          type: "string"
+          description: "An explanation regarding this billing cycle specification"
+        frequency:
+          type: "string"
+          description: "Frequency of the billing cycle (monthly for instance)"
+        href:
+          type: "string"
+          description: "Reference of the billing cycle specification"
+        id:
+          type: "string"
+          description: "Unique identifier of the billing cycle specification"
+        mailingDateOffset:
+          type: "integer"
+          description: "An offset of a customer bill mailing date. The offset is expressed\
+            \ as number of days with regard to the start of the BillingPeriod."
+        name:
+          type: "string"
+          description: "A short descriptive name"
+        paymentDueDateOffset:
+          type: "integer"
+          description: "An offset of a payment due date. The offset is expressed as\
+            \ number of days with regard to the start of the BillingPeriod."
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "The period for which the billing specification cycle is valid"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    SearchTimeSlotStateType:
+      type: "string"
+      description: "Valid values for the lifecycle state of the searchTimeSlot"
+      enum:
+      - "inProgress"
+      - "done"
+      - "rejected"
+      - "terminatedWithError"
+
+
+    BalanceTransferBody:
+      properties:
+        amount:
+          description: "Amount (can be monetary or non-monetary) to be transferred"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        channel:
+          description: "Indicator for the channel used to request the top-up operation.\
+            \ Structure including at least attribute �name�"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ChannelRef'
+        product:
+          description: "A reference to the product related to the bucket that is impacted\
+            \ by the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        targetId:
+          type: "string"
+          description: "Identifier for the entity that receives the transfer (reference\
+            \ to a product via a commercial identifier such as an msisidn that relates\
+            \ to an internal product id)"
+        type:
+          type: "string"
+          description: "A preconfigured value that describes a TopUp type which determines\
+            \ the prepay balance bucket in which the top-up is done (national-voice,\
+            \ roaming-voice, promotional-voice, data, ....)"
+      required:
+      - "type"
+      - "channel"
+      - "targetId"
+      - "amount"
+      type: "object"
+
+
+    ProductOrderStateType:
+      type: "string"
+      description: "Possible values for the state of the order"
+      enum:
+      - "acknowledged"
+      - "rejected"
+      - "pending"
+      - "held"
+      - "inProgress"
+      - "cancelled"
+      - "completed"
+      - "failed"
+      - "partial"
+      - "assessingCancellation"
+      - "pendingCancellation"
+
+
+    SearchTimeSlot:
+      type: "object"
+      description: "This task resource is used to retrieve available time slots. One\
+        \ of this available time slot is after used to create or reschedule an appointment"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier of the search time slot request"
+        href:
+          type: "string"
+          description: "Reference to access the search time slot resource"
+        status:
+          type: "string"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/SearchTimeSlotStateType'
+        searchDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the search time slot is performed"
+        searchResult:
+          type: "string"
+          description: "Result of the search time slot (success or fail for example)"
+        requestedTimeSlot:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TimeSlot'
+        availableTimeSlot:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TimeSlot'
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+          description: "RelatedParty reference. A related party defines party or party\
+            \ role linked to a specific entity."
+        relatedEntity:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedEntity'
+        relatedPlace:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedPlaceRefOrValue'
+          description: "Related place defines (by reference or value) the place where\
+            \ the appointment will take place."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceTransferStatusTypeModify:
+      properties:
+        status:
+          type: "string"
+      required:
+      - "status"
+      type: "object"
+
+
+    Authorization:
+      description: "If special discount or special product offering price or specific\
+        \ condition need an approval for ISP sale representative it is described here."
+      type: "object"
+      properties:
+        givenDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the authorization (approved or declined) was done"
+        name:
+          type: "string"
+          description: "Name of the required authorization"
+        requestedDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the authorization is requested for"
+        signatureRepresentation:
+          type: "string"
+          description: "To describe a digital or manual signature"
+        state:
+          type: "string"
+          description: "State of the authorization, such as: approved or declined"
+        approver:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppointmentStateType:
+      type: "string"
+      description: "Valid values for the lifecycle state of the appointment"
+      enum:
+      - "initialized"
+      - "confirmed"
+      - "cancelled"
+      - "completed"
+      - "failed"
+
+
+    PaymentPlan:
+      description: "Defines a plan for payment (when a party wants to spread his payments)"
+      type: "object"
+      properties:
+        numberOfPayments:
+          type: "integer"
+          description: "Number of payments used to spread the global payment"
+        paymentFrequency:
+          type: "string"
+          description: "Frequency of the payments, such as monthly and bimonthly"
+        priority:
+          type: "integer"
+          description: "Priority of the payment plan"
+        status:
+          type: "string"
+          description: "Status of the payment plan (effective, ineffective)"
+        totalAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Amount paid"
+        planType:
+          type: "string"
+          description: "Type of payment plan"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Validity period of the payment plan"
+        paymentMethod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentMethodRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CustomerBill:
+      type: "object"
+      properties:
+        amountDue:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Amount due for this bill expressed in the given currency"
+        billDate:
+          type: "string"
+          format: "date-time"
+          description: "Bill date"
+        billingPeriod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Billing period of the bill (used for onCycle bill only)"
+        billNo:
+          type: "string"
+          description: "Bill reference known by the customer or the party and displayed\
+            \ on the bill. Could be different from the id."
+        category:
+          type: "string"
+          description: "Category of the bill produced : normal, duplicate, interim,\
+            \ last, trial customer or credit note"
+        href:
+          type: "string"
+          description: "Bill unique reference"
+        id:
+          type: "string"
+          description: "Bill unique identifier"
+        lastUpdate:
+          type: "string"
+          format: "date-time"
+          description: "Date of bill last update"
+        nextBillDate:
+          type: "string"
+          format: "date-time"
+          description: "Approximate date of  the next bill production given for information\
+            \ (only used for onCycle bill)"
+        paymentDueDate:
+          type: "string"
+          format: "date-time"
+          description: "Date at which the amount due should have been paid"
+        remainingAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Remaining amount to be paid for this bill expressed in the given\
+            \ currency"
+        runType:
+          type: "string"
+          description: "onCycle (a bill can be created as a result of a cycle run) or\
+            \ offCycle (a bill can be created as a result of other events such as customer\
+            \ request or account close)"
+        state:
+          type: "string"
+          description: "State that a bill could take during its lifecycle : New, Validated,\
+            \ On Hold, Sent, Partially paid or Settled"
+        taxExcludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Total tax excluded amount expressed in the given currency"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Total tax included amount expressed in the given"
+        billDocument:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/FileDocument'
+          description: "Document(s) associated to the bill"
+        paymentItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentItem'
+          description: "Payment items already lettered on this bill."
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        taxItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TaxItem'
+        paymentMethod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentMethodRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        financialAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/FinancialAccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    SettlementNoteItem:
+      description: "Concerns a product identified by its catalogue reference. It could\
+        \ also follow a period delimited by a start and an end date."
+      type: "object"
+      properties:
+        itemId:
+          type: "string"
+          description: "Unique identifier of the settlement note item"
+        itemLabel:
+          type: "string"
+          description: "A free description text for the settlement note item"
+        itemNumber:
+          type: "string"
+          description: "Unique number assigned to the settlement note item"
+        period:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+        quantity:
+          type: "integer"
+          description: "Quantity"
+        taxExcludedAmount:
+          type: "number"
+          format: "float"
+          description: "Tax excluded amount equal to quantity * taxExcludedUnitPrice"
+        taxExcludedUnitPrice:
+          type: "number"
+          format: "float"
+          description: "Tax excluded unit price to be applied on the given quantity"
+        taxIncludedAmount:
+          type: "number"
+          format: "float"
+          description: "All taxes included amount equal to taxExcludedAmount + taxAmount"
+        taxItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TaxItem'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Bill:
+      description: "The Bill entity is used to model a bill (aka an invoice). It represents\
+        \ a total amount due for all products during the billing period and all significant\
+        \ date."
+      type: "object"
+      properties:
+        amountDue:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Amount due for this bill expressed in the given currency"
+        billDate:
+          type: "string"
+          format: "date-time"
+          description: "Bill date"
+        billingPeriod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Billing period of the bill (used for onCycle bill only)"
+        billNo:
+          type: "string"
+          description: "Bill reference known by the customer or the party and displayed\
+            \ on the bill. Could be different from the id."
+        category:
+          type: "string"
+          description: "Category of the bill produced : normal, duplicate, interim,\
+            \ last, trial customer or credit note"
+        href:
+          type: "string"
+          description: "Bill unique reference"
+        id:
+          type: "string"
+          description: "Bill unique identifier"
+        lastUpdate:
+          type: "string"
+          format: "date-time"
+          description: "Date of bill last update"
+        nextBillDate:
+          type: "string"
+          format: "date-time"
+          description: "Approximate date of  the next bill production given for information\
+            \ (only used for onCycle bill)"
+        paymentDueDate:
+          type: "string"
+          format: "date-time"
+          description: "Date at which the amount due should have been paid"
+        remainingAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Remaining amount to be paid for this bill expressed in the given\
+            \ currency"
+        runType:
+          type: "string"
+          description: "onCycle (a bill can be created as a result of a cycle run) or\
+            \ offCycle (a bill can be created as a result of other events such as customer\
+            \ request or account close)"
+        state:
+          type: "string"
+          description: "State that a bill could take during its lifecycle : New, Validated,\
+            \ On Hold, Sent, Partially paid or Settled"
+        taxExcludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Total tax excluded amount expressed in the given currency"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Total tax included amount expressed in the given"
+        billDocument:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/FileDocument'
+          description: "Document(s) associated to the bill"
+        paymentItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentItem'
+          description: "Payment items already lettered on this bill."
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        taxItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TaxItem'
+        paymentMethod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentMethodRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        financialAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/FinancialAccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    SettlementMethod:
+      description: "Is the way in which the CSP provides the payment"
+      type: "object"
+      properties:
+        code:
+          type: "string"
+          description: "Code of the settlement method"
+        label:
+          type: "string"
+          description: "A word, term or phrase by which a settlement method is known\
+            \ and distinguished from other settlement method"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceDeductRef:
+      description: "the resource that deduct balance information"
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the balance information for a subscription"
+        id:
+          type: "string"
+          description: "Unique identifier for the balancededuct entity"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceTransfer:
+      description: "#TODO"
+      type: "object"
+
+
+    BalanceTransferRequest:
+      description: "The BalanceTransfer resource is a detailed description of credit\
+        \ transfer operation requested between two buckets (reference to products owned\
+        \ by customers and consuming credit when using a service)."
+      properties:
+        bucket:
+          description: "A reference to the bucket impacted by the request. This is used\
+            \ in scenarios where the requestor knows beforehand the bucket that is going\
+            \ to be impacted instead of just referring to the commercial identifier\
+            \ of the impacted product and the type of bucket created under that product"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalanceRef'
+        confirmationDate:
+          type: "string"
+          description: "Date when the transfer was confirmed in the server"
+        costOwner:
+          type: "string"
+          description: "Indicates the entity responsible to assume the cost of the transfer\
+            \ operation"
+          enum:
+          - "originator"
+          - "receiver"
+        description:
+          type: "string"
+          description: "Description of the transfer operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual transfer operation details"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the balance transfer\
+            \ operation request."
+        partyAccount:
+          description: "A reference to the account that owns the bucket impacted by\
+            \ the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        reason:
+          type: "string"
+          description: "Text describing the reason for the adjustment"
+        receiver:
+          description: "Identifier for the user/customer/entity that receives the transfer\
+            \ action when it is required to indicate additional customer hierarchy information\
+            \ regarding the entity receiving the balance transfer"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+          description: "Used to provide information about any other entity with relation\
+            \ to the operation"
+        requestedDate:
+          type: "string"
+          description: "Date when the transfer request was received in the server"
+        requestor:
+          description: "Identifier for the user/customer/entity that performs the top-up\
+            \ action. This can be used to indicate the identifier of an agent that performs\
+            \ the operation on behalf of a user via a customer service channel. Structure\
+            \ including at least attributes �role� and �name�."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        status:
+          type: "string"
+          description: "Status of the top-up."
+          enum:
+          - "confirmed"
+          - "cancelled"
+          - "in progress"
+        targetType:
+          type: "string"
+          description: "Intended for scenarios where the transfer is done from one bucket\
+            \ type to another (from voice to data). A preconfigured value that describes\
+            \ a Transfer type which determines the prepay balance bucket in which the\
+            \ transfer is done"
+        transferCost:
+          description: "Associated cost to be charged for the transfer operation (can\
+            \ be monetary or non-monetary)"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceTransferBody'
+      required:
+      - "id"
+      - "href"
+      - "reason"
+      - "requestedDate"
+      - "confirmationDate"
+      - "status"
+      - "product"
+      type: "object"
+
+
+    QueryProductRecommendation:
+      description: "Recommendation API is used to recommend offering quickly based on\
+        \ the history and real-time context of customer. It is a real-time and personalized\
+        \ recommendation API. It is usually provided by e-commerce or BSS, CRM system\
+        \ in omni-channel."
+      type: "object"
+      properties:
+        description:
+          type: "string"
+        id:
+          type: "string"
+          description: "Unique identifier of recommendation"
+        instantSyncRecommendation:
+          type: "boolean"
+          description: "An indicator which when the value is \"true\" means that requester\
+            \ expects to get recommendation result in the response"
+        href:
+          type: "string"
+          description: "Hypertext Reference of the recommendation"
+        name:
+          type: "string"
+          description: "Name of recommendation"
+        recommendationType:
+          type: "string"
+          description: "The type of recommendation"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "The period in which the recommendation is valid"
+        order:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ProductOrderRef'
+        place:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedPlaceRefOrValue'
+          description: "The place which the recommendation is related to"
+        channel:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ChannelRef'
+        category:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/CategoryRef'
+          description: "The category for grouping recommendations"
+        shoppingCart:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ShoppingCartRef'
+          description: "The shopping cart which the recommendation is related to"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        item:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/RecommendationItem'
+        state:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TaskStateType'
+          description: "State of the Recommendation defined in the state engine"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    TimeSlot:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the TimeSlot"
+        id:
+          type: "string"
+          description: "Unique identifier of the TimeSlot"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+          description: "RelatedParty reference. A related party defines party or party\
+            \ role linked to a specific entity."
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Start date and end date of the timeSlot"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillingCycleSpecificationRef:
+      description: "BillingCycleSpecification reference. A description of when to initiate\
+        \ a billing cycle and the various sub steps of a billing cycle."
+      type: "object"
+      properties:
+        dateShift:
+          type: "integer"
+          description: "An offset of a billing/settlement date. The offset is expressed\
+            \ as number of days with regard to the start of the billing/settlement period."
+        frequency:
+          type: "string"
+          description: "Frequency of the billing cycle (monthly for instance)"
+        href:
+          type: "string"
+          description: "Reference of the billing cycle specification"
+        id:
+          type: "string"
+          description: "Unique identifier of the billing cycle specification"
+        name:
+          type: "string"
+          description: "A short descriptive name"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    PaymentItem:
+      description: "The paymentItem is the result of lettering process. It enables to\
+        \ assign automatically or manually part of incoming payment amount to a bill"
+      type: "object"
+      properties:
+        appliedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Part of a payment amount lettered to the customer bill"
+        payment:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceDeduct:
+      description: "The Balance Deduct task resource is a detailed description of deduction\
+        \ operation. If balanceReserve Resource ID is contained in the deduct request\
+        \ message, the reserved balance will be performed deduct operation (if part\
+        \ of the reserved balance is deducted, the remain amount will be released);\
+        \ if balanceReserve Resource ID is not contained in the deduct request message,\
+        \ the balance will be deducted directly."
+      type: "object"
+      properties:
+        confirmationDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the deduction was confirmed in the server"
+        description:
+          type: "string"
+          description: "Description of the deduct  operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information about a deduction"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the deduction  operation\
+            \ request"
+        requestedDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the deduction request was received in the server"
+        status:
+          type: "string"
+          description: "Status of the deduction operation"
+        deductType:
+          type: "string"
+          description: "A preconfigured value that describes a deduct type which determines\
+            \ the prepay balance bucket in which the deduct is done"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        balanceReserve:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceReserveRef'
+        requestor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        partyAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceAdjustmentRequest:
+      description: "the BalanceAdjustment resource is a detailed description of credit\
+        \ adjustment operation erformed on a given bucket (defined by a specific product\
+        \ or reference to a product (i.e.: a commercial id such as an msisidn) and a\
+        \ service type)"
+      properties:
+        bucket:
+          description: "A reference to the bucket impacted by the request. This is used\
+            \ in scenarios where the requestor knows beforehand the bucket that is going\
+            \ to be impacted instead of just referring to the commercial identifier\
+            \ of the impacted product and the type of bucket created under that product"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalanceRef'
+        description:
+          type: "string"
+          description: "Description of the recharge operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual top-up operation details"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the balance adjustment\
+            \ operation request"
+        partyAccount:
+          description: "A reference to the account that owns the bucket impacted by\
+            \ the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+          description: "Used to provide information about any other entity with relation\
+            \ to the operation"
+        requestedDate:
+          type: "string"
+          description: "Date when the top-up request was received in the server"
+        requestor:
+          description: "Identifier for the user/customer/entity that performs the top-up\
+            \ action. This can be used to indicate the identifier of an agent that performs\
+            \ the operation on behalf of a user via a customer service channel. Structure\
+            \ including at least attributes �role� and �name�."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        validFor:
+          description: "The period defined for the adjusted amount to be part of the\
+            \ prepay balance. This could be used to define expiration times to remove\
+            \ balance not consumed."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriodType'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceAdjustmentBody'
+      required:
+      - "id"
+      - "href"
+      - "requestedDate"
+      - "product"
+      type: "object"
+
+
+    BalanceTopup:
+      description: "#TODO"
+      type: "object"
+
+
+    CartItemRelationship:
+      description: "Relationship among cart items mainly other than hierarchical relationships\
+        \ such as \"RelyOn\", \"DependentOn\", \"Shipping\" etc."
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier of the referred cart item"
+        relationshipType:
+          type: "string"
+          description: "Type of the cart item relationship"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceReserve:
+      description: "The Balance Reserve Operation resource is a detailed description\
+        \ of a balance reserve operation requested over a subscription"
+      type: "object"
+      properties:
+        confirmationDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the reserve request was confirmed in the server"
+        description:
+          type: "string"
+          description: "Description of the reserve operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information about a reserve"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the reserve operation\
+            \ request"
+        isAutoDeduct:
+          type: "boolean"
+          description: "Indicates if the reserved balance is auto deducted after a time\
+            \ period"
+        remainedAmount:
+          type: "number"
+          format: "float"
+          description: "Amount (can be monetary or non-monetary) to be remained in the\
+            \ bucket"
+        requestedDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the reserve request was received in the server"
+        reservedAmount:
+          type: "number"
+          format: "float"
+          description: "Amount (can be monetary or non-monetary) to be reserved in the\
+            \ bucket"
+        status:
+          type: "string"
+          description: "Status of the reserve operation"
+        reserveType:
+          type: "string"
+          description: "A preconfigured value that describes a reserve type which determines\
+            \ the prepay balance bucket in which the reserve is done"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Indicates if the reserved balance is auto deducted after a time\
+            \ period"
+        requestor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        partyAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    QuoteItem:
+      type: "object"
+      description: "A quote items describe an action to be performed on a productOffering\
+        \ or a product in order to get pricing elements and condition."
+      properties:
+        action:
+          type: "string"
+          description: "Action to be performed on this quote item (add, modify, remove,\
+            \ etc.)"
+        appointment:
+          type: "array"
+          description: "A reference to appointment(s) associated with this quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppointmentRef'
+        attachment:
+          type: "array"
+          description: "A reference to attachment(s) associated with this quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/AttachmentRefOrValue'
+        id:
+          type: "string"
+          description: "Identifier of the quote item (generally it is a sequence number\
+            \ 01, 02, 03, ...)"
+        note:
+          type: "array"
+          description: "Free form text associated with the quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRefOrValue'
+        productOffering:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingRef'
+        quantity:
+          type: "integer"
+          description: "Quantity asked for this quote item"
+        quoteItem:
+          type: "array"
+          description: "A structure to embedded quote item within quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuoteItem'
+        quoteItemAuthorization:
+          type: "array"
+          description: "Authorization related to this quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Authorization'
+        quoteItemPrice:
+          type: "array"
+          description: "Price for this quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuotePrice'
+        quoteItemRelationship:
+          type: "array"
+          description: "A relationship from item within a quote"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuoteItemRelationship'
+        productOfferingQualificationItem:
+          description: "A reference to a previously done POQ with item specified"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingQualificationItemRef'
+        relatedParty:
+          type: "array"
+          description: "A reference to a party playing a role in this quote item"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        state:
+          type: "string"
+          description: "State of the quote item : described in the state machine diagram"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Appointment:
+      type: "object"
+      description: "An Appointment is an arrangement to do something or meet someone\
+        \ at a particular time, at a place (for face to face appointment) or in a contact\
+        \ medium (for phone appointment)."
+      properties:
+        attachment:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/AttachmentRefOrValue'
+        calendarEvent:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/CalendarEventRef'
+          description: "A calendar event reference (CalendarEventRef). The appointment\
+            \ is associated with a calendar event (an happening at a point of time)\
+            \ associated to a calendar entry."
+        category:
+          type: "string"
+          description: "Business category : intervention for example or to be more precise\
+            \ after SalesIntervention, orderDeliveryIntervention,..."
+        contactMedium:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ContactMedium'
+        creationDate:
+          type: "string"
+          format: "date-time"
+          description: "Appointment creation date"
+        description:
+          type: "string"
+          description: "Short free text describing the appointment"
+        externalId:
+          type: "string"
+          description: "External reference known by the customer"
+        href:
+          type: "string"
+          description: "Unique URI used to access to the appointment resource"
+        id:
+          type: "string"
+          description: "Unique identifier of the appointment"
+        lastUpdate:
+          type: "string"
+          format: "date-time"
+          description: "Date of last appointment update"
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+        relatedPlace:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedPlaceRefOrValue'
+          description: "Related place defines (by reference or value) the place where\
+            \ the appointment will take place."
+        relatedEntity:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedEntity'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        status:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppointmentStateType'
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+      required:
+      - "validFor"
+
+
+    CartItemRef:
+      description: "CartIIem reference. A CartItem is an identified part of the shopping\
+        \ cart."
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Unique identifier of the cart item"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    TokenizedCardDetails:
+      description: "Detailed information for a stored tokenized card"
+      type: "object"
+      properties:
+        brand:
+          type: "string"
+          description: "Card brand. Might be used for display purposes"
+        issuer:
+          type: "string"
+          description: "Whoever issued the token"
+        lastFourDigits:
+          type: "string"
+          description: "Last four digits of the credit card. Might be used for display\
+            \ purposes"
+        token:
+          type: "string"
+          description: "The token itself"
+        tokenType:
+          type: "string"
+          description: "Token type (e.g.: emv)"
+        cardType:
+          type: "string"
+          description: "Card type. Might be used for display purposes"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ProductOrderRef:
+      description: "ProductOrder (ProductOrder) .The product order which the recommendation\
+        \ is related with."
+      type: "object"
+      properties: {}
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    BalanceActionRequestRef:
+      description: "link to the resource that holds balance-related request information"
+      properties:
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the request information for the balance-related action"
+        id:
+          type: "string"
+          description: "Unique identifier for the balance related action request"
+      required:
+      - "id"
+      - "href"
+      type: "object"
+
+
+    BillFormatRefOrValue:
+      description: "An attachment by value or by reference."
+      type: "object"
+      properties: {}
+      required:
+      - "role"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillFormatRef'
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillFormat'
+
+
+    CartItemActionType:
+      description: "action to be performed on the product"
+      type: "string"
+      enum:
+      - "add"
+      - "modify"
+      - "delete"
+      - "noChange"
+
+
+    OrderItemPrice:
+      description: "An amount, usually of money, that represents the actual price paid\
+        \ by the Customer for this item or this order"
+      type: "object"
+      required:
+      - "priceType"
+      - "price"
+      properties:
+        description:
+          type: "string"
+          description: "A narrative that explains in detail the semantics of this order\
+            \ item price."
+        name:
+          type: "string"
+          description: "Name of the order item price"
+        productOfferingPrice:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingPriceRef'
+        priceType:
+          type: "string"
+          description: "A category that describes the price, such as recurring, discount,\
+            \ allowance, penalty, and so forth"
+        recurringChargePeriod:
+          type: "string"
+          description: "Could be month, week..."
+        unitOfMeasure:
+          type: "string"
+          description: "Could be minutes, GB..."
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        price:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Price'
+        priceAlteration:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/PriceAlteration'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ShoppingCart:
+      description: "Shopping Cart resource is used for the temporarily selection and\
+        \ reservation of product offerings in e-commerce, call center and retail purchase.\
+        \ Shopping cart supports purchase of both physical and digital goods and service\
+        \ (e.g. handset, telecom network service). Shopping Cart contain list of cart\
+        \ items, a reference to customer (partyRole) or contact medium in case customer\
+        \ not exist, and the total items price including promotions"
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Hyperlink to access the shopping cart"
+        id:
+          type: "string"
+          description: "Unique identifier created on provider side (e.g. Order Capture\
+            \ system)"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "The period for which the shopping cart is valid (e.g. 90 if\
+            \ no activity or 7 days if cart is empty)"
+        contactMedium:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ContactMedium'
+        cartTotalPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartPrice'
+          description: "Total amount of the shopping cart, usually of money, that represents\
+            \ the actual price paid by the Customer for cart (considering only \"Active\"\
+            \ cart items)"
+        cartItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartItem'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Disability:
+      type: "object"
+      description: "Lack or inadequate strength or ability."
+      properties:
+        disabilityCode:
+          type: "string"
+          description: "Code of the disability"
+        disabilityName:
+          type: "string"
+          description: "Name of the disability"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    SettlementNoteImage:
+      description: "Is the image of the settlement note"
+      type: "object"
+      properties:
+        imageFileName:
+          type: "string"
+          description: "The name of the file in which the settlement note image is saved."
+        imageFileURL:
+          type: "string"
+          description: "The URL of the settlement note image"
+        imageFormat:
+          type: "string"
+          description: "The format of the settlement note image (csv, pdf, xls, txt...)"
+        imageSize:
+          type: "integer"
+          description: "The size of the settlement note image (in bytes)"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppointmentRef:
+      description: "Refers an appointment, such as a Customer presentation or internal\
+        \ meeting or site visit"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "An explanatory text regarding the appointment made with a party"
+        href:
+          type: "string"
+          description: "The reference of the appointment"
+        id:
+          type: "string"
+          description: "The identifier of the referred appointment"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CreditProfile:
+      description: "Credit profile for the party (containing credit scoring, ...). By\
+        \ default only the current credit profile  is retrieved. It can be used as a\
+        \ list to give the party credit profiles history, the first one in the list\
+        \ will be the current one."
+      type: "object"
+      properties:
+        creditProfileDate:
+          type: "string"
+          format: "date-time"
+          description: "The date the profile was established"
+        creditRiskRating:
+          type: "integer"
+          description: "This is an integer whose value is used to rate the risk"
+        creditScore:
+          type: "integer"
+          description: "A measure of a person or organizations creditworthiness calculated\
+            \ on the basis of a combination of factors such as their income and credit\
+            \ history"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "The period for which the profile is valid"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppliedCustomerBillingRate:
+      description: "An applied billing rate presented on a customer bill. It is created\
+        \ before or during the billing process."
+      type: "object"
+      properties:
+        date:
+          type: "string"
+          format: "date-time"
+          description: "Creation date of the applied billing charge"
+        description:
+          type: "string"
+          description: "Additional data to be displayed on the bill for this applied\
+            \ billing charge"
+        href:
+          type: "string"
+          description: "Reference of the applied billing charge"
+        id:
+          type: "string"
+          description: "Unique identifier of the applied billing charge"
+        name:
+          type: "string"
+          description: "Name of the applied billing rate"
+        taxExcludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Tax excluded amount to be charged on the bill (expresses in\
+            \ the given currency) for this applied billing rate"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "All taxes included amount to be charged on the bill (expressed\
+            \ in the given currency) for this applied billing rate"
+        rateType:
+          type: "string"
+          description: "Type of the applied billing rate : appliedBillingCharge (any\
+            \ kind of charge except taxation charges : recurringCharge, oneTimeCharge,\
+            \ usageCharge),  appliedBillingCredit (any kind of credit : rebate or productAlteration)\
+            \ or appliedPenaltyCharge (penalty charges such as late fees, payment rejection\
+            \ fees,...)"
+        appliedTax:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingTaxRate'
+        bill:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillRef'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingRateCharacteristic'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ShoppingCartRef:
+      description: "ShoppingCart (ShoppingCartRef) . The shopping cart which the recommendation\
+        \ is related with."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Hypertext Reference of the shopping cart."
+        id:
+          type: "string"
+          description: "Unique identifier of shopping cart"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceTopupBody:
+      properties:
+        amount:
+          description: "Amount (can be monetary or non-monetary) to be recharged in\
+            \ the bucket"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        channel:
+          description: "Indicator for the channel used to request the top-up operation.\
+            \ Structure including at least attribute �name�"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ChannelRef'
+        product:
+          description: "A reference to the product related to the bucket that is impacted\
+            \ by the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        type:
+          type: "string"
+          description: "A preconfigured value that describes a TopUp type which determines\
+            \ the prepay balance bucket in which the top-up is done (national-voice,\
+            \ roaming-voice, promotional-voice, data, ....)"
+      required:
+      - "type"
+      - "channel"
+      - "amount"
+      type: "object"
+
+
+    VoucherMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/VoucherDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CartItemStatusType:
+      type: "string"
+      description: "Possible values for the status of the cart item"
+      enum:
+      - "active"
+      - "saveForLater"
+
+
+    DigitalWalletDetails:
+      description: "Detailed information of a check"
+      type: "object"
+      properties:
+        service:
+          type: "string"
+          description: "Organization, platform or currency backing the wallet (e.g.:\
+            \ PayPal, Yandex, BitCoin...)"
+        walletId:
+          type: "string"
+          description: "account identifier in that service"
+        walletUrl:
+          type: "string"
+          format: "uri"
+          description: "URI pointing at the digital wallet (e.g.: https://paypal.me/johndoe)"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Bucket:
+      description: "desc"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalance'
+      type: "object"
+
+
+    CheckDetails:
+      description: "Detailed information of a check"
+      type: "object"
+      properties:
+        bank:
+          type: "string"
+          description: "Bank performing the payment of the check"
+        code:
+          type: "string"
+          description: "Unique identifier of the check"
+        date:
+          type: "string"
+          format: "date-time"
+          description: "Date when the check was signed"
+        drawer:
+          type: "string"
+          description: "Person or entity writing the check"
+        payee:
+          type: "string"
+          description: "Person or entity the check is addressed to"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Price:
+      description: "Provides all amounts (tax included, duty free, tax rate), used currency\
+        \ and percentage to apply for Price Alteration."
+      type: "object"
+      properties:
+        dutyFreeAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "All taxes excluded amount (expressed in the given currency)"
+        percentage:
+          type: "number"
+          format: "float"
+          description: "Percentage to apply for ProdOfferPriceAlteration"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "All taxes included amount (expressed in the given currency)"
+        taxRate:
+          type: "number"
+          format: "float"
+          description: "Tax rate"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CartTerm:
+      type: "object"
+      properties:
+        description:
+          type: "string"
+        duration:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Quantity'
+        name:
+          type: "string"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    TaxItem:
+      description: "A tax item is created for each tax rate and tax type used in the\
+        \ bill."
+      type: "object"
+      properties:
+        taxAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Amount of tax expressed in the given currency"
+        taxCategory:
+          type: "string"
+          description: "Tax category"
+        taxRate:
+          type: "number"
+          format: "float"
+          description: "Applied rate of the tax"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillPresentationMedia:
+      description: "A mean of communicating a bill, supported by the associated bill\
+        \ format. For example, post mail, email, web page."
+      type: "object"
+      required:
+      - "name"
+      properties:
+        description:
+          type: "string"
+          description: "An explanatory text describing this bill presentation media"
+        href:
+          type: "string"
+          description: "Reference of the bill presentation media"
+        id:
+          type: "string"
+          description: "Unique identifier of the bill presentation media"
+        name:
+          type: "string"
+          description: "A short descriptive name"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    QuotePrice:
+      description: "Description of price and discount awarded"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "Description of the quote/quote item price"
+        name:
+          type: "string"
+          description: "Name of the quote /quote item price"
+        productOfferingPrice:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingPriceRef'
+          description: "An amount, usually of money, that is asked for or allowed when\
+            \ a ProductOffering is bought, rented, or leased. The price is valid for\
+            \ a defined period of time."
+        priceType:
+          type: "string"
+          description: "indicate if the price is for recurrent or no-recurrent charge"
+        recurringChargePeriod:
+          type: "string"
+          description: "Used for recurring charge to indicate period (month, week, etc..)"
+        unitOfMeasure:
+          type: "string"
+          description: "Unit of Measure if price depending on it (Gb, SMS volume, etc..)"
+        priceAlteration:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/PriceAlteration'
+        price:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Price'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    Customer:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Url used to reference the customer."
+        id:
+          type: "string"
+          description: "Unique identifier for Customers"
+        name:
+          type: "string"
+          description: "A word, term, or phrase by which the Customer is known and distinguished\
+            \ from other Customers."
+        status:
+          type: "string"
+          description: "Used to track the lifecycle status of the customer."
+        statusReason:
+          type: "string"
+          description: "A string providing an explanation on the value of the status\
+            \ lifecycle. For instance if the status is Rejected, statusReason will provide\
+            \ the reason for rejection."
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "The time period that the Customer is valid for."
+        engagedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+        paymentMethod:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentMethodRef'
+        contactMedium:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ContactMedium'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Characteristic'
+          description: "Describes the characteristic of a customer."
+        creditProfile:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CreditProfile'
+        agreement:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AgreementRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillRef:
+      description: "Bill reference."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Unique reference of the bill."
+        id:
+          type: "string"
+          description: "Unique identifier of the bill"
+        name:
+          type: "string"
+          description: "Name of the bill"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BankCardDetails:
+      description: "Detailed information for a bank card"
+      type: "object"
+      properties:
+        bank:
+          type: "string"
+          description: "Bank that issued the card"
+        brand:
+          type: "string"
+          description: "Card brand, such as Visa, MasterCard, AmericanExpress"
+        cardNumber:
+          type: "string"
+          description: "Credit long card number"
+        cvv:
+          type: "string"
+          description: "The security code (e.g.: CVV, CVV2) of the card"
+        expirationDate:
+          type: "string"
+          format: "date-time"
+          description: "Expiration date of the card"
+        lastFourDigits:
+          type: "string"
+          description: "Last four digits of the credit card"
+        nameOnCard:
+          type: "string"
+          description: "Name on the card"
+        cardType:
+          type: "string"
+          description: "Type of the card, such as Credit, Debit"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceActivity:
+      description: "The BalanceActivity resource is a detailed description of a specific\
+        \ balance-related action that has happened over a given bucket balance. Typically\
+        \ a recharge/transfer/adjustment request creates one activity, but a request\
+        \ for an auto-topup operation actually triggers multiple periodic balance-related\
+        \ activities."
+      properties:
+        action:
+          description: "A reference to the balance-related operation that triggered\
+            \ the action"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceActionRequestRef'
+        amount:
+          description: "Amount (can be monetary or non-monetary) that was involved in\
+            \ the balance operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        amountAfter:
+          description: "Remained amount in the bucket involved in the operation after\
+            \ it took place"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        amountBefore:
+          description: "Remained amount in the bucket involved in the operation before\
+            \ it took place"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        bucketBalance:
+          description: "A reference to the bucket involved in the balance-related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalanceRef'
+        date:
+          type: "string"
+          description: "Date when the balance related operation took place"
+        partyAccount:
+          description: "A reference to the account that owns the bucket impacted by\
+            \ the balance activity"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        product:
+          description: "A reference to the product related to the bucket that is impacted\
+            \ by the balance activity"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+          description: "Used to provide information about any other entity with relation\
+            \ to the balance activity"
+        type:
+          type: "string"
+          description: "A preconfigured value that describes a type of balance-related\
+            \ performed (topup, transfer, adjustment)"
+      required:
+      - "type"
+      - "date"
+      - "action"
+      - "amount"
+      - "bucketBalance"
+      - "product"
+      type: "object"
+
+
+    BalanceReserveRef:
+      description: "the resource that holds reserved balance information"
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the balance information for a subscription"
+        id:
+          type: "string"
+          description: "Unique identifier for the balancereserve entity"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CashMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CashDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ProductOfferingQualificationItemRef:
+      type: "object"
+      description: "It's a productOfferingQualification item that has been executed\
+        \ previously."
+      required:
+      - "id"
+      - "productOfferingQualificationId"
+      properties:
+        productOfferingQualificationHref:
+          type: "string"
+          description: "Reference of the related entity."
+        productOfferingQualificationId:
+          type: "string"
+          description: "Unique identifier of a related entity."
+        productOfferingQualificationName:
+          type: "string"
+          description: "Name of the related entity."
+        id:
+          type: "string"
+          description: "Id of an item of a product offering qualification"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas//EntityRef'
+
+
+    Quote:
+      type: "object"
+      required:
+      - "quoteItem"
+      description: "Quote can be used to negotiate service and product acquisition or\
+        \ modification between a customer and a service provider. Quote contain list\
+        \ of quote items, a reference to customer (partyRole), a list of productOffering\
+        \ and attached prices and conditions."
+      properties:
+        agreement:
+          type: "array"
+          description: "A reference to an agreement defining the context of the quote"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AgreementRef'
+        billingAccount:
+          type: "array"
+          description: "A reference to a billing account to provide quote context information "
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        category:
+          type: "string"
+          description: "Used to categorize the quote from a business perspective that\
+            \ can be useful for the CRM system (e.g. \"enterprise\", \"residential\"\
+            , ...)"
+        contactMedium:
+          type: "array"
+          description: "Information contact related to the quote requester"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/ContactMedium'
+        description:
+          type: "string"
+          description: "Description of the quote"
+        effectiveQuoteCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the quote has been completed"
+        expectedFulfillmentStartDate:
+          type: "string"
+          format: "date-time"
+          description: "this is the date wished by the requester to have the requested\
+            \ quote item delivered"
+        expectedQuoteCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "This is expected date - from quote supplier - to be able to\
+            \ send back  a response for this quote"
+        externalId:
+          type: "string"
+          description: "ID given by the consumer and only understandable by him (to\
+            \ facilitate his searches afterwards)"
+        href:
+          type: "string"
+          description: "Hyperlink to access the quote"
+        id:
+          type: "string"
+          description: "Unique identifier - attributed by quoting system"
+        instantSyncQuote:
+          type: "boolean"
+          description: "An indicator which when the value is \"true\" means that requester\
+            \ expects to get quoting result immediately in the response. If the indicator\
+            \ is true then the response code of 200 indicates the operation is successful\
+            \ otherwise a task is created with a response 201. "
+        note:
+          type: "array"
+          description: "Free form text associated with the quote"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+        authorization:
+          type: "array"
+          description: "An authorization provided for the quote"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Authorization'
+        quoteDate:
+          type: "string"
+          format: "date-time"
+          description: "Date and time when the quote was created"
+        quoteItem:
+          type: "array"
+          description: "An item of the quote - it is used to descirbe an operation on\
+            \ a product to be quoted"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuoteItem'
+          minItems: 1
+        quoteTotalPrice:
+          type: "array"
+          description: "Quote total price"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuotePrice'
+        relatedParty:
+          type: "array"
+          description: "A reference to a party playing a role in this quote (customer,\
+            \ seller, requester, etc.)"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        productOfferingQualification:
+          type: "array"
+          description: "A reference to a previously done product offering qualification"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingQualificationRef'
+        requestedQuoteCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "This is requested date - from quote requester - to get a complete\
+            \ response for this quote"
+        state:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/QuoteStateType'
+          description: "State of the quote : described in the state-machine diagram"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Quote validity period"
+        version:
+          type: "string"
+          description: "Quote version - if the customer rejected the quote but  negotiations\
+            \ still open a new version of the quote is managed"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ProductOrderItemStateType:
+      type: "string"
+      description: "Possible values for the state of the product order item"
+      enum:
+      - "acknowledged"
+      - "rejected"
+      - "pending"
+      - "held"
+      - "inProgress"
+      - "cancelled"
+      - "completed"
+      - "failed"
+      - "assessingCancellation"
+      - "pendingCancellation"
+
+
+    BucketBalanceRef:
+      description: "link to the resource that holds bucket balance information"
+      properties:
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the balance information for a bucket"
+        id:
+          type: "string"
+          description: "Unique identifier for the bucket entity"
+      required:
+      - "id"
+      - "href"
+      type: "object"
+
+
+    OrderItem:
+      description: "An identified part of the order. A product order is decomposed into\
+        \ one or more order items."
+      type: "object"
+      properties:
+        action:
+          type: "string"
+          description: "Can be \"add\" / \"modify\" / \"no_change\"/ \"delete\""
+        id:
+          type: "string"
+          description: "Identifier of the line item (generally it is a sequence number\
+            \ 01, 02, 03, ...)"
+        quantity:
+          type: "integer"
+          description: "Quantity ordered"
+        state:
+          type: "string"
+          description: "State of the order item : described in the state machine diagram"
+        appointment:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppointmentRef'
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        itemPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderPrice'
+        orderItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderItem'
+        orderItemRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderItemRelationship'
+        itemTotalPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderPrice'
+        payment:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentRef'
+        productOffering:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingRef'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/Product'
+        qualification:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QualificationRef'
+        itemTerm:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderTerm'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceTopupStatusType:
+      description: "Structure including specific information about change of status\
+        \ for the topup operation"
+      properties:
+        statusChangeDate:
+          type: "string"
+          description: "Date in which the latest change of status was requested"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceTopupStatusTypeModify'
+      required:
+      - "statusChangeDate"
+      type: "object"
+
+
+    OrderItemRelationship:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        relationshipType:
+          type: "string"
+          description: "The type of order item relationship"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    DigitalWalletMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/DigitalWalletDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    OrderPrice:
+      description: "An amount, usually of money, that represents the actual price paid\
+        \ by the Customer for this item or this order"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "A narrative that explains in detail the semantics of this order\
+            \ item price."
+        name:
+          type: "string"
+          description: "A short descriptive name such as \"Subscription price\"."
+        productOfferingPrice:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingPriceRef'
+          description: "An amount, usually of money, that is asked for or allowed when\
+            \ a ProductOffering is bought, rented, or leased. The price is valid for\
+            \ a defined period of time."
+        priceType:
+          type: "string"
+          description: "A category that describes the price, such as recurring, discount,\
+            \ allowance, penalty, and so forth"
+        recurringChargePeriod:
+          type: "string"
+          description: "Could be month, week..."
+        unitOfMeasure:
+          type: "string"
+          description: "Could be minutes, GB..."
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+          description: "A reference to a billing account used for paid the order price\
+            \ charge"
+        price:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Price'
+          description: "a structure used to define price amount"
+        priceAlteration:
+          type: "array"
+          description: "a strucuture used to describe a price alteration"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/PriceAlteration'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BankCardMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BankCardDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppliedBillingTaxRate:
+      description: "The applied billing tax rate represents taxes applied billing rate\
+        \ it refers to. It is calculated during the billing process."
+      type: "object"
+      properties:
+        taxAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Tax amount expressed in the given currency"
+        taxCategory:
+          type: "string"
+          description: "A categorization of the tax rate"
+        taxRate:
+          type: "number"
+          format: "float"
+          description: "Applied rate"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    TokenizedCardMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TokenizedCardDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    VoucherDetails:
+      description: "Detailed information of a voucher"
+      type: "object"
+      properties:
+        campaign:
+          type: "string"
+          description: "Campaign this voucher belongs to"
+        code:
+          type: "string"
+          description: "Code that identifies the voucher"
+        expirationDate:
+          type: "string"
+          format: "date-time"
+          description: "The vouchers expiration date"
+        value:
+          type: "number"
+          format: "float"
+          description: "Discount that the voucher applies when it is a discount"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceTopupStatusTypeModify:
+      properties:
+        status:
+          type: "string"
+          description: "Current status of the operation request"
+      required:
+      - "status"
+      type: "object"
+
+
+    QuoteItemRef:
+      type: "object"
+      description: "It's a Quote item that has been executed previously."
+      required:
+      - "id"
+      - "quoteId"
+      properties:
+        quoteHref:
+          type: "string"
+          description: "Reference of the related entity."
+        quoteId:
+          type: "string"
+          description: "Unique identifier of a related entity."
+        quoteName:
+          type: "string"
+          description: "Name of the related entity."
+        id:
+          type: "string"
+          description: "Id of an item of a quote"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    BillFormatRef:
+      description: "BillFormat reference. A bill format is a description of the way\
+        \ in which a bill is presented."
+      type: "object"
+      properties:
+        href:
+          type: "string"
+          description: "Reference of the bill format"
+        id:
+          type: "string"
+          description: "Unique identifier of the bill format"
+        name:
+          type: "string"
+          description: "A short descriptive name"
+        '@referredType':
+          type: "string"
+          description: "The actual type of the target instance when needed for disambiguation."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    PaymentMethod:
+      description: "Defines a specific method of payment (e.g. direct debit with all\
+        \ details associated)"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillingCycleSpecificationRefOrValue:
+      description: "An attachment by value or by reference."
+      type: "object"
+      properties: {}
+      required:
+      - "role"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingCycleSpecificationRef'
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingCycleSpecification'
+
+
+    CartPrice:
+      description: "An amount, usually of money, that represents the actual price paid\
+        \ by the customer for this item. May represent the total price of the shopping\
+        \ cart or the total of the cart item depending on the relation"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "A narrative that explains in detail the semantics of this order\
+            \ item price."
+        name:
+          type: "string"
+          description: "A short descriptive name such as \"Subscription price\"."
+        priceType:
+          type: "string"
+          description: "A category that describes the price, such as recurring, discount,\
+            \ allowance, penalty, and so forth"
+        productOfferingPrice:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingPriceRef'
+          description: "An amount, usually of money, that is asked for or allowed when\
+            \ a ProductOffering is bought, rented, or leased. The price is valid for\
+            \ a defined period of time."
+        recurringChargePeriod:
+          type: "string"
+          description: "Could be month, week..."
+        unitOfMeasure:
+          type: "string"
+          description: "Could be minutes, GB..."
+        price:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/Price'
+        priceAlteration:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/PriceAlteration'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    OrderRelationship:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+        id:
+          type: "string"
+        relationshipType:
+          type: "string"
+          description: "The type of order relationship"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    PaymentRef:
+      type: "object"
+      description: "If an immediate payment has been done at the product order submission,\
+        \ the payment information are captured and stored (as a reference) in the order."
+      properties:
+        name:
+          type: "string"
+          description: "A name for the payment"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    SettlementNoteAdvice:
+      description: "The settlement is about transferring money receiving by a CSP to\
+        \ a partner. The settlement is notified to the partner with a settlement note\
+        \ advice containing details in settlement lines."
+      type: "object"
+      properties:
+        currencyCode:
+          type: "string"
+          description: "A string used as a code for specifying the currency associated\
+            \ to the given amounts. The ISO4217 norm uses 3 letters to define the currency\
+            \ (for example USD for US dollar or EUR for Euro)."
+        date:
+          type: "string"
+          format: "date-time"
+          description: "Creation date of the settlement note advice"
+        description:
+          type: "string"
+          description: "A free description text"
+        href:
+          type: "string"
+          description: "Reference of the settlement note advice"
+        id:
+          type: "string"
+          description: "A unique identifier for the settlement note advice"
+        issuerTaxRegistration:
+          type: "string"
+          description: "Tax registration number of the issuer"
+        paymentDueDate:
+          type: "string"
+          format: "date-time"
+          description: "Date at which the due amount should have been paid to the partner"
+        receiverTaxRegistration:
+          type: "string"
+          description: "Tax registration number of the receiver"
+        taxDate:
+          type: "string"
+          format: "date-time"
+          description: "Date of the tax"
+        taxExcludedAmount:
+          type: "number"
+          format: "float"
+          description: "All taxes excluded amount (expressed in the given currency)"
+        taxIncludedAmount:
+          type: "number"
+          format: "float"
+          description: "All taxes included amount (expressed in the given currency)"
+        settlementMethod:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/SettlementMethod'
+        settlementNoteImage:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/SettlementNoteImage'
+        receiver:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyRef'
+        taxItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/TaxItem'
+        issuer:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyRef'
+        settlementNoteItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/SettlementNoteItem'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BucketBalance:
+      description: "Represents and tracks the amount remained or owed for a certain\
+        \ type of service by certain customer"
+      properties:
+        bucketType:
+          type: "string"
+          description: "Type of prepay balance bucket (e.g.: promotion, deposit, bonus,\
+            \ data, voice, or any other service type)"
+        description:
+          type: "string"
+          description: "Text describing the contents of the balance managed by the bucket"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information for the bucket"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the bucket"
+        name:
+          type: "string"
+          description: "Friendly name to identify the bucket"
+        partyAccount:
+          description: "A reference to the account that owns the bucket"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        product:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+          description: "A reference to the product whose consumption is managed by the\
+            \ bucket. This is an array to allow scenarios where a given bucket is shared\
+            \ between different products."
+        realizingResource:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Resource.yaml#/components/schemas/ResourceRef'
+          description: "A reference to the resource that realizes a product. This is\
+            \ an array to allow scenarios where a given bucket is shared between different\
+            \ resources."
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+          description: "Used to provide information about any other entity with relation\
+            \ to the balance, for instance to define customer hierarchy for the balance\
+            \ (e.g.: customerId, userId, )"
+        remainedAmount:
+          description: "Amount remained in the bucket"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        reservedAmount:
+          description: "Indicate the reserved amount on the bucket"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+        status:
+          type: "string"
+          description: "Status for the balance (active, expired, suspended)"
+        validFor:
+          description: "The period for which the balance in the bucket is valid"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriodType'
+      required:
+      - "id"
+      - "href"
+      - "bucketType"
+      - "validFor"
+      - "status"
+      - "product"
+      type: "object"
+
+
+    CheckMethod:
+      type: "object"
+      properties:
+        details:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CheckDetails'
+        description:
+          type: "string"
+          description: "Text describing the contents of the payment method"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the server that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual details for the specific payment method"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the payment method."
+        name:
+          type: "string"
+          description: "Friendly name assigned to the payment method"
+        preferred:
+          type: "boolean"
+          description: "If the method is the preferred one by the owner. Typically used\
+            \ when querying for the payment methods of a specific customer or account"
+        status:
+          type: "string"
+        statusDate:
+          type: "string"
+          format: "date-time"
+        validFor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriod'
+          description: "Date interval in which the payment method is valid"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        account:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AccountRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    CartItem:
+      description: "An identified part of the shopping cart. A shopping cart  is decomposed\
+        \ into one or more shopping cart item. Cart item represents a product offering\
+        \ or bundled product offering that user wish to purchase, as well as the pricing\
+        \ of the product offering, reference to product in case of configured characteristic\
+        \ or installation address. Cart items can be related to other cart item to related\
+        \ bundled offerings or reference cart Items to a shipping options"
+      type: "object"
+      properties:
+        action:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartItemActionType'
+          description: "The action to be carried out on the Product. Can be: add, modify,\
+            \ delete, noChange"
+        id:
+          type: "string"
+          description: "Identifier of the cart item (generally it is a sequence number\
+            \ 01, 02, 03, ...) in the shopping cart"
+        quantity:
+          type: "integer"
+          description: "Quantity of cart items"
+        status:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartItemStatusType'
+          description: "status of cart item. e.g \"active\" , \"savedForLater\"."
+        itemTerm:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartTerm'
+        cartItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartItem'
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+        ItemTotalPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartPrice'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRefOrValue'
+        itemPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartPrice'
+        productOffering:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingRef'
+        cartItemRelationship:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/CartItemRelationship'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    QuoteRef:
+      type: "object"
+      description: "It's a Quote that has been executed previously"
+      properties: {}
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/EntityRef'
+
+
+    AppointmentStateValues:
+      type: "string"
+      description: ""
+      enum:
+      - "initialized"
+      - "confirmed"
+      - "cancelled"
+      - "completed"
+      - "failed"
+
+
+    OrderItemActionType:
+      description: "action to be performed on the product"
+      type: "string"
+      enum:
+      - "add"
+      - "modify"
+      - "delete"
+      - "noChange"
+
+
+    CashDetails:
+      description: "Cash has no additional data, but it could be extended to add information\
+        \ (e.g.: the cashier who took the payment, the person who paid, etc)"
+      type: "object"
+      properties: {}
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BalanceDeductRollback:
+      description: "The Rollback Balance Deduct task resource is a detailed description\
+        \ of rollback deduction"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "Description of the rollback deduct operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information about a rollback deduction"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the rollback deduction\
+            \  operation request"
+        requestedDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the rollback deduction request was received in the\
+            \ server"
+        status:
+          type: "string"
+          description: "Status of the rollback deduction operation"
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+        partyAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        balanceDeduct:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceDeductRef'
+        requestor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillPresentationMediaRefOrValue:
+      description: "An attachment by value or by reference."
+      type: "object"
+      properties: {}
+      required:
+      - "role"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillPresentationMediaRef'
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillPresentationMedia'
+
+
+    BalanceTopupRequest:
+      description: "Represents a detailed description of a recharge operation requested\
+        \ over a bucket (defined by a specific product or reference to a product (i.e.:\
+        \ a commercial id such as an msisidn) and a service type)"
+      properties:
+        bucket:
+          description: "A reference to the bucket impacted by the request. This is used\
+            \ in scenarios where the requestor knows beforehand the bucket that is going\
+            \ to be impacted instead of just referring to the commercial identifier\
+            \ of the impacted product and the type of bucket created under that product"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalanceRef'
+        confirmationDate:
+          type: "string"
+          description: "Date when the top-up was confirmed in the server"
+        description:
+          type: "string"
+          description: "Description of the recharge operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information. This is typically the resource url to retrieve\
+            \ individual top-up operation details"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the recharge operation\
+            \ request"
+        isAutoTopup:
+          type: "boolean"
+          description: "Indicates if the topup requested is an autotopup (to be processed\
+            \ periodically)"
+        nrOfPeriods:
+          type: "integer"
+          description: "For autotopup indicates the number of occurrences of the period\
+            \ the recharge operation must be executed. If not included then no limit\
+            \ is set to stop the executionof the topup every period"
+        partyAccount:
+          description: "A reference to the account that owns the bucket impacted by\
+            \ the balance related operation"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+        paymentMethod:
+          description: "Payment method used for the recharge operation (e.g.: cash,\
+            \ credit card, �). Structure including at least attribute �name�. Notice\
+            \ that the use of a voucher can be managed as a specific methodtype, where\
+            \ he voucher code can be passed as value."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentMethodRefOrValue'
+        recurringPeriod:
+          type: "string"
+          description: "For autotopup indicates the periodicity for the recharge operation\
+            \ (monthly, weekly, )"
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+          description: "Used to provide information about any other entity with relation\
+            \ to the operation"
+        requestedDate:
+          type: "string"
+          description: "Date when the top-up request was received in the server"
+        requestor:
+          description: "Identifier for the user/customer/entity that performs the top-up\
+            \ action. This can be used to indicate the identifier of an agent that performs\
+            \ the operation on behalf of a user via a customer service channel. Structure\
+            \ including at least attributes �role� and �name�."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        status:
+          type: "string"
+          description: "Status of the top-up operation Supported values are: - confirmed\
+            \ - cancelled - in progress"
+          enum:
+          - "confirmed"
+          - "cancelled"
+          - "in progress"
+        validFor:
+          description: "The period defined for the recharged amount to be part of the\
+            \ prepay balance. This could be used to define expiration times to remove\
+            \ balance not consumed."
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/TimePeriodType'
+        voucher:
+          type: "string"
+          description: "Identifier for the voucher when the topup can be perfomed by\
+            \ this means (referenced by a voucher based payment mean). This attribute\
+            \ is left in this release to keep compatibility with previous version and\
+            \ for implementations that do not relay on paymentMethods. A voucher can\
+            \ be managed as a specific methodtype, where he voucher code can be passed\
+            \ as value."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceTopupBody'
+      required:
+      - "id"
+      - "href"
+      - "validFor"
+      - "requestedDate"
+      - "confirmationDate"
+      - "status"
+      type: "object"
+
+
+    AccumulatedBalance:
+      description: "Represents and tracks the aggregated amount remained or owed in\
+        \ certain account which is owned by certain customer for a set of buckets."
+      properties:
+        bucket:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BucketBalanceRef'
+          description: "A reference to the buckets involved in the aggregation"
+        description:
+          type: "string"
+          description: "Text describing the contents of the aggregated balance"
+        name:
+          type: "string"
+          description: "Friendly name to identify the aggregated balance"
+        partyAccount:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccountRef'
+          description: "A reference to the account that owns the buckets aggregated"
+        product:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+          description: "A reference to the product whose consumption is managed by the\
+            \ bucket . This is an array to allow scenarios where a buckets are shared\
+            \ between different products"
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+          description: "Used to provide information about any other entity with relation\
+            \ to the balance, for instance to define customer hierarchy for the balance\
+            \ (e.g.: customerId, userId, )"
+        totalBalance:
+          description: "Aggregated for a set of prepay balance buckets associated to\
+            \ the product"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/QuantityType'
+      required:
+      - "name"
+      - "totalBalance"
+      - "bucket"
+      - "product"
+      type: "object"
+
+
+    BalanceUnreserve:
+      description: "The Balance Unreserve Operation resource is a detailed description\
+        \ of a balance unreserve operation requested over a subscription"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "Description of the unreserve operation"
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the detailed information about a unreserve"
+        id:
+          type: "string"
+          description: "Unique Identifier within the server for the unreserve operation\
+            \ request"
+        requestedDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the unreserve request was received in the server"
+        status:
+          type: "string"
+          description: "Status of the unreserve operation"
+        balanceReserve:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BalanceReserveRef'
+        relatedParty:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        requestor:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        product:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductRef'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    ProductOrder:
+      type: "object"
+      required:
+      - "productOrderItem"
+      description: "A Product Order is a type of order which  can  be used to place\
+        \ an order between a customer and a service provider or between a service provider\
+        \ and a partner and vice versa,"
+      properties:
+        agreement:
+          type: "array"
+          description: "A reference to an agreement defined in the context of the product\
+            \ order"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/AgreementRef'
+        billingAccount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingAccountRef'
+        cancellationDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the order is cancelled. This is used when order is\
+            \ cancelled. "
+        cancellationReason:
+          type: "string"
+          description: "Reason why the order is cancelled. This is used when order is\
+            \ cancelled. "
+        category:
+          type: "string"
+          description: "Used to categorize the order from a business perspective that\
+            \ can be useful for the OM system (e.g. \"enterprise\", \"residential\"\
+            , ...)"
+        channel:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/RelatedChannel'
+        completionDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the order was completed"
+        description:
+          type: "string"
+          description: "Description of the product order"
+        expectedCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "Expected delivery date amended by the provider"
+        externalId:
+          type: "string"
+          description: "ID given by the consumer and only understandable by him (to\
+            \ facilitate his searches afterwards)"
+        href:
+          type: "string"
+          description: "Hyperlink to access the order"
+        id:
+          type: "string"
+          description: "ID created on repository side (OM system)"
+        note:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Note'
+        notificationContact:
+          type: "string"
+          description: "Contact attached to the order to send back information regarding\
+            \ this order"
+        orderDate:
+          type: "string"
+          format: "date-time"
+          description: "Date when the order was created"
+        orderTotalPrice:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/OrderPrice'
+        payment:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/PaymentRef'
+        priority:
+          type: "string"
+          description: "A way that can be used by consumers to prioritize orders in\
+            \ OM system (from 0 to 4 : 0 is the highest priority, and 4 the lowest)"
+        productOfferingQualification:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Product.yaml#/components/schemas/ProductOfferingQualificationRef'
+        quote:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/QuoteRef'
+        productOrderItem:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ProductOrderItem'
+          minItems: 1
+        relatedParty:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedParty'
+        requestedCompletionDate:
+          type: "string"
+          format: "date-time"
+          description: "Requested delivery date from the requestor perspective"
+        requestedStartDate:
+          type: "string"
+          format: "date-time"
+          description: "Order fulfillment start date wished by the requestor. This is\
+            \ used when, for any reason, requestor cannot allow seller to begin to operationally\
+            \ begin the fulfillment before a date. "
+        state:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/ProductOrderStateType'
+          description: "Tracks the lifecycle status of the product order, such as Acknowledged,\
+            \ Rejected, InProgress, Pending and so on."
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillStructure:
+      description: "The structure of the bill for party accounts (billing or settlement)."
+      type: "object"
+      properties:
+        presentationMedia:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillPresentationMediaRefOrValue'
+        format:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillFormatRefOrValue'
+        cycleSpecification:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillingCycleSpecificationRefOrValue'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    PaymentMethodRefOrValue:
+      description: "link to the resource that holds information about the payment mean\
+        \ used to complete the operation"
+      properties:
+        details:
+          description: "The list of parameters depends on the type of payment method"
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/RelatedPartyRef'
+        href:
+          type: "string"
+          description: "A resource URI pointing to the resource in the OB that stores\
+            \ the channel information"
+        id:
+          type: "string"
+          description: "Unique identifier for the channel entity"
+        name:
+          type: "string"
+          description: "Name of the channel"
+        type:
+          type: "string"
+          description: "Type of payment method (bankcard, voucher, �)"
+      required:
+      - "id"
+      - "href"
+      type: "object"
+
+
+    OrderTerm:
+      description: "Description of a productTerm linked to this orderItem. This represent\
+        \ a commitment with a duration"
+      type: "object"
+      properties:
+        description:
+          type: "string"
+          description: "Description of the productOrderTerm"
+        duration:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Quantity'
+          description: "Duration of the productOrderTerm"
+        name:
+          type: "string"
+          description: "Name of the productOrderTerm"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    BillingAccount:
+      description: "A party account used for billing purposes. It includes a description\
+        \ of the bill structure (frequency, presentation media, format and so on). It\
+        \ is a specialization of entity PartyAccount."
+      type: "object"
+      required:
+      - "name"
+      - "relatedParty"
+      properties: {}
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/EngagedParty.yaml#/components/schemas/PartyAccount'
+
+
+    AppliedPartyBillingRate:
+      description: "An applied billing rate presented on a party bill. It is created\
+        \ before or during the billing process."
+      type: "object"
+      properties:
+        date:
+          type: "string"
+          format: "date-time"
+          description: "Creation date of the applied billing charge"
+        description:
+          type: "string"
+          description: "Additional data to be displayed on the bill for this applied\
+            \ billing charge"
+        href:
+          type: "string"
+          description: "Reference of the applied billing charge"
+        id:
+          type: "string"
+          description: "Unique identifier of the applied billing charge"
+        name:
+          type: "string"
+          description: "Name of the applied billing rate"
+        taxExcludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "Tax excluded amount to be charged on the bill (expresses in\
+            \ the given currency) for this applied billing rate"
+        taxIncludedAmount:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Money'
+          description: "All taxes included amount to be charged on the bill (expressed\
+            \ in the given currency) for this applied billing rate"
+        rateType:
+          type: "string"
+          description: "Type of the applied billing rate : appliedBillingCharge (any\
+            \ kind of charge except taxation charges : recurringCharge, oneTimeCharge,\
+            \ usageCharge),  appliedBillingCredit (any kind of credit : rebate or productAlteration)\
+            \ or appliedPenaltyCharge (penalty charges such as late fees, payment rejection\
+            \ fees,...)"
+        appliedTax:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingTaxRate'
+        bill:
+          $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/BillRef'
+        characteristic:
+          type: "array"
+          items:
+            $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/Customer.yaml#/components/schemas/AppliedBillingRateCharacteristic'
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+
+    AppliedBillingRateCharacteristic:
+      description: "An applied billing rate has dynamic characteristics according to\
+        \ the its type (characteristics are based on the service type, line of business\
+        \ or on others parameters)"
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          description: "Characteristic name"
+        value:
+          type: "string"
+          description: "Value affected to the characteristic"
+      allOf:
+      - $ref: '/INTERFACES/API-SPECIFICATION/YAML/TMFORUM/DATA_MODEL/Common.yaml#/components/schemas/Entity'
+
+

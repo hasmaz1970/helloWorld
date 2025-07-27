@@ -1,0 +1,4862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.12">
+    
+    
+      
+        <title>Start 42 resource mgmt patterns - CadenzaFlow 360-Library(v1.1.0)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#resource-management-patterns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-header__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CadenzaFlow 360-Library(v1.1.0)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Start 42 resource mgmt patterns
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-tabs__link">
+          
+  
+  Editions, Releases & Roadmap
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../30-PLATFORM/todo_link/" class="md-tabs__link">
+          
+  
+  Platform
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-tabs__link">
+          
+  
+  Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../50-RESOURCES/resources-starter/" class="md-tabs__link">
+          
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../60-PRICING/pricing-starter/" class="md-tabs__link">
+          
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/contact-us/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10-HOME/login/" class="md-tabs__link">
+        
+  
+    
+  
+  Login
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-nav__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CadenzaFlow 360-Library(v1.1.0)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://guthub.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Guthub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Editions, Releases & Roadmap
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Editions, Releases & Roadmap
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/editions-and-release-cycles-ov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editions & Releases Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/categorization-of-repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Categorization of SW repositories
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20-ED-REL-ROADMAP/cadenzaflow-roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI & Agentic Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Design & Implement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integrations & Connectivity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test & Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability, O&AM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Features & Marketplace
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Features & Marketplace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifical Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Human Tasks, Forms & Backoffice Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intelligent Notification & Communication Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30-PLATFORM/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RPA (Robotic Process Automation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/solutions-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutions Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Industry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            By Industry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunciations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public Sector & Government
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Finance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insurance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Media & Entertainment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manufacturing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    By Purpose
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            By Purpose
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transition from Camunda 7 to CadenzaFlow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Process Optimization & Build a Centralized  Automation Platform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Commercial Order Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Order Mgmt & Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workforce Augmentation & Human Task Automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microservice Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40-SOLUTIONS/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy Systems Modernization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/resources-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/51-DOWNLOAD/download-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/52-DOC/documentation-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/53-COMMUNITY-HUB/community-hub-starter.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Hub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/54-MARKETPLACE/marketplace-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Marketplace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/55-EVENTS/events-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/white-papers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    White Papers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/56-WP-CS/case-studies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Studies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/57-SERVICES-SUPPORT/services-support-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services & Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50-RESOURCES/58-TRAINING-CERT/training-certification-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training & Certification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Pricing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/pricing-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pricing Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LTS Community Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60-PRICING/todo_link/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ISV/ASL Edition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/contact-us/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact Us
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10-HOME/login/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Login
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p><img alt="" src="/assets/header.png" /></p>
+<h1 id="resource-management-patterns">Resource Management Patterns</h1>
+<h2 id="1-create-resource-patterns">1. Create Resource Patterns</h2>
+<h3 id="11-creating-a-single-resource">1.1. Creating a single resource</h3>
+<p>http-POST method is used for creation of a single resource. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json</li>
+<li>Return message contains the full representation of the resource</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong>=field1,field2, ... In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>For optional and not specified attributes of the resource model, entity is populated by default values as per entity schema specification.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>201 Created (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Create a resource</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>POST /MonE/accountManagement/v4/partyAccount 
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>201 Created
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<p><br></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Create a resource with attribute selector directive fields=none</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>POST /MonE/accountManagement/v4/partyAccount?fields=none 
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>201 Created
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;
+}
+</code></pre></div></p>
+<h3 id="12-creating-multiple-resources">1.2. Creating multiple resources</h3>
+<p>http-PATCH method is used for creation of multiple resources. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json-patch+json</li>
+<li>PATCH operation is relative to the container collection for the entity types to be created, where the following directives detail the type of update:<ul>
+<li>“op” is the action to take. For creating multiple resources at a given path, always <strong>"add"</strong>.</li>
+<li>“path” is a pointer/reference to the field to change.</li>
+<li>“value” is the value object to add.</li>
+</ul>
+</li>
+<li>Return message contains the full representation of the resource</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong>=field1,field2, ... In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>For optional and not specified attributes of the resource model, entity is populated by default values as per entity schema specification.</li>
+<li>The HTTP PATCH method is atomic, as per [RFC5789] i.e., all operations MUST be successful otherwise the application of the full PATCH is unsuccessful.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+    <li>204 No Content</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Create multiple resources</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /MonE/accountManagement/v4/partyAccount 
+Content-Type: application/json-patch+json
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/&quot;,
+    &quot;value&quot;: {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;101&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+      &quot;name&quot;: &quot;Travel account-101&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;4665&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+          &quot;name&quot;: &quot;John Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    }
+  },
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/&quot;,
+    &quot;value&quot;: {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;102&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+      &quot;name&quot;: &quot;Travel account-102&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;6666&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+          &quot;name&quot;: &quot;Jane Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    }
+  }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;101&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+    &quot;name&quot;: &quot;Travel account-101&quot;,
+    &quot;state&quot;: &quot;active&quot;,
+    &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+    &quot;relatedParty&quot;: [
+      {
+        &quot;@referredType&quot;: &quot;Organization&quot;,
+        &quot;id&quot;: &quot;4665&quot;,
+        &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;role&quot;: &quot;owner&quot;
+      } 
+    ]
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;102&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+    &quot;name&quot;: &quot;Travel account-102&quot;,
+    &quot;state&quot;: &quot;active&quot;,
+    &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.740Z&quot;,
+    &quot;relatedParty&quot;: [
+      {
+        &quot;@referredType&quot;: &quot;Organization&quot;,
+        &quot;id&quot;: &quot;6666&quot;,
+        &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+        &quot;name&quot;: &quot;Jane Doe&quot;,
+        &quot;role&quot;: &quot;owner&quot;
+      } 
+    ]
+  }
+]
+</code></pre></div>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Create multiple resources with attribute selector directive fields=none</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /MonE/accountManagement/v4/partyAccount?fields=none 
+Content-Type: application/json-patch+json
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/&quot;,
+    &quot;value&quot;: {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;101&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+      &quot;name&quot;: &quot;Travel account&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;4665&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+          &quot;name&quot;: &quot;John Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    }
+  },
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/&quot;,
+    &quot;value&quot;: {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;102&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+      &quot;name&quot;: &quot;Travel account&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;6666&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+          &quot;name&quot;: &quot;Jane Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    }
+  }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;101&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;102&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;
+  }
+]
+</code></pre></div>
+<p><br><br></p>
+<hr />
+<h2 id="2-query-resources-patterns">2. Query Resources Patterns</h2>
+<p>The fundamental concept in MonE RESTful API is the resource with media type "application/json". The following diagram depicts the two possible types of resources in a response to a query: whether a single object, or a collection/array of objects.</p>
+<p><img alt="Figure-1" src="../assets/37918d0ef83248b1c369f08132f112b2d9423210dcf8feda1482a089a575584f.png" />  </p>
+<p><strong>Figure-1: Query Response: Resource Models</strong></p>
+<p>This section details the query method patterns of resources in the following sections:</p>
+<ul>
+<li><a href="#21-querying-a-single-resource">Querying a single resource</a></li>
+<li><a href="#22-querying-multiple-resources">Querying multiple/collection resources</a></li>
+<li><a href="#23-querying-multiple-resources-with-json-path-extension">Querying multiple/collection resources with JSON Path Extension</a></li>
+</ul>
+<h3 id="21-querying-a-single-resource">2.1. Querying a single resource</h3>
+<p>http-GET method is used for querying of a single resource. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>GET {apiRoot}/{resourceName}/{resourceID} MUST be used to retrieve the representation of a <strong>Managed Resource</strong> named resourceID.</li>
+<li>Return message contains the full representation of the resource</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong>=field1,field2, ... In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>If resource identified by URI cannot be identified 404 Not Found is returned.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Query a resource</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount/101
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account-101&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Query a resource with attribute selector directive fields=none</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount/101?fields=none 
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;
+}
+</code></pre></div></p>
+<div class="admonition example-3">
+<p class="admonition-title">Example-3</p>
+</div>
+<p><em><strong>Query a resource with attribute selector directive fields=name,state</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount/101?fields=name,state
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;state&quot;: &quot;active&quot;
+}
+</code></pre></div></p>
+<h3 id="22-querying-multiple-resources">2.2. Querying multiple resources</h3>
+<p>http-GET method is used for querying of multiple resources. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>GET {apiRoot}/{resourceName} MUST be used to retrieve the representation of a <strong>Collection Resource</strong></li>
+<li>Return message contains the array of one or more <strong>Managed Resource</strong> entities that constitute the <strong>Collection Resource</strong></li>
+<li>For query-based pagination, the HTTP header “X-Total-Count” in a response is returned, with the total number of matching resources so that the client can calculate the next page.<ul>
+<li><strong>offset</strong> and <strong>limit</strong> parameters are used to control pagination by the client.</li>
+</ul>
+</li>
+<li>If no paging query parameters are specified in the URI then all matching resources are returned to the consumer, considering the default default paging values for offset and limit. <ul>
+<li>If the response can fit a single page, response code returned is 200</li>
+<li>If the response cannot fit a single page, then the response code returned is 206.</li>
+</ul>
+</li>
+<li>In the case of pagination, the responses contain <strong>Link</strong> HTTP header that allows a way for the server to communicate the client a menu for possible future requests from which the client is free to choose, such as "first", "next", "prev", and "last" page related URLs.</li>
+<li>Each entity in return message contains the full representation of the resource</li>
+<li>Client can control representation of the entity resources via attribute selector directive <strong>fields</strong>=field1,field2, ... In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>If resource identified by URI cannot be identified 404 Not Found is returned.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK</li>
+    <li>206 Partial Content (returned in case of pagination)</li>  
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br><br></p>
+<h4 id="221-query-multiple-resources-no-pagination">2.2.1. Query Multiple Resources: No Pagination</h4>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Query multiple resources</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+X-Total-Count: 2
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;101&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+    &quot;name&quot;: &quot;Travel account-101&quot;,
+    &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+    &quot;state&quot;: &quot;active&quot;,
+    &quot;relatedParty&quot;: [
+      {
+        &quot;@referredType&quot;: &quot;Organization&quot;,
+        &quot;id&quot;: &quot;4665&quot;,
+        &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;role&quot;: &quot;owner&quot;
+      } 
+    ]
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;102&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+    &quot;name&quot;: &quot;Travel account-102&quot;,
+    &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.750Z&quot;,
+    &quot;state&quot;: &quot;active&quot;,
+    &quot;relatedParty&quot;: [
+      {
+        &quot;@referredType&quot;: &quot;Organization&quot;,
+        &quot;id&quot;: &quot;6666&quot;,
+        &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+        &quot;name&quot;: &quot;Jane Doe&quot;,
+        &quot;role&quot;: &quot;owner&quot;
+      } 
+    ]
+  }
+]
+</code></pre></div></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Query multiple resources with attribute selector directive fields=name,state</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?fields=name,state
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+X-Total-Count: 2
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;101&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+    &quot;name&quot;: &quot;Travel account-101&quot;,
+    &quot;state&quot;: &quot;active&quot;
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;102&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+    &quot;name&quot;: &quot;Travel account-102&quot;,
+    &quot;state&quot;: &quot;active&quot;
+    ]
+  }
+]
+</code></pre></div></p>
+<p><br><br></p>
+<h4 id="222-query-multiple-resources-with-pagination">2.2.2. Query Multiple Resources: With Pagination</h4>
+<p>The following table depicts pagination control related query parameters:</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>Default:0 if NOT provided. <br>Requested index for start of resources to be provided in response requested by client</td>
+</tr>
+
+<tr>
+<td>limit</td>
+<td>integer</td>
+<td>Default:20 if NOT provided. <br>Requested number of resources to be provided in response requested by client</td>
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<p>The following table depicts the semantics of offset and limit used together as query parameters usage :</p>
+<table>
+<tbody>
+
+<tr>
+<td>?limit=20</td>
+<td>Get the first twenty matching resources (first page with pagesize=20).</td>
+</tr>
+
+<tr>
+<td>?offset=0&limit=20</td>
+<td>Get the first twenty matching resources (first page with pagesize=20).</td>
+</tr>
+
+<tr>
+<td>?offset=40&limit=20</td>
+<td>Get twenty matching resources starting at the 40th (third page with pagesize=20).</td>
+</tr>
+
+<tr>
+<td>?offset=10&limit=20</td>
+<td>Get twenty matching resources starting at the 10th (client specified custom page).</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Query multiple resources with pagination and attribute selector directive fields=name,state</strong></em></p>
+<p>In thew following example, considering a total count of 9 resources IDs starting from 101..109 and a page size of 3, the second page is requested by the client. <strong>Note for the response code being 206 due to pagination</strong>.</p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?offset=3&amp;limit=3&amp;fields=name,state
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>206 OK
+Content-Type: application/json
+X-Total-Count: 9
+Link: &lt;https:server:port//MonE/accountManagement/v4/partyAccount?offset=3&amp;limit=3&amp;fields=name,state&gt;; rel=&quot;self&quot;,
+&lt;https:server:port//MonE/accountManagement/v4/partyAccount?offset=0&amp;limit=3&amp;fields=name,state&gt;; rel=&quot;first&quot;,
+&lt;https:server:port//MonE/accountManagement/v4/partyAccount?offset=6&amp;limit=3&amp;fields=name,state&gt;; rel=&quot;next&quot;,
+&lt;https:server:port//MonE/accountManagement/v4/partyAccount?offset=0&amp;limit=3&amp;fields=name,state&gt;; rel=&quot;prev&quot;,
+&lt;https:server:port//MonE/accountManagement/v4/partyAccount?offset=6&amp;limit=3&amp;fields=name,state&gt;; rel=&quot;last&quot;
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;104&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/104&quot;,
+    &quot;name&quot;: &quot;Travel account-104&quot;,
+    &quot;state&quot;: &quot;active&quot;
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;105&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/105&quot;,
+    &quot;name&quot;: &quot;Travel account-105&quot;,
+    &quot;state&quot;: &quot;active&quot;
+    ]
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;106&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/106&quot;,
+    &quot;name&quot;: &quot;Travel account-106&quot;,
+    &quot;state&quot;: &quot;active&quot;
+    ]
+  }
+]
+</code></pre></div></p>
+<p><br><br></p>
+<h4 id="223-query-multiple-resources-sorting">2.2.3. Query Multiple Resources: Sorting</h4>
+<p>To support sorting the sort directive is used as HTTP query parameter. The definition is as the following:</p>
+<p>sort=[direction]field, [direction]field,...</p>
+<p>where:</p>
+<ul>
+<li>direction : is optional. Default is "+" indicating ascending. Can be: “-“ | “+” </li>
+<li>field: The field to sort on.</li>
+</ul>
+<p>The following table depicts sorting control related query parameters usage:</p>
+<table>
+<tbody>
+
+<tr>
+<td>?sort=name</td>
+<td>Sort the result set on the name in ascending order.</td>
+</tr>
+
+<tr>
+<td>?sort=+name</td>
+<td>Sort the result set on the name in ascending order.</td>
+</tr>
+
+<tr>
+<td>?sort=-name</td>
+<td>Sort the result set on the name in descending order.</td>
+</tr>
+
+<tr>
+<td>?sort=name,state</td>
+<td>Sort the result set on the name in ascending, then by state in ascending order.</td>
+</tr>
+
+<tr>
+<td>?sort=-name,state</td>
+<td>Sort the result set on the name in descending, then by state in ascending order.</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Query multiple resources with pagination and attribute selector directive fields=name,state and sorting on name in descending order</strong></em></p>
+<p>In thew following example, considering a total count of 9 resources IDs starting from 101..109 and a page size of 3, the second page is requested by the client. Note for the response code being 206.</p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?offset=3&amp;limit=3&amp;fields=name,state&amp;sort=-name
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>206 OK
+Content-Type: application/json
+X-Total-Count: 9
+Link: &lt;https:server:port//...&gt;; rel=&quot;self&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;first&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;next&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;prev&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;last&quot;
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;106&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/106&quot;,
+    &quot;name&quot;: &quot;Travel account-106&quot;,
+    &quot;state&quot;: &quot;active&quot;
+    ]
+  },  
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;105&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/105&quot;,
+    &quot;name&quot;: &quot;Travel account-105&quot;,
+    &quot;state&quot;: &quot;active&quot;
+    ]
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;104&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/104&quot;,
+    &quot;name&quot;: &quot;Travel account-104&quot;,
+    &quot;state&quot;: &quot;active&quot;
+  }
+
+]
+</code></pre></div></p>
+<p><br><br></p>
+<h4 id="224-query-multiple-resources-conditional-collection-filtering">2.2.4. Query Multiple Resources: Conditional Collection Filtering</h4>
+<p>This section describes the TMFORUM open API basic design patterns for conditional attribute filtering with less flexibility. <strong>Please note that unless otherwise explicitly specified in section <a href="/INTERFACES/API-SPECIFICATION/publicApiSpec">MonE Public APIs Specification</a>, all MonE Public API supports JSONPath based conditional attribute filtering as detailed in <a href="#23-querying-multiple-resources-with-json-path-extension">next section</a>.</strong></p>
+<p>It is possible to have conditional collection items filtering, while issuing query multiple resources. The basic expression is one or a sequence of ANDED attribute assertions to formulate a filtering expression as the following usage patterns:</p>
+<ul>
+<li>SINGLE CONDITION: GET {apiRoot}/{resourceName}?{attributeName1}={attributeValue1}</li>
+<li>MULTIPLE CONDITIONs: GET {apiRoot}/{resourceName}?{attributeName1}={attributeValue1}&amp;{attributeName2}={attributeValue2}...</li>
+</ul>
+<p>The following table depicts the operators that may be used:</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Operator</th>
+<th>URL Encoded <br>Form</th>
+<th>Suffix <br>Form</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td> = </td>
+<td> %3D%3D </td>
+<td> .eq </td>
+<td> equal to ( = ) <br>
+Return results where the search criteria field is equal to </td>
+</tr>
+
+<tr>
+<td> &gt; </td>
+<td> %3E </td>
+<td> .gt </td>
+<td> greater than ( > ) <br>
+Return results where the search criteria field is strictly greater than </td>
+</tr>
+
+<tr>
+<td> &ge; </td>
+<td> %3E%3D </td>
+<td> .gte </td>
+<td> greater than or equal to ( >= ) <br>
+Return results where the search criteria field is equal to or greater than </td>
+</tr>
+
+<tr>
+<td> &lt; </td>
+<td> %3C </td>
+<td> .lt </td>
+<td> less than ( > ) <br>
+Return results where the search criteria field is strictly less than </td>
+</tr>
+
+<tr>
+<td> &le; </td>
+<td> %3C%3D </td>
+<td> .lte </td>
+<td> less than or equal to ( >= ) <br>
+Return results where the search criteria field is equal to or less than </td>
+</tr>
+
+<tr>
+<td> *= </td>
+<td> %3D~ </td>
+<td> .regex </td>
+<td> Regex expression<br>
+Note: all regex special characters must be encoded</td>
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<p>The following table depicts conditional attribute filtering usage examples. Note that some examples provide both types of usage via Suffix Form or URL encoded form of the operator presented in the table above.</p>
+<table>
+
+<thead>
+<tr bgcolor="blue">
+<th>Query</th>
+<th>Description</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+<tr>
+<td>GET /MonE/accountManagement/v4/partyAccount?offset=0&limit=10&state=active</td>
+<td>Get the first 10 Party Account(s) WHERE state=active.</td>
+</tr>
+
+<tr>
+<td>GET /MonE/accountManagement/v4/partyAccount?offset=0&limit=10&state=active,suspended</td>
+<td>Get the first 10 Party Account(s) WHERE state IN (active, suspended).</td>
+</tr>
+
+<tr>
+<td>GET /MonE/accountManagement/v4/partyAccount?offset=0&limit=10&state=active;state=suspended</td>
+<td>";" is an EXPLICIT OR. Get the first 10 entities of Party Accounts WHERE state=active OR state=suspended.</td>
+</tr>
+
+<tr>
+<td>
+GET /MonE/accountManagement/v4/partyAccount?limit=10&state=active&lastModified.gt=2020-01-01&lastModified.lt=2020-06-01<br>
+GET /MonE/accountManagement/v4/partyAccount?limit=10&state=active&lastModified%3E2020-01-01&lastModified%3C2020-06-01
+</td>
+<td>Get the first 10 Party Account(s) WHERE state=active AND 2020-01-01&lt;lastModified&lt;2020-06-01</td>
+</tr>
+
+<tr>
+<td>
+GET /MonE/accountManagement/v4/partyAccount?limit=10&fields=id,href,name,lastModified&state=active&lastModified.gt=2020-01-01&lastModified.lt=2020-06-01<br>
+GET /MonE/accountManagement/v4/partyAccount?limit=10&fields=id,href,name,lastModified&state=active&lastModified%3E2020-01-01&lastModified%3C2020-06-01
+</td>
+<td>Get the first 10 Party Account(s) WHERE state=active AND 2020-01-01&lt;lastModified&lt;2020-06-01<br>
+and represent ONLY id, href, name and lastModified in the output.</td>
+</tr>
+
+</tbody>
+</table>
+
+<p><strong>ASSUME THE FOLLOWING AS THE CURRENT STATUS OF THE RESOURCE FOR THE FOLLOWING EXAMPLES OF THIS SECTION.</strong></p>
+<div class="highlight"><pre><span></span><code> [
+    {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;101&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+      &quot;name&quot;: &quot;Travel account-101&quot;,
+      &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;1111&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/1111&quot;, 
+          &quot;name&quot;: &quot;John Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    },
+    {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;102&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/102&quot;,
+      &quot;name&quot;: &quot;Travel account-102&quot;,
+      &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.750Z&quot;,
+      &quot;state&quot;: &quot;suspended&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;2222&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/2222&quot;, 
+          &quot;name&quot;: &quot;Mike Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        },
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;2223&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/2223&quot;, 
+          &quot;name&quot;: &quot;Jenny Doe&quot;,
+          &quot;role&quot;: &quot;user&quot;
+        } 
+      ]
+    },
+    {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;103&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/103&quot;,
+      &quot;name&quot;: &quot;Travel account-103&quot;,
+      &quot;lastModified&quot;: &quot;2020-05-04T22:00:00.663Z&quot;,
+      &quot;state&quot;: &quot;active&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;3333&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/3333&quot;, 
+          &quot;name&quot;: &quot;Smith Brown&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    },
+    {
+      &quot;@type&quot;: &quot;PartyAccount&quot;,
+      &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+      &quot;id&quot;: &quot;104&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/104&quot;,
+      &quot;name&quot;: &quot;Travel account-104&quot;,
+      &quot;lastModified&quot;: &quot;2020-05-04T22:00:00.663Z&quot;,
+      &quot;state&quot;: &quot;terminated&quot;,
+      &quot;relatedParty&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;4444&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4444&quot;, 
+          &quot;name&quot;: &quot;Johny Rocket&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        } 
+      ]
+    }
+  ]
+</code></pre></div>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Get the first 10 Party Account(s) WHERE state=active criteria and represent ONLY id, href in the output.</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?offset=0&amp;limit=10&amp;state=active&amp;fields=id,href
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+X-Total-Count: 2
+Link: &lt;https:server:port//...&gt;; rel=&quot;self&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;first&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;next&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;prev&quot;,
+&lt;https:server:port//...&gt;; rel=&quot;last&quot;
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;101&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;
+  },
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;103&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/103&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Get the first 10 Party Account(s) WHERE state=active AND 2020-01-01&lt;lastModified&lt;2020-06-01 and represent ONLY id, href, name and lastModified in the output.</strong></em></p>
+<p><strong>REQUEST ALTERNATIVE-1</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?limit=10&amp;fields=id,href,name,lastModified&amp;state=active&amp;lastModified.gt=2020-01-01&amp;lastModified.lt=2020-06-01
+Access: application/json
+</code></pre></div></p>
+<p><strong>REQUEST ALTERNATIVE-2 (URL Encoded form)</strong>
+<div class="highlight"><pre><span></span><code>GET /MonE/accountManagement/v4/partyAccount?limit=10&amp;fields=id,href,name,lastModified&amp;state=active&amp;lastModified%3E2020-01-01&amp;lastModified%3C2020-06-01
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+X-Total-Count: 1
+
+
+[
+  {
+    &quot;@type&quot;: &quot;PartyAccount&quot;,
+    &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+    &quot;id&quot;: &quot;103&quot;,
+    &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/103&quot;,
+    &quot;name&quot;: &quot;Travel account-103&quot;,
+    &quot;lastModified&quot;: &quot;2020-05-04T22:00:00.663Z&quot;
+  }
+]
+</code></pre></div></p>
+<p><br><br></p>
+<h3 id="23-querying-multiple-resources-with-json-path-extension">2.3. Querying Multiple Resources with JSON Path Extension</h3>
+<p>This section describes MonE API JSON Path support for querying multiple resources adhering to TMFORUM open API JSON Path based design patterns for conditional attribute filtering as detailed in (<a href="/10-LIB_OVW/REFERENCES/start-10references">Ref.</a> [1], Part-6). <strong>Please note that unless otherwise explicitly specified in section <a href="/INTERFACES/API-SPECIFICATION/publicApiSpec">MonE API Catalog &amp; Specs</a>, all MonE API supports JSONPath based conditional attribute filtering as detailed in this section.</strong></p>
+<p><strong>Please note that PAGINATION logic and directives are as described in <a href="#222-query-multiple-resources-with-pagination">Query Multiple Resources: With Pagination</a>.</strong></p>
+<p>http-GET method is used for querying of multiple resources. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>GET {apiRoot}/{resourceName} MUST be used to retrieve the representation of a <strong>Collection Resource</strong></li>
+<li>Return message contains the array of one or more <strong>Managed Resource</strong> entities that constitute the <strong>Collection Resource</strong></li>
+<li>For query-based pagination, the HTTP header “X-Total-Count” in a response is returned, with the total number of matching resources so that the client can calculate the next page.<ul>
+<li><strong>offset</strong> and <strong>limit</strong> parameters are used to control pagination by the client.</li>
+</ul>
+</li>
+<li>If no paging query parameters are specified in the URI then all matching resources are returned to the consumer, considering the default default paging values for offset and limit. <ul>
+<li>If the response can fit a single page, response code returned is 200</li>
+<li>If the response cannot fit a single page, then the response code returned is 206.</li>
+</ul>
+</li>
+<li>Each entity in return message contains the full representation of the resource</li>
+<li>Client can control representation of the entity resources via attribute selector directive <strong>fields={JSONPath*}</strong>. In this case, requested fields as per provided JSONPath will be presented. As a shortcut, if <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>For conditional collection filtering, <strong>filter={JSONPathExpression}</strong> query directive is used as described in this section, instead of the pattern as described in previous section <a href="#224-query-multiple-resources-conditional-collection-filtering">Query Multiple Resources: Conditional Collection Filtering</a>.</li>
+<li>If resource identified by URI cannot be identified 404 Not Found is returned.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK</li>
+    <li>206 Partial Content (returned in case of pagination)</li>  
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><b>ASSUME THE FOLLOWING AS THE CURRENT STATUS OF THE RESOURCE FOR THE FOLLOWING EXAMPLES OF THIS SECTION.</b></p>
+<div class="highlight"><pre><span></span><code>{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    &quot;relatedEntity&quot;: [
+        {
+            &quot;id&quot;: &quot;3472&quot;,
+            &quot;href&quot;: &quot;https://host:port/customerBillManagement/v2/customerBill/3472&quot;,
+            &quot;name&quot;: &quot;November Bill&quot;,
+            &quot;@referredType&quot;: &quot;CustomerBill&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3473&quot;,
+            &quot;href&quot;: &quot;https://host:port/customerBillManagement/v2/customerBill/3473&quot;,
+            &quot;name&quot;: &quot;December Bill&quot;,
+            &quot;@referredType&quot;: &quot;CustomerBill&quot;
+        }
+    ],
+    &quot;statusChange&quot;: [
+        {
+            &quot;status&quot;: &quot;Pending&quot;,
+            &quot;changeReason&quot;: &quot;Need more information from the customer&quot;,
+            &quot;changeDate&quot;: &quot;2018-05-01T00:00&quot;
+        },
+        {
+            &quot;status&quot;: &quot;InProgress&quot;,
+            &quot;changeReason&quot;: &quot;Working on the issue resolution&quot;,
+            &quot;changeDate&quot;: &quot;2018-05-02T00:00&quot;
+        },
+        {
+            &quot;status&quot;: &quot;Resolved&quot;,
+            &quot;changeReason&quot;: &quot;Issue has been resolved&quot;,
+            &quot;changeDate&quot;: &quot;2018-05-02T00:00&quot;
+        }
+    ],
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;,
+            &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+        }
+    ],
+    &quot;attachment&quot;: [
+        {
+            &quot;description&quot;: &quot;Scanned disputed December bill&quot;,
+            &quot;href&quot;: &quot;http://hostname:port/documentManagement/v2/attachment/44&quot;,
+            &quot;id&quot;: &quot;44&quot;,
+            &quot;url&quot;: &quot;http://xxxxx&quot;,
+            &quot;name&quot;: &quot;December Bill&quot;,
+            &quot;size&quot;: 300,
+            &quot;sizeUnit&quot;: &quot;KB&quot;,
+            &quot;@referredType&quot;: &quot;Attachment&quot;
+        },
+        {
+            &quot;description&quot;: &quot;Scanned disputed November bill&quot;,
+            &quot;href&quot;: &quot;http://hostname:port/documentManagement/v2/attachment/45&quot;,
+            &quot;id&quot;: &quot;45&quot;,
+            &quot;url&quot;: &quot;http://xxxxx&quot;,
+            &quot;name&quot;: &quot;November Bill &quot;,
+            &quot;size&quot;: 500,
+            &quot;sizeUnit&quot;: &quot;KB&quot;,
+            &quot;@referredType&quot;: &quot;Attachment&quot;
+        }
+    ],
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<h4 id="231-jsonpath-overview">2.3.1. JSONPath Overview</h4>
+<p>The equivalent of XPath for JSON documents is called JSON Path. It is a query-oriented language that allows querying and extraction of subsection(s) of a JSON document.</p>
+<h4 id="2311-jsonpath-expression-operators">2.3.1.1. JSONPath Expression &amp; Operators</h4>
+<p>The following table depicts the JSON Path expression and operators:</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Expression & Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>$</td>
+<td>Root object/element to query. This is how all the path expressions are started.</td>
+</tr>
+
+<tr>
+<td>@</td>
+<td>The current node being processed - it is used in the input expressions for filter predicates.</td>
+</tr>
+
+<tr>
+<td>.&lt;attribute&gt;</td>
+<td>Child selector - selects the specified property in a parent object using the "dot" (.) notation.</td>
+</tr>
+
+<tr>
+<td>['&lt;attribute&gt;(,'&lt;attribute&gt;')]</td>
+<td>Child or children selector - selects the specified property or properties in a parent object using the "bracket" ([) notation.<br>
+Note: This expression SHOULD be used if the attribute contains special characters such as spaces, or begins with a character other than A..Za..z_.</td>
+</tr>
+
+<tr>
+<td>..</td>
+<td>Recursive descent.<br>
+It will search for the specified attribute name recursively and it will return an array of all values with the attribute name.<br>
+It will always return a list, even if only one property is found.</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>Wildcard selector.<br>
+It will select all elements (object or array) regardless of their names or indexes.<br>
+For example, $.relatedEntity[0][*] means all attributes of the first object from the relatedEntity array, and $.relatedEntity[*] means all items of the relatedEntity array.</td>
+</tr>
+
+<tr>
+<td>[n]</td>
+<td>Selects the nth element from an array. Indexes are 0-based.</td>
+</tr>
+
+<tr>
+<td>[indexNr, <br>indexNr, ...]</td>
+<td>Selects array elements with the specified indexes. Returns a list.</td>
+</tr>
+
+<tr>
+<td>[start:end]<br>[start:]</td>
+<td>Array slice operator. <br>
+It will select array elements from the start index and up to, but not including, end index.<br>
+If the end is omitted, selects all elements from start until the end of the array. Returns a list.</td>
+</tr>
+
+<tr>
+<td>[:n]</td>
+<td>Selects the first n elements of the array. Returns a list.</td>
+</tr>
+
+<tr>
+<td>[-n:]</td>
+<td>Selects the last n elements of the array. Returns a list.</td>
+</tr>
+
+<tr>
+<td>[,]</td>
+<td>Union operator. JSONPath allows alternate names or array indices as a set.</td>
+</tr>
+
+<tr>
+<td>[?(expression)]</td>
+<td><b>Filter expression.</b><br> Selects all elements in an object or array that match the specified filter.</td>
+</tr>
+
+<tr>
+<td>[(expression)]</td>
+<td><b>Script expression.<b><br> Script expressions can be used instead of explicit property names or indexes. An example is [(@.length-1)] which selects the last item in an array. Here, length refers to the length of the current array rather than a JSON field named length.</td>
+</tr>
+
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.channel
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>All the properties of the channel
+<div class="highlight"><pre><span></span><code>{
+  &quot;id&quot; : &quot;8774&quot;,
+  &quot;name&quot; : &quot;Self Service&quot;, 
+  &quot;@type&quot; : &quot;Channel&quot;
+}
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$[&#39;id&#39;,&#39;name&#39;,&#39;href&#39;]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Select multiple children from the root element. This operator is very useful in the partial response scenario.
+<div class="highlight"><pre><span></span><code>{
+  &quot;id&quot; : &quot;3180&quot;,
+  &quot;name&quot; : &quot;Compliant over last bill&quot;,
+  &quot;href&quot; : &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;
+}
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$..name
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Select all the ‘name’ attributes across all the resource structure including sub parts.
+<div class="highlight"><pre><span></span><code>[
+  &quot;Compliant over last bill&quot;,
+  &quot;November Bill&quot;, 
+  &quot;December Bill&quot;, 
+  &quot;December Bill&quot;, 
+  &quot;November Bill &quot;, 
+  &quot;Self Service&quot;
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[*].author
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>All the authors attribute values from all the elements of the 'note' array.
+<div class="highlight"><pre><span></span><code>[
+  &quot;Mr John Wils&quot;,
+  &quot;Mr Erika Xavy&quot;, 
+  &quot;Mr Redfin Tekram&quot;
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[*]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Wildcard select for all the elements within the note array.
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr John Wils&quot;,
+    &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+  },
+  {
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+    &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+  },
+  {
+    &quot;id&quot;: &quot;3&quot;,
+    &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+    &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[1]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Retrieve the first element of the note array.
+<div class="highlight"><pre><span></span><code>{
+  &quot;id&quot;: &quot;1&quot;,
+  &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+  &quot;author&quot;: &quot;Mr John Wils&quot;,
+  &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+}
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[0,1]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Retrieve the elements from the array positions 0 and 1 (remember indexes start from 0).
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr John Wils&quot;,
+    &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+  },
+  {
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+    &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[1:]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Retrieve the elements from the array starting from position 1 till the end (remember indexes start from 0).
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+    &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+  },
+  {
+    &quot;id&quot;: &quot;3&quot;,
+    &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+    &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[:2]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Selects the first 2 elements of the array.
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr John Wils&quot;,
+    &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+  },
+  {
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+    &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.note[-2:]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Selects the last 2 elements of the array.
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+    &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+  },
+  {
+    &quot;id&quot;: &quot;3&quot;,
+    &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+    &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+    &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+  }
+]
+</code></pre></div></p>
+<p><br><br></p>
+<h4 id="2312-jsonpath-filter-expression-predicates">2.3.1.2. JSONPath Filter Expression Predicates</h4>
+<p>JSONPath predicate filters are Boolean expressions (true or false) that restrict returned lists of nodes - usually applied to arrays. The filter syntax is:
+<div class="highlight"><pre><span></span><code>[?(expression)]
+</code></pre></div></p>
+<p>As detailed in previous section regarding JSONPath operators, the filter syntax is generally used in conjunction with the "@" operator (@ pointier to current item being processed) to create the predicate.</p>
+<p><strong>If predicate filter does NOT validate, an empty response is returned.</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>statusChange[?(@.status==&#39;Pending&#39;)]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Retrieve statusChange sub element from ROOT, that has statusChange.status child having 'Pending' value.
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;status&quot; : &quot;Pending&quot;,
+    &quot;changeReason&quot; : &quot;Need more information from the customer&quot;, 
+    &quot;changeDate&quot; : &quot;2018-05-01T00:00&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>statusChange[?(@.status==$.status)]
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Retrieve statusChange sub element from ROOT, that has statusChange.status child having $.status (status at ROOT) 'Resolved' value.
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;status&quot; : &quot;Resolved&quot;,
+    &quot;changeReason&quot; : &quot;Issue has been resolved&quot;, 
+    &quot;changeDate&quot; : &quot;2018-05-02T00:00&quot;
+  }
+]
+</code></pre></div></p>
+<p>The following table depicts the JSON Path filter expression related operators:</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>==</td>
+<td>Equal to<br>
+1 and '1' are considered equal.
+String values should be enclosed in single quotes or double-quotes.</td>
+</tr>
+
+<tr>
+<td>!=</td>
+<td>Not equal to.</td>
+</tr>
+
+<tr>
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+
+<tr>
+<td>&gt;=</td>
+<td>Greater than or Equal to</td>
+</tr>
+
+<tr>
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+
+<tr>
+<td>&lt;=</td>
+<td>Less than or Equal to</td>
+</tr>
+
+<tr>
+<td>=~</td>
+<td>Match a JavaScript regular expression.<br>
+For example, $.statusChange[?(@.status=~/Resol.*?/i)] matches items whose status starts with Resol.</td>
+</tr>
+
+<tr>
+<td>!</td>
+<td>Negate filter condition.<br>
+Use to negate a filter: $.attachment[?(!@.size)] matches items that do not have the size property.</td>
+</tr>
+
+<tr>
+<td>&&</td>
+<td>Logical AND<br> 
+Used to combine multiple filter expressions:
+$.attachment[?(@.size==300 && @.sizeUnit=='KB')]</td>
+</tr>
+
+<tr>
+<td>||</td>
+<td>Logical OR<br> 
+Used to combine multiple filter expressions:
+$.attachment[?(@.size==300 || @.size==500)]</td>
+</tr>
+
+</tbody>
+</table>
+
+<p><br>
+The following are some examples:</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.attachment[?(@.size==300)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;description&quot;: &quot;Scanned disputed December bill&quot;,
+    &quot;href&quot; : &quot;http://hostname:port/documentManagement/v2/attachment/44&quot;,
+    &quot;id&quot; : &quot;44&quot;,
+    &quot;url&quot; : &quot;http://xxxxx&quot;,
+    &quot;name&quot; : &quot;December Bill&quot;, 
+    &quot;size&quot; : 300,
+    &quot;sizeUnit&quot; : &quot;KB&quot;, 
+    &quot;@referredType&quot; : &quot;Attachment&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.statusChange[?(@.status!=&#39;Pending&#39;)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;status&quot; : &quot;InProgress&quot;,
+    &quot;changeReason&quot;: &quot;Working on the issue resolution&quot;,
+    &quot;changeDate&quot;: &quot;2018-05-02T00:00&quot; 
+  },
+  {
+    &quot;status&quot; : &quot;Resolved&quot;,
+    &quot;changeReason&quot; : &quot;Issue has been resolved&quot;, 
+    &quot;changeDate&quot; : &quot;2018-05-02T00:00&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.attachment[?(@.size&gt;300)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+      &quot;description&quot;: &quot;Scanned disputed November bill&quot;,
+      &quot;href&quot;: &quot;http://hostname:port/documentManagement/v2/attachment/45&quot;,
+      &quot;id&quot;: &quot;45&quot;,
+      &quot;url&quot;: &quot;http://xxxxx&quot;,
+      &quot;name&quot;: &quot;November Bill &quot;,
+      &quot;size&quot;: 500,
+      &quot;sizeUnit&quot;: &quot;KB&quot;,
+      &quot;@referredType&quot;: &quot;Attachment&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.statusChange[?(@.status=~ /Resol.*?/i)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+      &quot;status&quot;: &quot;Resolved&quot;,
+      &quot;changeReason&quot;: &quot;Issue has been resolved&quot;,
+      &quot;changeDate&quot;: &quot;2018-05-02T00:00&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.attachment[?(@.size==300 &amp;&amp; @.sizeUnit==&#39;KB&#39;)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+    &quot;description&quot;: &quot;Scanned disputed December bill&quot;,
+    &quot;href&quot; : &quot;http://hostname:port/documentManagement/v2/attachment/44&quot;,
+    &quot;id&quot; : &quot;44&quot;,
+    &quot;url&quot; : &quot;http://xxxxx&quot;,
+    &quot;name&quot; : &quot;December Bill&quot;, 
+    &quot;size&quot; : 300,
+    &quot;sizeUnit&quot; : &quot;KB&quot;, 
+    &quot;@referredType&quot; : &quot;Attachment&quot;
+  }
+]
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path Expression</strong>
+<div class="highlight"><pre><span></span><code>$.attachment[?(@.size==300 || @.size==500)]
+</code></pre></div></p>
+<p><strong>RESULT</strong>
+<div class="highlight"><pre><span></span><code>[
+  {
+      &quot;description&quot;: &quot;Scanned disputed December bill&quot;,
+      &quot;href&quot;: &quot;http://hostname:port/documentManagement/v2/attachment/44&quot;,
+      &quot;id&quot;: &quot;44&quot;,
+      &quot;url&quot;: &quot;http://xxxxx&quot;,
+      &quot;name&quot;: &quot;December Bill&quot;,
+      &quot;size&quot;: 300,
+      &quot;sizeUnit&quot;: &quot;KB&quot;,
+      &quot;@referredType&quot;: &quot;Attachment&quot;
+  },
+  {
+      &quot;description&quot;: &quot;Scanned disputed November bill&quot;,
+      &quot;href&quot;: &quot;http://hostname:port/documentManagement/v2/attachment/45&quot;,
+      &quot;id&quot;: &quot;45&quot;,
+      &quot;url&quot;: &quot;http://xxxxx&quot;,
+      &quot;name&quot;: &quot;November Bill &quot;,
+      &quot;size&quot;: 500,
+      &quot;sizeUnit&quot;: &quot;KB&quot;,
+      &quot;@referredType&quot;: &quot;Attachment&quot;
+  }
+]
+</code></pre></div></p>
+<hr />
+<p><br><br></p>
+<h4 id="2313-jsonpath-functions">2.3.1.3. JSONPath Functions</h4>
+<p>The following table depicts the JSON Path functions:</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Function</th>
+<th>Description</th>
+<th>Output<br>Type</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>min()</td>
+<td>Provides the min value of an array of numbers.</td>
+<td>Double</td>
+</tr>
+
+<tr>
+<td>max()</td>
+<td>Provides the max value of an array of numbers.</td>
+<td>Double</td>
+</tr>
+
+<tr>
+<td>avg()</td>
+<td>Provides the average value of an array of numbers.</td>
+<td>Double</td>
+</tr>
+
+<tr>
+<td>stdev()</td>
+<td>Provides the standard deviation value of an array of numbers.</td>
+<td>Double</td>
+</tr>
+
+<tr>
+<td>length()</td>
+<td>Provides the length of an array.</td>
+<td>Integer</td>
+</tr>
+
+
+</tbody>
+</table>
+
+<p>Considering the following example:
+<div class="highlight"><pre><span></span><code>{ 
+  &quot;price&quot;: [ 
+    1,
+    2, 
+    3, 
+    4, 
+    5, 
+    6
+  ]
+}
+</code></pre></div></p>
+<p><br></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.price.min()
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Provides the minimum value of an array of numbers.
+<div class="highlight"><pre><span></span><code>1.0
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.price.max()
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Provides the maximum value of an array of numbers.
+<div class="highlight"><pre><span></span><code>6.0
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.price.avg()
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Provides the average value of an array of numbers.
+<div class="highlight"><pre><span></span><code>3.5
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.price.stddev()
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Provides the standard deviation value of an array of numbers.
+<div class="highlight"><pre><span></span><code>1.707825127659933
+</code></pre></div></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><strong>JSON Path</strong>
+<div class="highlight"><pre><span></span><code>$.price.length()
+</code></pre></div></p>
+<p><strong>RESULT</strong></p>
+<p>Provides the length of an array.
+<div class="highlight"><pre><span></span><code>6
+</code></pre></div></p>
+<p><br><br></p>
+<h3 id="232-fields-filtering-with-jsonpath">2.3.2. Fields filtering with JSONPath</h3>
+<p>In order to retrieve a partial representation using a JSON Path, the “fields” selector MUST be used:</p>
+<div class="highlight"><pre><span></span><code>GET {apiRoot}/{resourceName}/{resourceID}/?fields={JSONPath*}
+</code></pre></div>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket/3180?fields=channel.name
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{ &quot;id&quot;: &quot;3180&quot;, 
+  &quot;channel&quot;: {
+    &quot;name&quot;: &quot;Self Service&quot; 
+  }
+}
+</code></pre></div></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket/3180/?fields=note[?(@.author==&#39;Mr John Wils&#39;)]
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;1&quot;,
+  &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+  &quot;author&quot;: &quot;Mr John Wils&quot;,
+  &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+}
+</code></pre></div></p>
+<div class="admonition example-3">
+<p class="admonition-title">Example-3</p>
+</div>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket/3180/?fields=[&#39;id&#39;,&#39;href&#39;,&#39;name&#39;,&#39;note&#39;]
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;3180&quot;,
+  &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+  &quot;name&quot;: &quot;Compliant over last bill&quot;,
+  &quot;note&quot;: [
+    {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+        &quot;author&quot;: &quot;Mr John Wils&quot;,
+        &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+    },
+    {
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+        &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+        &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+    },
+    {
+        &quot;id&quot;: &quot;3&quot;,
+        &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+        &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+        &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+    }
+  ]
+}
+</code></pre></div></p>
+<div class="admonition example-4">
+<p class="admonition-title">Example-4</p>
+</div>
+<p><em><strong>Multiple criteria via ","</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket/3180/?fields=[&#39;id&#39;,&#39;href&#39;,&#39;name&#39;,&#39;note&#39;],channel,note[?(@.author==&#39;Mr John Wils&#39;)]
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;3180&quot;,
+  &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+  &quot;name&quot;: &quot;Compliant over last bill&quot;,
+  &quot;note&quot;: [
+    {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+        &quot;author&quot;: &quot;Mr John Wils&quot;,
+        &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+    }
+  ],
+  &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+  }
+}
+</code></pre></div></p>
+<p><br><br></p>
+<h3 id="233-collection-filtering-with-jsonpath">2.3.3. Collection filtering with JSONPath</h3>
+<p>In order to retrieve a subset of resources, the “filter” selector MUST be used:</p>
+<div class="highlight"><pre><span></span><code>GET {apiRoot}/{resourceName}/?filter={JSONPath Expression}
+GET {apiRoot}/{resourceName}/?filter={JSONPath Expression},{JSONPath Expression},...    //ORING via COMMA
+GET {apiRoot}/{resourceName}/?filter={JSONPath Expression};filter={JSONPath Expression},...    //ORING via semicolon
+</code></pre></div>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket?fields=[&#39;id&#39;,&#39;href&#39;,&#39;name&#39;,&#39;channel&#39;]&amp;filter=attachment[?(@.sizeUnit==&#39;KB&#39; &amp;&amp; @.size==500)]
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;3180&quot;,
+  &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+  &quot;name&quot;: &quot;Compliant over last bill&quot;,
+  &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+  }
+}
+</code></pre></div></p>
+<p><br><br></p>
+<h3 id="233-sorting-with-jsonpath">2.3.3. Sorting with JSONPath</h3>
+<p>To support sorting the sort directive is used as HTTP query parameter. The definition is as the following:</p>
+<p>sort=[direction]sort-field, [direction]sort-field,...</p>
+<p>where:</p>
+<ul>
+<li>direction : is optional. Default is "+" indicating ascending. Can be: “-“ | “+”</li>
+<li>sort-field: The field to sort on, specified as a <strong>JSONPath</strong> expression</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket?sort=channel.name
+Access: application/json
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket?sort=attachment[*].name
+Access: application/json
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>GET /api/troubleTicket?filter=attachment[?(@.size==300)]&amp;fields==[&#39;id&#39;,&#39;href&#39;,&#39;name&#39;]&amp; sort=attachment[*].name
+Access: application/json
+</code></pre></div>
+<h3 id="24-query-depth-and-expand-directives">2.4. Query Depth and Expand Directives</h3>
+<p>As for any REST based API, MonE API query responses, return single or a collection of resources in which each resource contain referenced entities. A common use case is to query a resource and “dereference” or “embed” the hyperlinked resource representations. Control of expansion in the hierarchy of referenced objects is controlled via the following two directives:</p>
+<ul>
+<li><strong>depth</strong>: The value of this directive controls the number of depth level subject to expansion in the hierarchy of references.<ul>
+<li>If depth=0, then no expansion, meaning all referenced entities and response is just RootEntity objects which contains only @type, @schemaLocation, id and href.</li>
+<li>If depth = 1, then the first level of related target entities is expanded. References are replaced with the actual loaded entities with the corresponding level of details.</li>
+<li>If depth = N it expands reference objects of related entities recursively. The last level contains only the references.</li>
+</ul>
+</li>
+<li><strong>expand</strong>: It is optional and must be used together with depth. The value of this directive is used to narrow down (filter) expanding of the referenced objects. <ul>
+<li>If expand is not specified, then by default all the paths should be expanded as per specified depth value.</li>
+<li>If the expand parameter is specified, only those paths should be expanded according to depth parameter.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+</div>
+<p><em><strong>Expand up to depth=3 for productOffering.productSpecification</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>GET /catalogManagement/productOffering/23/?depth=3&amp;expand=productOffering.productSpecification
+Access: application/json
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;23&quot;,
+  &quot;href&quot;: &quot;/catalogManagement/productOffering/23&quot;,
+  &quot;version&quot;: &quot;2.0&quot;,
+  &quot;lastUpdate&quot;: &quot;2013-04-19T16:42:23-04:00&quot;,
+  &quot;name&quot;: &quot;Sensor mini&quot;,
+  &quot;description&quot;: &quot;A wireless sensor for small garden&quot;,
+  &quot;isBundle&quot;: &quot;false&quot;,
+  &quot;lifecycleStatus&quot;: &quot;Active&quot;,
+  &quot;validFor&quot;: {
+      &quot;startDateTime&quot;: &quot;2013-04-19T16:42:23-04:00&quot;,
+      &quot;endDateTime&quot;: &quot;2013-06-19T00:00:00-04:00&quot;
+  },
+  &quot;category&quot;: [
+      {
+          &quot;id&quot;: &quot;14&quot;,
+          &quot;href&quot;: &quot;/catalogManagement/category/14&quot;,
+          &quot;version&quot;: &quot;2.0&quot;,
+          &quot;name&quot;: &quot;Wireless sensors&quot;
+      }
+  ],
+  &quot;channel&quot;: [
+      {
+          &quot;id&quot;: &quot;13&quot;,
+          &quot;href&quot;: &quot;/marketSales/channel/13&quot;,
+          &quot;name&quot;: &quot;IOT Corner&quot;
+      }
+  ],
+  &quot;place&quot;: [
+      {
+          &quot;id&quot;: &quot;12&quot;,
+          &quot;href&quot;: &quot;/marketSales/place/12&quot;,
+          &quot;name&quot;: &quot;France&quot;
+      }
+  ],
+  &quot;serviceLevelAgreement&quot;: {
+      &quot;id&quot;: &quot;28&quot;,
+      &quot;href&quot;: &quot;/slaManagement/serviceLevelAgreement/28&quot;,
+      &quot;name&quot;: &quot;Standard SLA&quot;
+  },
+  &quot;productSpecification&quot;: [
+      {
+          &quot;id&quot;: &quot;13&quot;,
+          &quot;href&quot;: &quot;/catalogManagement/productSpecification/13&quot;,
+          &quot;version&quot;: &quot;2.0&quot;,
+          &quot;name&quot;: &quot;wireless sensor mini&quot;,
+          &quot;productSpecCharacteristic&quot;: [
+              {
+                  &quot;id&quot;: &quot;34&quot;,
+                  &quot;name&quot;: &quot;Colour&quot;,
+                  &quot;description&quot;: &quot;Colour&quot;,
+                  &quot;valueType&quot;: &quot;string&quot;,
+                  &quot;configurable&quot;: &quot;true&quot;,
+                  &quot;validFor&quot;: {
+                      &quot;startDateTime&quot;: &quot;2013-04-19T16:42:23-04:00&quot;,
+                      &quot;endDateTime&quot;: &quot;&quot;
+                  },
+                  &quot;ProductSpecCharacteristicValue&quot;: [
+                      {
+                          &quot;valueType&quot;: &quot;string&quot;,
+                          &quot;default&quot;: &quot;false&quot;,
+                          &quot;value&quot;: &quot;Black&quot;,
+                          &quot;unitOfMeasure&quot;: &quot;&quot;,
+                          &quot;valueFrom&quot;: &quot;&quot;,
+                          &quot;valueTo&quot;: &quot;&quot;,
+                          &quot;validFor&quot;: {
+                              &quot;startDateTime&quot;: &quot;2013-04-19T16:42:23-04:00&quot;,
+                              &quot;endDateTime&quot;: &quot;&quot;
+                          }
+                      },
+                      {
+                          &quot;valueType&quot;: &quot;string&quot;,
+                          &quot;default&quot;: &quot;false&quot;,
+                          &quot;value&quot;: &quot;White&quot;,
+                          &quot;unitOfMeasure&quot;: &quot;&quot;,
+                          &quot;valueFrom&quot;: &quot;&quot;,
+                          &quot;valueTo&quot;: &quot;&quot;,
+                          &quot;validFor&quot;: {
+                              &quot;startDateTime&quot;: &quot;2013-04-19T16:42:23-04:00&quot;,
+                              &quot;endDateTime&quot;: &quot;&quot;
+                          }
+                      }
+                  ]
+              }
+          ]
+      }
+  ],
+  &quot;productOfferingPrice&quot;: [
+    {
+      &quot;id&quot;: &quot;15&quot;,
+      &quot;href&quot;: &quot;/catalogManagement/productOfferingPrice/15&quot;,
+      &quot;name&quot;: &quot;Sale Price&quot;
+    }
+  ]
+}
+</code></pre></div></p>
+<p><br><br></p>
+<hr />
+<h2 id="3-modify-resources-patterns">3. Modify Resources Patterns</h2>
+<h3 id="31-full-update-replace-all-attributes-of-a-resource">3.1. Full Update: Replace ALL attributes of a resource</h3>
+<p>http-PUT method is used for updating all attributes of a resource. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json</li>
+<li>http-PUT cannot be used for partial update. One approach to using PUT to facilitate a partial “replace” functionality is to first GET the object, modify it in memory, then to PUT the modified object back.</li>
+<li>For full update, in the input id, href and read-only and non-nullable attributes MUST be specified explicitly at all times.</li>
+<li>To empty a resource, call http-PUT on the specific resource with an input that ONLY consists of id and href.</li>
+<li>For partial updates http-PATCH must be used (please refer to next sections).</li>
+<li>Return message contains the full representation of the resource.</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong> (Please refer to <a href="#2-query-resources-patterns">Query Resources Patterns</a> for details regarding the usage of this directive in basic and JSONPath modes).  In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Update a resource: change state to suspended</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PUT /MonE/accountManagement/v4/partyAccount/101 
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;suspended&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;suspended&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Empty resource</strong></em><br></p>
+<p>Note that in the input id, href and read-only and non-nullable attributes (name for PartyAccount) MUST be specified explicitly at all times.</p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PUT /MonE/accountManagement/v4/partyAccount/101 
+Content-Type: application/json
+
+{
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;&quot;
+}
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;&quot;
+  &quot;relatedParty&quot;: []
+}
+</code></pre></div></p>
+<p><br><br></p>
+<h3 id="32-partial-update-modify-attribute-subset-a-resource">3.2. Partial Update: Modify Attribute subset a resource</h3>
+<p>http-PATCH method is used for updating a limited subset of the attributes of an entity as described in [RFC5789] and [RFC7386]. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json</li>
+<li>For partial updates, in the input only the to-be-updated fields are provided.</li>
+<li>Return message contains the full representation of the resource.</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong> (Please refer to <a href="#2-query-resources-patterns">Query Resources Patterns</a> for details regarding the usage of this directive in basic and JSONPath modes).  In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Partial update a resource: change state to suspended</strong></em></p>
+<p>Note that in the input only the updated field(s) need to be provided provided.</p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /MonE/accountManagement/v4/partyAccount/101 
+Content-Type: application/json
+
+{
+  &quot;state&quot;: &quot;suspended&quot;
+}
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;suspended&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div></p>
+<h3 id="33-partial-update-modify-lists">3.3. Partial Update: Modify Lists</h3>
+<p>http-PATCH method is used for modification of list based (multi-valued) attributes of a resource. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json-patch+json</li>
+<li>PATCH operation is relative to the container collection for the entity types to be created, where the following directives detail the type of update:<ul>
+<li>“op” is the action to take. The following operations are supported: "add", "remove", "replace", "copy", "move", "test". Operation names are self-explanatory, except for "test".  The "test" operation tests that a value at the target location is equal to a specified value.</li>
+<li>"from" is OPTIONAL and required in case of "copy" and "move"</li>
+<li>“path” is a pointer/reference to the field to change, but also utilizes JSONPath. For background information regarding JSONPath and filter selectors, please refer to <a href="#231-jsonpath-overview">JSONPath</a>.</li>
+<li>“value” is the value to use. Not required if "op" is "remove"</li>
+</ul>
+</li>
+<li>Return message contains the full representation of the resource.</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong> (Please refer to <a href="#2-query-resources-patterns">Query Resources Patterns</a> for details regarding the usage of this directive in basic and JSONPath modes).  In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>For optional and not specified attributes of the resource model, entity is populated by default values as per entity schema specification.</li>
+<li>The HTTP PATCH method is atomic, as per [RFC5789] i.e., all operations MUST be successful otherwise the application of the full PATCH is unsuccessful.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+    <li>204 No Content</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<p><b>ASSUME THE FOLLOWING AS THE CURRENT (BEFORE UPDATE) STATUS OF THE RESOURCE FOR THE FOLLOWING EXAMPLES</b>
+<div class="highlight"><pre><span></span><code>{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;5555&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/5555&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    } 
+  ]
+}
+</code></pre></div>
+<br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Add two relatedParties to partyAccount/101</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /MonE/accountManagement/v4/partyAccount/101
+Content-Type: application/json-patch+json
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/relatedParty&quot;,
+    &quot;value&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;6666&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+          &quot;name&quot;: &quot;Jane Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        },
+        {
+          &quot;@referredType&quot;: &quot;Individual&quot;,
+          &quot;id&quot;: &quot;7777&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/7777&quot;, 
+          &quot;name&quot;: &quot;Smith Brown&quot;,
+          &quot;role&quot;: &quot;payer&quot;
+        }
+      ]
+    }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account-101&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    },
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;6666&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+      &quot;name&quot;: &quot;Jane Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    },
+    {
+      &quot;@referredType&quot;: &quot;Individual&quot;,
+      &quot;id&quot;: &quot;7777&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/7777&quot;, 
+      &quot;name&quot;: &quot;Smith Brown&quot;,
+      &quot;role&quot;: &quot;payer&quot;
+    }
+  ]
+}
+</code></pre></div>
+<p><br>
+Continuing from the above Example-1</p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Remove two relatedParties from partyAccount/101</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /MonE/accountManagement/v4/partyAccount/101
+Content-Type: application/json-patch+json
+[
+  {
+    &quot;op&quot;: &quot;remove&quot;,
+    &quot;path&quot;: &quot;/relatedParty&quot;,
+    &quot;value&quot;: [
+        {
+          &quot;@referredType&quot;: &quot;Organization&quot;,
+          &quot;id&quot;: &quot;6666&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/6666&quot;, 
+          &quot;name&quot;: &quot;Jane Doe&quot;,
+          &quot;role&quot;: &quot;owner&quot;
+        },
+        {
+          &quot;@referredType&quot;: &quot;Individual&quot;,
+          &quot;id&quot;: &quot;7777&quot;,
+          &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/7777&quot;, 
+          &quot;name&quot;: &quot;Smith Brown&quot;,
+          &quot;role&quot;: &quot;payer&quot;
+        }
+      ]
+    }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+  &quot;@type&quot;: &quot;PartyAccount&quot;,
+  &quot;@schemaLocation&quot;: &quot;https://bss.operator.com/MonE/schemas/SpecialAccount.schema.json&quot;, 
+  &quot;id&quot;: &quot;101&quot;,
+  &quot;href&quot;: &quot;https://bss.operator.com//MonE/accountManagement/v4/partyAccount/101&quot;,
+  &quot;name&quot;: &quot;Travel account-101&quot;,
+  &quot;lastModified&quot;: &quot;2020-07-04T22:00:00.663Z&quot;,
+  &quot;state&quot;: &quot;active&quot;,
+  &quot;relatedParty&quot;: [
+    {
+      &quot;@referredType&quot;: &quot;Organization&quot;,
+      &quot;id&quot;: &quot;4665&quot;,
+      &quot;href&quot;: &quot;https://bss.operator.com/MonE/partyManagement/v4/organization/4665&quot;, 
+      &quot;name&quot;: &quot;John Doe&quot;,
+      &quot;role&quot;: &quot;owner&quot;
+    }
+  ]
+}
+</code></pre></div>
+<p><br><br></p>
+<h3 id="34-partial-update-modify-lists-with-json-patch-query-and-jsonpath-filters">3.4. Partial Update: Modify Lists with JSON Patch Query and JSONPath filters</h3>
+<p>JSON Patch Query [RFC6902] is a format for expressing a sequence of operations to apply to a target JSON document for use with the HTTP PATCH method. Thus, JSON Patch Query extends JSON Patch in order to handle partial updates of elements within an array without previous knowledge of the order in which the impacted elements are located within the array. Using JSON Patch Query blended with JSONPath filter selector capabilities, there is no need to refer to indexes within the array but use the contents of the different parameters defining the structure as the reference to identify each individual element within the array.</p>
+<p>http-PATCH method is used for modification of list based (multi-valued) attributes of a resource via JSON Patch Query pattern. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json-patch-query+json</li>
+<li>PATCH operation is relative to the container collection for the entity types to be created, where the following directives detail the type of update:<ul>
+<li>“op” is the action to take. The following operations are supported: "add", "remove", "replace", "copy", "move", "test". Operation names are self-explanatory, except for "test".  The "test" operation tests that a value at the target location is equal to a specified value.</li>
+<li>"from" is OPTIONAL and required in case of "copy" and "move"</li>
+<li>“path” is a pointer/reference to the field to change, but also utilizes JSONPath. For background information regarding JSONPath and filter selectors, please refer to <a href="#231-jsonpath-overview">JSONPath</a>.</li>
+<li>“value” is the value to use. Not required if "op" is "remove"</li>
+</ul>
+</li>
+<li>Return message contains the full representation of the resource.</li>
+<li>Client can control representation of the resource via attribute selector directive <strong>fields</strong> (Please refer to <a href="#2-query-resources-patterns">Query Resources Patterns</a> for details regarding the usage of this directive in basic and JSONPath modes).  In this case, requested fields will be presented. If <strong>fields=none</strong>, then response contains only <strong>id</strong>, <strong>href</strong> and <strong>name</strong> (also optionally <strong>@type</strong>, <strong>@schemaLocation</strong> as per API implementation).</li>
+<li>For optional and not specified attributes of the resource model, entity is populated by default values as per entity schema specification.</li>
+<li>The HTTP PATCH method is atomic, as per [RFC5789] i.e., all operations MUST be successful otherwise the application of the full PATCH is unsuccessful.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC)</li>
+    <li>202 Accepted (if ASYNC)</li>
+    <li>204 No Content</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br>
+<b>ASSUME THE FOLLOWING AS THE CURRENT (BEFORE UPDATE) STATUS OF THE RESOURCE FOR THE FOLLOWING EXAMPLES</b>
+<div class="highlight"><pre><span></span><code>{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;status&quot;: &quot;Open&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div></p>
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Adding an attribute to one of the components of an array</strong></em></p>
+<p><strong>REQUEST BASIC PATTERN ALTERNATIVE-1</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { &quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/note/text?note.author=Mr Redfin Tekram&quot;, &quot;value&quot;:&quot;Issue has been resolved, the service has been restored&quot;}
+]
+</code></pre></div></p>
+<p><strong>REQUEST JSONPath PATTERN ALTERNATIVE-2</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { 
+    &quot;op&quot;: &quot;add&quot;, 
+    &quot;path&quot;: &quot;note[?(@.author==&#39;Mr Redfin Tekram&#39;)]&quot;, 
+    &quot;value&quot;:{ &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;}
+  }
+]
+</code></pre></div></p>
+<p><strong>REQUEST JSONPath PATTERN ALTERNATIVE-2 with multiple selectors</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { 
+    &quot;op&quot;: &quot;add&quot;, 
+    &quot;path&quot;: &quot;note[?(@.author==&#39;Mr Redfin Tekram&#39; &amp;&amp; @.status==&#39;Edited&#39;)]&quot;, 
+    &quot;value&quot;:{ &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;}
+  }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;status&quot;: &quot;Open&quot;,
+            &quot;text&quot;: &quot;Issue has been resolved, the service has been restored&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<p><br></p>
+<div class="admonition example-2">
+<p class="admonition-title">Example-2</p>
+</div>
+<p><em><strong>Removing one of the components of an Array Element (the whole structure)</strong></em></p>
+<p><strong>REQUEST BASIC PATTERN ALTERNATIVE-1</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;/note?note.author=Mr Redfin Tekram&quot;}
+]
+</code></pre></div></p>
+<p><strong>REQUEST JSONPath PATTERN ALTERNATIVE-2</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { 
+    &quot;op&quot;: &quot;remove&quot;, 
+    &quot;path&quot;: &quot;note[?(@.author==&#39;Mr Redfin Tekram&#39;)]&quot;
+  }
+]
+</code></pre></div></p>
+<p><strong>REQUEST JSONPath PATTERN ALTERNATIVE-2 with multiple selectors</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { 
+    &quot;op&quot;: &quot;remove&quot;, 
+    &quot;path&quot;: &quot;note[?(@.author==&#39;Mr Redfin Tekram&#39; &amp;&amp; @.status==&#39;Edited&#39;)]&quot;
+  }
+]
+</code></pre></div>
+<br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Missing necessary information from the customer&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<p><br></p>
+<div class="admonition example-3">
+<p class="admonition-title">Example-3</p>
+</div>
+<p><em><strong>Removing an attribute from one of the components of an array</strong></em></p>
+<p><strong>REQUEST BASIC PATTERN ALTERNATIVE-1</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;/note/text?note.author=Mr John Wils&quot;}
+]
+</code></pre></div></p>
+<p><strong>REQUEST JSONPath PATTERN ALTERNATIVE-2</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { 
+    &quot;op&quot;: &quot;remove&quot;, 
+    &quot;path&quot;: &quot;note[?(@.author==&#39;Mr John Wils&#39;)].text&quot;
+  }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;
+            &quot;status&quot;: &quot;Edited&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;status&quot;: &quot;Open&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<p><br></p>
+<div class="admonition example-4">
+<p class="admonition-title">Example-4</p>
+</div>
+<p><em><strong>Replacing attributes from one of the components of an array</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/note/text?note.author=Mr John Wils&quot;, &quot;value&quot;: &quot;Issue has been resolved&quot;},
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/note/status?note.author=Mr John Wils&quot;, &quot;value&quot;: &quot;Closed&quot;}
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr John Wils&quot;,
+            &quot;status&quot;: &quot;Closed&quot;,
+            &quot;text&quot;: &quot;Issue has been resolved&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;status&quot;: &quot;Open&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<p><br></p>
+<div class="admonition example-5">
+<p class="admonition-title">Example-5</p>
+</div>
+<p><em><strong>Replacing a complete component of an array</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>PATCH /api/troubleTicket/3180
+Content-Type: application/json-patch-query+json
+[
+  { &quot;op&quot;: &quot;replace&quot;, 
+    &quot;path&quot;: &quot;/note?note.author=Mr John Wils&quot;, 
+    &quot;value&quot;: {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2020-07-04T00:00&quot;,
+            &quot;author&quot;: &quot;Mrs Jane Wils&quot;,
+            &quot;status&quot;: &quot;Closed&quot;,
+            &quot;text&quot;: &quot;Issue has been resolved&quot;      
+    }
+  }
+]
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong></p>
+<div class="highlight"><pre><span></span><code>200 OK
+Content-Type: application/json
+
+{
+    &quot;id&quot;: &quot;3180&quot;,
+    &quot;href&quot;: &quot;https://host:port/troubleTicket/v2/troubleTicket/3180&quot;,
+    &quot;name&quot;: &quot;Compliant over last bill&quot;,
+    &quot;status&quot;: &quot;Resolved&quot;,
+    ...
+    ...
+    &quot;note&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;date&quot;: &quot;2020-07-04T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Jane Wils&quot;,
+            &quot;status&quot;: &quot;Closed&quot;,
+            &quot;text&quot;: &quot;Issue has been resolved&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;date&quot;: &quot;2018-05-01T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Erika Xavy&quot;,
+            &quot;status&quot;: &quot;Edited&quot;,
+            &quot;text&quot;: &quot;Information has been received, we&#39;re working on the resolution&quot;
+        },
+        {
+            &quot;id&quot;: &quot;3&quot;,
+            &quot;date&quot;: &quot;2018-05-02T00:00&quot;,
+            &quot;author&quot;: &quot;Mr Redfin Tekram&quot;,
+            &quot;status&quot;: &quot;Open&quot;
+        }
+    ],
+    ...
+    ...
+    &quot;channel&quot;: {
+        &quot;id&quot;: &quot;8774&quot;,
+        &quot;name&quot;: &quot;Self Service&quot;,
+        &quot;@type&quot;: &quot;Channel&quot;
+    }
+}
+</code></pre></div>
+<p><br><br></p>
+<hr />
+<h2 id="4-delete-resources-patterns">4. Delete Resources Patterns</h2>
+<p>http-DELETE method is used for deletion/removal of a resource. The following design guidelines apply for this pattern:</p>
+<ul>
+<li>Content-Type: application/json (for response). A Delete operation does NOT accept a request payload.</li>
+</ul>
+<p>The following table depicts the critical response codes for this scenario. For details of response codes, please refer to <a href="/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-MonE-api-responsestatus-codes">Methods, Response Codes and Error Representation</a>.</p>
+<table>
+<thead>
+<tr bgcolor="blue">
+<th>Response Codes-Success</th>
+<th>Response Codes-Error</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+
+<td>
+  <ul>
+    <li>200 OK (if SYNC and if the action has been enacted and the response message includes a representation describing the status)</li>
+    <li>202 Accepted (if ASYNC )</li>
+    <li>204 No Content (if SYNC and if the action has been enacted and no further information is to be supplied)</li>
+  </ul>
+</td>
+<td>
+  <ul>
+    <li>400 Bad Request</li>
+    <li>404 Not Found</li>
+    <li>405 Method Not Allowed</li>
+    <li>409 Conflict</li>
+    <li>5XX Server Errors</li>
+  </ul>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+<p><br></p>
+<div class="admonition example-1">
+<p class="admonition-title">Example-1</p>
+</div>
+<p><em><strong>Delete a resource</strong></em></p>
+<p><strong>REQUEST</strong>
+<div class="highlight"><pre><span></span><code>DELETE /MonE/accountManagement/v4/partyAccount/101
+</code></pre></div></p>
+<p><br>
+<strong>RESPONSE</strong>
+<div class="highlight"><pre><span></span><code>204 No Content
+</code></pre></div></p>
+<p><br><br></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 PiA-TEAM INC. USA<br> All rights reserved. Proprietary and confidential material. No part of this document may be reproduced, used or disclosed in any form without written permission of PiA-TEAM INC. All trademarks referenced are the property of their respective owners.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../../javascripts/external-links.js"></script>
+      
+    
+  </body>
+</html>

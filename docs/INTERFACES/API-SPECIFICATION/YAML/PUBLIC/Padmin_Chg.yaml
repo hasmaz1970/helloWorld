@@ -1,0 +1,2369 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: Padmin_Chg
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PUBLIC WS (http-REST) API SPECIFICATION:**
+      * **Reference Point Name:** Padmin*
+      * **API Name:** Padmin_Chg-Admin API for Charging
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/public/padmin/chargingAdmin/{version}
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+tags:
+  - name: "Charging Event Streams"
+    description: "Charging Event Streams"
+
+  - name: "Charging Stream Converters"
+    description: "Charging Stream Converters"
+
+  - name: "Charging Monetization Templates"
+    description: "Charging Monetization Templates"
+
+  - name: "Charging Tariffs"
+    description: "Charging Tariffs"
+
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+#############################################################################
+  /chargingEventStream:
+
+    post:
+      summary: 
+        Creates ChargingEventStream Resource 
+      operationId: post-ChargingEventStream
+      tags:
+        - "Charging Event Streams"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: ChargingEventStream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingEventStream"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingEventStream"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      summary: Retrieves or finds a List of ChargingEventStream(s)
+      operationId: Read-ChargingEventStream-List
+      tags:
+        - "Charging Event Streams"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingEventStream"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingEventStream"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+  /chargingEventStream/{id}:
+    get:
+      summary: Retrieves a ChargingEventStream by ID
+      operationId: Read-ChargingEventStream
+      tags:
+        - "Charging Event Streams"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingEventStream"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    patch:
+      summary: 
+        Partially updates a ChargingEventStream.
+        
+        Note that only provided attributes will be modified. 
+        Implementation for updating a limited subset of the attributes of an entity as described in [RFC5789] and [RFC7386].
+      operationId: Update-ChargingEventStream-Partial
+      tags:
+        - "Charging Event Streams"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        description: ChargingEventStream patch request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingEventStream"
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingEventStream"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    delete:
+      summary: Deletes a ChargingEventStream
+      operationId: Delete-ChargingEventStream
+      tags:
+        - "Charging Event Streams"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+#############################################################################
+
+  /chargingStreamConverter:
+
+    post:
+      summary: 
+        Creates ChargingStreamConverter Resource as referenced when submitting Charging Information Record Streams to Offline Charging
+      operationId: post-ChargingStreamConverter
+      tags:
+        - "Charging Stream Converters"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: ChargingStreamConverter
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingStreamConverter"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingStreamConverter"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      summary: Retrieves or finds a List of ChargingStreamConverter(s)
+      operationId: Read-ChargingStreamConverter-List
+      tags:
+        - "Charging Stream Converters"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingStreamConverterRef"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingStreamConverterRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+  /chargingStreamConverter/{id}:
+    get:
+      summary: Retrieves a ChargingStreamConverter by ID
+      operationId: Read-ChargingStreamConverter
+      tags:
+        - "Charging Stream Converters"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingStreamConverter"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    patch:
+      summary: 
+        Partially updates a ChargingStreamConverter.
+        
+        Note that only provided attributes will be modified. 
+        Implementation for updating a limited subset of the attributes of an entity as described in [RFC5789] and [RFC7386].
+      operationId: Update-ChargingStreamConverter-Partial
+      tags:
+        - "Charging Stream Converters"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        description: ChargingStreamConverter patch request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingStreamConverter"
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingStreamConverter"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    delete:
+      summary: Deletes a ChargingStreamConverter
+      operationId: Delete-ChargingStreamConverter
+      tags:
+        - "Charging Stream Converters"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+#############################################################################
+
+  /chargingMonetizationTemplate:
+
+    post:
+      summary: 
+        Creates ChargingMonetizationTemplate Resource as referenced when submitting Charging Information Record Streams to Offline Charging
+      operationId: post-ChargingMonetizationTemplate
+      tags:
+        - "Charging Monetization Templates"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: ChargingMonetizationTemplate
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingMonetizationTemplate"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingMonetizationTemplate"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      summary: Retrieves or finds a List of ChargingMonetizationTemplate(s)
+      operationId: Read-ChargingMonetizationTemplate-List
+      tags:
+        - "Charging Monetization Templates"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingMonetizationTemplateRef"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/ChargingMonetizationTemplateRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+  /chargingMonetizationTemplate/{id}:
+    get:
+      summary: Retrieves a ChargingMonetizationTemplate by ID
+      operationId: Read-ChargingMonetizationTemplate
+      tags:
+        - "Charging Monetization Templates"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingMonetizationTemplate"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    patch:
+      summary: 
+        Partially updates a ChargingMonetizationTemplate.
+        
+        Note that only provided attributes will be modified. 
+        Implementation for updating a limited subset of the attributes of an entity as described in [RFC5789] and [RFC7386].
+      operationId: Update-ChargingMonetizationTemplate-Partial
+      tags:
+        - "Charging Monetization Templates"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        description: ChargingStreamConverter patch request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargingMonetizationTemplate"
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/ChargingMonetizationTemplate"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    delete:
+      summary: Deletes a ChargingMonetizationTemplate
+      operationId: Delete-ChargingMonetizationTemplate
+      tags:
+        - "Charging Monetization Templates"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+#############################################################################
+
+#############################################################################
+
+  /chargingTariffRuleSet:
+
+    post:
+      summary: 
+        Creates ChargingTariff Resource
+      operationId: post-ChargingTariff
+      tags:
+        - "Charging Tariffs"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        description: ChargingTariff
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecisionTree"
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/DecisionTreeRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    get:
+      summary: Retrieves or finds a List of ChargingTariff(s)
+      operationId: Read-ChargingTariff-List
+      tags:
+        - "Charging Tariffs"
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/DecisionTreeRef"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/DecisionTreeRef"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+  /chargingTariffRuleSet/{id}:
+    get:
+      summary: Retrieves a ChargingTariff by ID
+      operationId: Read-ChargingTariff
+      tags:
+        - "Charging Tariffs"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/DecisionTree"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    patch:
+      summary: 
+        Partially updates a ChargingTariff.
+        
+        Note that only provided attributes will be modified. 
+        Implementation for updating a limited subset of the attributes of an entity as described in [RFC5789] and [RFC7386].
+      operationId: Update-ChargingTariff-Partial
+      tags:
+        - "Charging Tariffs"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecisionTree"
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/DecisionTree"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+    delete:
+      summary: Deletes a ChargingTariff
+      operationId: Delete-ChargingTariff
+      tags:
+        - "Charging Tariffs"
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      responses:
+        204:
+          description: "No Content in Response / Deleted"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+
+#############################################################################
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+#############################################################################
+## 5.x. HEADERS
+#############################################################################
+  headers:
+
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/transactionId'
+    X-Total-Count:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/X-Total-Count'
+    Location:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/Location'
+
+
+
+#############################################################################
+## 5.x. PARAMETERS
+#############################################################################
+  parameters:
+    id:
+      name: id
+      in: path
+      description: ID of Entity
+      required: true
+      schema:
+        type: string
+
+    
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/transactionId'   
+    fields:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/fields'
+    limit:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/limit'
+    offset:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/offset'
+    sort:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sort'
+    depth:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/depth'
+    expand:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/expand'
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response400'
+    Response401:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response401'
+    Response403:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response403'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response404'
+    Response405:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response405'
+    Response406:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response406'
+    Response409:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response409'
+    Response410:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response410'
+    Response411:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response411'
+    Response412:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response412'
+    Response413:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response413'
+    Response414:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response414'
+    Response415:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response415'
+    Response422:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response422'
+    Response429:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response429'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response500'
+    Response501:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response501'
+    Response502:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response502'
+    Response503:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response503'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response504'
+
+
+
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+
+    ChargingEventStream:
+      description:
+        ChargingEventStream Data Model.
+      allOf:
+        - $ref: "#/components/schemas/VersionedEntityRef"
+        - type: object
+          properties:
+            streamConverter:
+              $ref: "#/components/schemas/ChargingStreamConverterRef"
+            monetizationTemplate:
+              $ref:  "#/components/schemas/ChargingMonetizationTemplateRef"
+
+
+
+
+#############################################################################
+
+
+
+    ChargingStreamConverter:
+      description:
+        ChargingStreamConverter Data Model.
+      allOf:
+        - $ref: "#/components/schemas/VersionedEntityRef"
+        - type: object
+          properties:
+            fieldMapping:
+              type: array
+              items:
+                $ref: "#/components/schemas/FieldMapping"
+              example: [
+                  {
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "STREAM_INFO",
+                    "propertyName": "PRICE_TYPE",
+                    "valueType": "String",
+                    "value": "usage"
+                  },  
+                  {
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "STREAM_INFO",
+                    "propertyName": "USAGE_TYPE",
+                    "valueType": "String",
+                    "value": "MOC: Mobile Originating Call"
+                  },  
+                  {
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "STREAM_INFO",
+                    "propertyName": "RECORD_TYPE",
+                    "valueType": "String",
+                    "value": "TD.57"
+                  },              
+                  {
+                    "sourceFieldId": 0,
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "SERVED_PARTY",
+                    "propertyName": "NUMBER",
+                    "valueType": "Msisdn"
+                  },
+                  {
+                    "sourceFieldId": 1,
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "SERVED_PARTY",
+                    "propertyName": "TYPE_OF_NUMBER",
+                    "valueType": "UInt32",
+                    "defaultValue": "2"
+                  },
+                  {
+                    "collectionName": "qualifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "SERVED_PARTY",
+                    "propertyName": "NUMBER_PLAN_INDICATOR",
+                    "valueType": "UInt32",
+                    "value": "1"
+                  },
+                  {
+                    "sourceFieldId": 2,
+                    "collectionName": "quantifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "QUANTITY",
+                    "propertyName": "AMOUNT",
+                    "valueType": "UInt32",
+                    "unitType": "Time",
+                    "unit": "second"
+                  },
+                  {
+                    "sourceFieldId": 3,
+                    "collectionName": "quantifierCollection",
+                    "sequenceNo": 0,
+                    "objectName": "QUANTITY",
+                    "propertyName": "ROUNDED_AMOUNT",
+                    "valueType": "UInt32",
+                    "unitType": "Time",
+                    "unit": "second"
+                  }
+                ]
+
+
+    ChargingStreamConverterRef:
+      description: 
+        Reference. ChargingStreamConverter.
+
+      allOf:
+        - $ref: "#/components/schemas/VersionedEntityRef"
+
+
+
+    FieldMapping:
+      description:
+        Represents a singe data conversion mapping for the relevant field no   
+      type: object
+      properties:
+
+        sourceFieldId:
+          description: Field no related to this conversion. Starts with 0.
+          type: integer
+          example: 0
+        collectionName:
+          description: The target collection where this information will be added
+          type: string
+          enum:
+            - dateTimeCollection
+            - qualifierCollection
+            - quantifierCollection
+          example: "qualifierCollection"
+        sequenceNo:
+          description: Provided if more than one instance of the same objectName is added to a collection
+          type: integer
+          default: 0
+        objectName:
+          description: 
+            The type of the object
+          type: string
+          example: "SERVED_PARTY"
+        propertyName:
+          description: 
+            The property/attribute/field name of the value in the object
+          type: string
+          example: "MSISDN"
+        valueType:
+          $ref: "#/components/schemas/ValueType"
+        value:
+          type: string
+          example: "valueAsString"
+        defaultValue:
+          type: string
+          example: "defaultValueAsString"
+        unitType:
+          $ref: "#/components/schemas/UnitType"
+        unit:
+          description: 
+            Unit Of Measurement Name
+          type: string
+          example: "second"
+      required:
+        - collectionName
+        - objectName
+        - propertyName
+        - valueType
+
+
+
+#############################################################################
+##  5.x Event TYPES
+#############################################################################
+
+    ChargingAdmin_EventsType:
+      description:
+        AccountManagement_EventsType
+      oneOf:
+        - $ref: "#/components/schemas/ChargingEventStreamEvent"
+        - $ref: "#/components/schemas/ChargingStreamConverterEvent"
+        - $ref: "#/components/schemas/ChargingMonetizationTemplateEvent"
+        - $ref: "#/components/schemas/ChargingTariffRuleSetEvent"
+
+
+    ChargingEventStreamEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/ChargingEventStream"
+
+
+    ChargingStreamConverterEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/ChargingStreamConverter"
+
+    ChargingMonetizationTemplateEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/ChargingMonetizationTemplate"
+
+    ChargingTariffRuleSetEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/DecisionTree"
+
+#############################################################################
+## 5.x. MODEL HELPERs
+#############################################################################
+
+
+    ChargingMonetizationTemplate:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/ChargingMonetizationTemplate'
+    ChargingMonetizationTemplateRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_charging_type_schemas.yaml#/components/schemas/ChargingMonetizationTemplateRef'
+
+
+    DecisionTree:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/DecisionTree'
+    DecisionTreeRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/DecisionTreeRef'
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+    FileDocument:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/FileDocument'
+
+    RelatedEntityWithRole:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/RelatedEntityWithRole'
+    VersionedEntity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/VersionedEntity'
+    VersionedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/VersionedEntityRef'
+    VersionedRelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/VersionedRelatedEntityRef'
+    VersionedRelatedEntityWithRole:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/VersionedRelatedEntityWithRole'
+
+    ValueType:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/ValueType'
+    UnitType:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/UnitType'
+
+
+    Hub:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Hub'
+    Event:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################

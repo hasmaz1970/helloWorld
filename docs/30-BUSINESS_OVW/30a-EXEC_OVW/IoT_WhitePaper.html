@@ -1,0 +1,392 @@
+<!DOCTYPE html><html><head>
+      <title>IoT_WhitePaper</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/hasmaz1970/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.6.3/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <p><img src="../../../assets/header.png" alt></p>
+<h1 class="mume-header" id="realization-of-an-iot-platform-using-tmforum-compliant-dnext-building-blocks">Realization of an IoT Platform using TMFORUM compliant DNext Building Blocks</h1>
+
+<h2 class="mume-header" id="introduction">Introduction</h2>
+
+<p>&quot;Telecoms is at a crucial turning point. The last decade has dealt a series of punishing blows to an industry that had previously enjoyed enviable growth for more than 20 years. Services that once returned high margins are being reduced to commodities in the digital world, and our insatiable appetite for data demands continuous investment in infrastructure. On the other hand, communications service providers (CSPs) and their partners are in an excellent position to guide and capitalize on the next wave of digital revolution. The growth opportunities attached to new 5G ecosystems are estimated to be worth over $580 billion in the next decade.&quot; <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<p>A quick reflection on the history, reveals a stunning fact about pace of business change: <em><strong>~500years of change is LESS THAN ~50years of change is LESS THAN the last ~20years of change</strong></em></p>
+<ul>
+<li><strong>1500s-1950s:</strong> First, Second and Third Industrial Revolutions. Cars, Planes, Television, Cameras and Plain old Telephony in our lives.</li>
+<li><strong>1950s-2000s:</strong> Start of Fourth Industrial Revolution: Internet Born, Personal Computers, Mobile Phones</li>
+<li><strong>2000s-2010s:</strong> Second wave of Fourth Industrial Revolution: High Speed Broadband Internet, ECommerce Boom, On-Demand High-Definition Content, 3G/4G Internet and Mobility Everywhere</li>
+<li><strong>2010s-NEXT:</strong> Next wave of Fourth Industrial Revolution: Cloud Computing, Big Data, Machine Learning and Artificial Intelligence based Analytics, Prediction, Internet of Things (IoT) and 5G enabling: Mobile Broadband, Massive Machine to Machine and Ultra Reliable Communication Infrastructure everywhere</li>
+</ul>
+<p>Especially the following areas of technology will play a significant role and drive new <strong>digital business ecosystems</strong>:</p>
+<ul>
+<li><strong>5G</strong> allowing ground breaking capabilities for next generation apps and services anytime, anywhere providing three types of specialized connectivity: high-throughput broadband access (10Gbps), ultra reliable low latency networks (1ms) and massive machine type communications allowing millions of devices on a small area (1km<sup>2</sup>)</li>
+<li><strong>IoT</strong> (Internet of Things) technologies allowing many different types of appliances, devices and items connected to the global Internet</li>
+<li><strong>SDN</strong> (Software Defined Networking) / <strong>NFV</strong> (Network Function Virtualization) / <strong>Cloud</strong> technologies allowing intent based fully controllable networks, virtual infrastructures that can be dynamically scaled, load-balanced across disperse geographical locations and distributed physical infrastructures; all of which making it possible to dynamically orchestrate, on-the-fly deploy and scale the entire lifecycle of apps and network functions accessible anywhere, anytime</li>
+<li><strong>Blockchain</strong> technology allowing digital contracts (Smart Contracts) revolutionizing both identity and trust management</li>
+</ul>
+<p><strong>For the Telecom Operators or CSPs that want to capitalize on IoT business utilizing the advantages made possible through the 5G infrastructure investments, this whitepaper describes a possible revolutionary BSS/OSS (Business and Operational Support Systems) transformation by realizing an IoT Platform via TMFORUM ODA compliant modules of <em>DNext</em>; The Next Generation, Cloud based, Digital Customer Experience Platform by PiA.</strong></p>
+<p><br><br></p>
+<h2 class="mume-header" id="the-platform-and-platform-business">The Platform and Platform Business</h2>
+
+<p>In a nutshell, a platform business is &#x201C;a business based on enabling value-creating interactions between external producers and consumers. The platform provides an open, participative infrastructure for these interactions and sets governance conditions for them. The platform&#x2019;s overarching purpose to consummate matches among users and facilitate the exchange of goods, services, or social currency, thereby enabling value creation for all participants.&#x201D;  <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<p><img src="assets/traditionalpipe_vs_platform.png" alt="Figure-1"></p>
+<p><strong>Figure-1: Traditional Pipeline vs Platform Business</strong></p>
+<p>Similar to applying a dependency inversion principle for utmost flexibility to software systems, the main idea is to break the linear chain of traditional pipeline and insert in between well defined interfaces implemented by the <strong>Platform</strong> that facilitate standardized mechanisms for exchange of goods and/or services between multiple producers and consumers.</p>
+<p>Thus, similar to Amazon, the Platform Owner (such as Telco Operator) can expose product offerings it doesn&apos;t own or produce, can provide inventory, common catalog facilities, as well as omni-channel sales UIs, can vet and measure performances of solution partners, collecting quality and/or KPI data with other metrics resulting in enhanced customer experiences for consumers and faster time-to-market for its partners.</p>
+<h2 class="mume-header" id="iot-business">IoT Business</h2>
+
+<p>The&#xA0;Internet of Things&#xA0;(IoT) describes the network of physical objects &#x201C;things&#x201D;&#x2014;that are embedded with sensors, software, and other technologies for the purpose of connecting and exchanging valuable data with other devices and systems over the internet.</p>
+<p>IoT is a perfect business use case enforcing the Platform Business, since from a Telco Operator&apos;s perspective, there are many partners at play incorporating and the Operator has to sell products/solutions that it does NOT own or produce. Some of the players (including but not limited to) are; Device Manufacturers, SIM Manufacturers, Network/Connectivity Providers (aka Telco Operators), IoT Application Providers, Logistics/Shipment Providers, Distriubutors etc.</p>
+<h2 class="mume-header" id="iot-platform-realized-with-dnext-in-the-core">IoT Platform realized with Dnext in the Core</h2>
+
+<p>Below diagram depicts a conceptual view of the IoT Platform enabled via Dnext components in the core.</p>
+<ul>
+<li>The Northbound constitutes the set of experience and engagement APIs and processes of the IoT Platform for managing the Customer experience and interactions of the Business Partners to freely onboard their solutions, APIs such as; Onboarding Devices, placing Orders, Searching Product and/or Resource Inventories etc.</li>
+<li>The Southbound constitutes the set of managed and orchestrated aspects of the IoT Platform for enabling the IoT Solutions, such as; Connectivity, Backing Applications, Devices and Shipment.</li>
+<li>The Eastbound is the Info Stream flowing from all internal processes, App PLatforms and Devices that make it possible for value-added Intelligence and Analytics</li>
+<li>The Westbound is the Revenue Stream made possible via the IoT Platform that enables the Operator to capitalize on IoT Offerings of its partners and be able to sell IoT Solutions that it does not directly own or produce</li>
+<li>Cloud Native, TMFORUM Open API compliant, standardized DNext micro-services constitute the <strong>IoT Platform Core Modules</strong> that allow seperation of business policies and external interfaces (managed by Adapters) from transactional components of implementation (DNext Modules), resulting in a flexible, easy to maintain and scale low OPEX system.</li>
+</ul>
+<p><img src="assets/IoT_Platform.png" alt="Figure-2"></p>
+<p><br><br></p>
+<p><strong>Thus, One IoT Platform, but means many to many:</strong></p>
+<ul>
+<li>For the Sales-UI/Market Place =&gt; It is Order Management</li>
+<li>For the IoT Solution/Device Suppliers =&gt; It is Inventory Mgmt and SOlution Onboarding</li>
+<li>For the Logistics/Shipment Partner =&gt; It is Procurement/Distribution dispatcher</li>
+<li>For the IoT Solution backing Application Provider =&gt; It is License Management (License Type, Capacity etc.)</li>
+<li>For the Operator/Platform Owner
+<ul>
+<li>Product/Service Catalog</li>
+<li>Resource/Device Catalog</li>
+<li>Product/Device Inventory</li>
+<li>Sales and Order Management System</li>
+<li>Order Fulfillment, Activation/Provisioning System</li>
+<li>Logistics/Shipment/Just in Time Manufactiring Orchestrator</li>
+<li>Analytics/Intelligence Platform</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="dnext-in-the-core-of-iot-platform">DNext in the Core of IoT Platform</h2>
+
+<p><em>DNext</em> is the Next Generation, Cloud based, Digital Customer Experience Platform by PiA that conforms the TMFORUM Open APIs and Open Digital Architecture.</p>
+<p><img src="assets/DNext_Core_Capabilities.png" alt="Figure-3"></p>
+<p>Compliant to TMFORUM Open Digital Architecture, DNext Modules are packaged as <strong>container images</strong> the de facto ready-to run deployment units  of modern cloud native applications and expose their capabilities via TMFORUM Open APIs compliant http-REST web services (aka micro-services).</p>
+<p>Logically, the modules can be grouped as the following:</p>
+<ul>
+<li>Systems of Engagement: DNext Modules of this group are mainly Web UI modules that focus on managing experience and interactions. Some examples of DNext Modules utilized for IoT Platform are: Catalog Management UIs, Customer/Account Management UIs</li>
+<li>Systems of Records: DNext Modules of this group mainly focus on realizing operational processes of real world. This Group can be further logically grouped into three sub groups:
+<ul>
+<li>Party Management: DNext Modules of this group utilized in IoT Platform focus on managing Party, Party Roles, Customer and Agreement Information.</li>
+<li>Core Commerce Management: DNext Modules of this group utilized in IoT Platform focus on managing Sales, Product Catalog and Catalog driven Order Fulfillment as well as orchestration of Shipment and Product Inventory Management.</li>
+<li>Production: DNext Modules of this group utilized in IoT Platform focus on managing the lower levels of ho products are realized, such as Resource Catalog Management, Resource Order Management as well as Resource Inventory Management,</li>
+</ul>
+</li>
+<li>Systems of Insights: All Dnext Modules follow a standardized component anatomy, enabling standardized LOGs, metrics, KPIS informations as well as supporting notification and messaging services. Thus, rather than enforcing a single solution, it becomes possible to easily integrate with any Analytics, Log Management and Monitoring system. The result is an IoT Platform that provides insights on business activities, and supports actionable analytics.</li>
+</ul>
+<hr>
+<p>The result is an on/off premise custom, yet standardized, cloud-native flexible <strong>IoT Platform</strong> that can realize the enterprise&apos;s business policies as required, meanwhile still benefiting via utilizing on industry standard and proven TMFORUM open API compliant components of PiA&apos;s DNext.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>TMFORUM IG1166 ODA Architecture Vision Rel 18 <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Platform Revolution book by Geoffrey Parker, Marshall Van Alstyne and Sangeet Paul Choudary <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#realization-of-an-iot-platform-using-tmforum-compliant-dnext-building-blocks">Realization of an IoT Platform using TMFORUM compliant DNext Building Blocks</a>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-platform-and-platform-business">The Platform and Platform Business</a></li>
+<li><a href="#iot-business">IoT Business</a></li>
+<li><a href="#iot-platform-realized-with-dnext-in-the-core">IoT Platform realized with Dnext in the Core</a></li>
+<li><a href="#dnext-in-the-core-of-iot-platform">DNext in the Core of IoT Platform</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

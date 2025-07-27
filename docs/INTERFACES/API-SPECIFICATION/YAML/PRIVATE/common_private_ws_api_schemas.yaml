@@ -1,0 +1,923 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: MonE Private WS (Web Service) APIs Common Schema (Type) Definitions
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **This Open API specification does NOT contain any valid PATHS/OPERATIONS!!!. It ONLY contains COMMON SCHEMA (TYPE) DEFINITIONS referred by other API specifications.**
+
+    Thus, in this context COMMON SCHEMA (TYPE) DEFINITIONS mean shared entity data models or baseline objects that can be reused with or without extension.
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/private/WS_API_SCHEMAS
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - ''
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+  /readMe:
+    get:
+      summary: This is a placeholder nouse operation. (to bypass Swagger UI limitation of a specification with ONLY data models without operation)
+      operationId: readMe
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+#############################################################################
+## 5.x. HEADERS
+#############################################################################
+  headers:
+
+    site:
+      description: "Calling Client Site info for correlation purposes"
+      schema:
+        type: string
+    company:
+      description: "Calling Client Company Identifier info for correlation purposes"
+      schema:
+        type: string
+    channel:
+      description: "Calling Client Channel info for correlation purposes"
+      schema:
+        type: string
+    application:
+      description: "Calling Client Application Name info for correlation purposes"
+      schema:
+        type: string
+    user:
+      description: "User Identifer for the Calling Application info for correlation purposes"
+      schema:
+        type: string
+    sessionId:
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+    businessInteractionId:
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+    transactionId:
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+
+    X-Total-Count:
+      description: |
+        Total number of items matching criteria.
+      schema:
+        type: integer
+        
+    Location:
+      description: |
+        Location (URL) of posted resource
+      schema:
+        type: string
+        format: uri        
+
+#############################################################################
+## 5.x. PARAMETERS
+#############################################################################
+  parameters:
+     
+
+
+    site:
+      name: site
+      in: header
+      description: "Calling Client Site info for correlation purposes"
+      schema:
+        type: string
+    company:
+      name: company
+      in: header
+      description: "Calling Client Company Identifier info for correlation purposes"
+      schema:
+        type: string
+    channel:
+      name: channel
+      in: header
+      description: "Calling Client Channel info for correlation purposes"
+      schema:
+        type: string
+    application:
+      name: application
+      in: header
+      description: "Calling Client Application Name info for correlation purposes"
+      schema:
+        type: string
+    user:
+      name: user
+      in: header
+      description: "User Identifer for the Calling Application info for correlation purposes"
+      schema:
+        type: string
+    sessionId:
+      name: sessionId
+      in: header
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+    businessInteractionId:
+      name: businessInteractionId
+      in: header
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+    transactionId:
+      name: transactionId
+      in: header
+      description: "11111111-1111-1111-1111-111111111111"
+      schema:
+        type: string
+
+## Due to a Swagger Editor BUG for path parameters, below can NOT be referenced. So it is defined in each Swagger API file
+##    id:
+##      name: id
+##      in: path
+##      description: ID of Entity
+##      required: true
+##      schema:
+##        type: string
+
+    fields:
+      name: fields
+      in: query
+      description: |
+        JSON Path for Fields or Collection Filtering.<br>
+        Some examples:
+
+          * FIELDs FILTERING: 
+            * ?fields=channel.name      
+            * ?fields=['id','href','name','note']
+            * ?fields=note[?(@.author=='Mr John Wils')]
+          * FIELDS AND COLLECTION FILTERING: 
+            * ?fields=['id','href','name','channel']&filter=attachment[?(@.sizeUnit=='KB' && @.size==500)]
+        
+      required: false
+      schema:
+        type: string
+      style: form 
+
+    limit:
+      name: limit
+      in: query
+      description: |
+        Requested max number of resources to be returned. Default 20, if not specified.<br>
+        Some examples:
+
+          * Get the first 20 matching resources (pagesize=40):
+            * ?limit=20
+          * Starting at the 40th, get max 20 (pagesize=20) matching resources:
+            * ?offset=40&limit=20
+
+      required: false
+      schema:
+        type: integer
+      style: form 
+
+    offset:
+      name: offset
+      in: query
+      description: |
+        Requested index for start of resources.<br>
+        Some examples:
+
+          * Starting at the 40th, get max 20 (pagesize=20) matching resources:
+            * ?offset=40&limit=20
+
+      required: false
+      schema:
+        type: integer
+        default: 0
+      style: form 
+
+    sort:
+      name: sort
+      in: query
+      description: |
+        The field to sort on, specified as a JSONPath expression.<br>
+        Some examples:
+
+          * ?sort=channel.name
+          * ?sort=['id','name']
+
+      required: false
+      schema:
+        type: string
+      style: form 
+
+    depth:
+      name: depth
+      in: query
+      description: |
+        The number of depth level subject to expansion in the hierarchy of references.<br>
+        Some examples:
+
+          * ?depth=2
+
+      required: false
+      schema:
+        type: integer
+        default: 0
+      style: form 
+
+    expand:
+      name: expand
+      in: query
+      description: |
+        JSON Path for Fields to narrow down expansion of referenced objects for the requested depth.<br>
+        Some examples:
+
+          * Expand up to depth=3 for the given sub entities
+            * ?depth=3&expand=productOffering.productSpecification
+            * ?depth=3&expand=[productOffering.productSpecification,productOffering.serviceCandidate]
+
+      required: false
+      schema:
+        type: string
+      style: form 
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+  responses:
+
+    Response400:
+      description: |
+        Bad Request<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response401:
+      description: |
+        Unauthorized<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response403:
+      description: |
+        Forbidden<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response404:
+      description: |
+        Not Found<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response405:
+      description: 
+        Method Not Allowed<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response406:
+      description: |
+        Not Acceptable<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response409:
+      description: |
+        Conflict<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+
+    Response410:
+      description: |
+        Gone<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+
+    Response411:
+      description: |
+        Length Required
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response412:
+      description: |
+        Precondition Failed
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+
+    Response413:
+      description: |
+        Request Entity Too Large<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response414:
+      description: |
+        Request-URI Too Long<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+    Response415:
+      description: |
+        Unsupported Media Type<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"
+
+
+    Response422:
+      description: |
+        Unprocessable Entity<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"            
+
+    Response429:
+      description: |
+        Too Many Requests<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"         
+            
+
+            
+    Response500:
+      description: |
+        Internal Server Error<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"     
+
+    Response501:
+      description: |
+        Not Implemented<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+    Response502:
+      description: |
+        Bad Gateway<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"  
+
+    Response503:
+      description: |
+        Service Unavailable<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+
+    Response504:
+      description: |
+        Gateway Timeout<br><br>
+
+        For details, please refer to:<br>
+        [Response/Status Codes](/INTERFACES/API-GUIDELINES/start-42_methods_responses/#3-mone-api-responsestatus-codes)
+
+      headers:
+        site:
+          $ref:  "#/components/headers/site"
+        company:
+          $ref:  "#/components/headers/company"
+        channel:
+          $ref:  "#/components/headers/site"
+        application:
+          $ref:  "#/components/headers/application"
+        user:
+          $ref:  "#/components/headers/user"
+        sessionId:
+          $ref:  "#/components/headers/sessionId"
+        businessInteractionId:
+          $ref:  "#/components/headers/businessInteractionId"
+        transactionId:
+          $ref:  "#/components/headers/transactionId"
+      content:
+        'application/json':
+          schema:
+            type: object
+            $ref: "#/components/schemas/ErrorContext"  
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+    ErrorContext:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/ErrorContext'
+      
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+
+
+
+#############################################################################
+#############################################################################

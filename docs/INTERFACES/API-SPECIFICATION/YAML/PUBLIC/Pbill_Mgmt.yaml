@@ -1,0 +1,2098 @@
+#############################################################################
+## 1. OPENAPI
+#############################################################################
+openapi: 3.0.2
+
+#############################################################################
+## 2. INFO
+#############################################################################
+info:
+  version: 1.0.0
+  title: Pbill_Mgmt
+  contact:
+    name: MonE Product Development
+    
+  license:
+    name: GNU AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  description: |
+    <!-- Note that this description is a MARKDOWN Block -->
+
+    **PUBLIC WS (http-REST) API SPECIFICATION:**
+      * **Reference Point Name:** Pbill  
+      * **API Name:** Pbill_Mgmt-Bill Management
+      * Utilizes TMFORUM Open API: TMF678-Bill Management
+
+#############################################################################
+## 3. SERVERS
+#############################################################################
+servers:
+  - url: https://{environment}.monetizehub.io:{port}/public/pbill/customerBillManagement/{version}
+    description: The production API server
+    variables:
+      environment:
+        enum:
+          - 'dev'
+          - 'test'
+          - 'staging'
+          - 'production'
+        default: 'dev'
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      version:
+        default: 'v1'
+
+tags:
+  - name: customerBillOnDemand  
+  - name: customerBill
+  - name: appliedCustomerBillingRate
+    description: "**Non-aggregated bill/invoice details**"
+  - name: appliedCustomerBillLineItem
+    description: "**Aggregated/Grouped Bill Line Items that constitute the Bill total Amount**"
+  - name: appliedCustomerBillTaxLineItem
+    description: "**Aggregated/Grouped Bill Tax Line Items that constitute the Bill total Tax Amount**"
+  - name: appliedCustomerBillGlcodeLineItem
+    description: "**Aggregated/Grouped Bill Glcode Line Items to be posted to external Finance System(s)**"
+  - name: appliedCustomerBillCostAllocationLineItem
+    description: "**Aggregated/Grouped Bill Cost Allocation Items as Value Added service allowing customers to allocate costs to project(s)**"
+
+
+#############################################################################
+## 4. PATHS
+#############################################################################
+paths:
+
+#############################################################################
+
+
+#############################################################################
+
+  /customerBillOnDemand: 
+
+
+    post:
+      operationId: create-customerBillOnDemand
+      summary: Creates a customerBillOnDemand
+      description: This operation creates a customerBillOnDemand entity.
+      tags:
+        - customerBillOnDemand
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerBillOnDemand"
+
+
+
+      responses:
+        201:
+          description: "Created"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            Location:
+              $ref: "#/components/headers/Location"
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/CustomerBillOnDemand"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    get:
+      operationId: list-customerBillOnDemand
+      summary: List or find customerBillOnDemand objects
+      description: This operation list or find customerBillOnDemand entities
+      tags:
+        - customerBillOnDemand
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/CustomerBillOnDemand"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/CustomerBillOnDemand"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /customerBillOnDemand/{id}:
+    get:
+      operationId: retrieve-customerBillOnDemand
+      summary: Retrieves a customerBillOnDemand by ID
+      description: This operation retrieves a customerBillOnDemand entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - customerBillOnDemand
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/CustomerBillOnDemand"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+#############################################################################
+
+
+  /customerBill: 
+
+    get:
+      operationId: list-customerBill
+      summary: List or find customerBill objects
+      description: This operation list or find customerBill entities
+      tags:
+        - customerBill
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/CustomerBill"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/CustomerBill"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /customerBill/{id}:
+    get:
+      operationId: retrieve-customerBill
+      summary: Retrieves a customerBill by ID
+      description: This operation retrieves a customerBill entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - customerBill
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/CustomerBill"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+    patch:
+      operationId: patch-customerBill
+      summary: Updates partially a customerBill
+      description: This operation updates partially a customerBill entity.
+      tags:
+        - customerBill
+
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerBill"
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/CustomerBill"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        413:
+          $ref: "#/components/responses/Response413"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+################################################################################
+
+
+  /appliedCustomerBillingRate: 
+
+    get:
+      operationId: list-appliedCustomerBillingRate
+      summary: List or find appliedCustomerBillingRate objects
+      description: This operation list or find appliedCustomerBillingRate entities
+      tags:
+        - appliedCustomerBillingRate
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillingRate"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillingRate"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /appliedCustomerBillingRate/{id}:
+    get:
+      operationId: retrieve-appliedCustomerBillingRate
+      summary: Retrieves a appliedCustomerBillingRate by ID
+      description: This operation retrieves a appliedCustomerBillingRate entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - appliedCustomerBillingRate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/AppliedCustomerBillingRate"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+################################################################################
+
+
+  /appliedCustomerBillLineItem: 
+
+    get:
+      operationId: list-appliedCustomerBillLineItem
+      summary: List or find appliedCustomerBillLineItem objects
+      description: This operation list or find appliedCustomerBillLineItem entities
+      tags:
+        - appliedCustomerBillLineItem
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillLineItem"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillLineItem"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /appliedCustomerBillLineItem/{id}:
+    get:
+      operationId: retrieve-appliedCustomerBillLineItem
+      summary: Retrieves a appliedCustomerBillLineItem by ID
+      description: This operation retrieves a appliedCustomerBillLineItem entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - appliedCustomerBillLineItem
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/AppliedCustomerBillLineItem"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+##    patch:
+##      operationId: patch-appliedCustomerBillLineItem
+##      summary: Updates partially a appliedCustomerBillLineItem
+##      description: This operation updates partially a appliedCustomerBillLineItem entity.
+##      tags:
+##        - appliedCustomerBillLineItem
+##
+##      parameters:
+##        - $ref: "#/components/parameters/id"
+##        
+##        - $ref: "#/components/parameters/site"
+##        - $ref: "#/components/parameters/company"
+##        - $ref: "#/components/parameters/channel"
+##        - $ref: "#/components/parameters/application"
+##        - $ref: "#/components/parameters/user"
+##        - $ref: "#/components/parameters/sessionId"
+##        - $ref: "#/components/parameters/businessInteractionId"
+##        - $ref: "#/components/parameters/transactionId"  
+##      requestBody:
+##        required: true
+##        content:
+##          application/json:
+##            schema:
+##              $ref: "#/components/schemas/CustomerBillLineItem"
+##
+##      responses:
+##        200:
+##          description: "Success"
+##          headers:
+##            site:
+##              $ref:  "#/components/headers/site"
+##            company:
+##              $ref:  "#/components/headers/company"
+##            channel:
+##              $ref:  "#/components/headers/site"
+##            application:
+##              $ref:  "#/components/headers/application"
+##            user:
+##              $ref:  "#/components/headers/user"
+##            sessionId:
+##              $ref:  "#/components/headers/sessionId"
+##            businessInteractionId:
+##              $ref:  "#/components/headers/businessInteractionId"
+##            transactionId:
+##              $ref:  "#/components/headers/transactionId"
+##            X-Total-Count:
+##              $ref: "#/components/headers/X-Total-Count"
+##
+##          content:
+##            'application/json':
+##              schema:
+##                type: object
+##                $ref: "#/components/schemas/CustomerBillLineItem"
+##        400:
+##          $ref: "#/components/responses/Response400"
+##        401:
+##          $ref: "#/components/responses/Response401"
+##        403:
+##          $ref: "#/components/responses/Response403"
+##        404:
+##          $ref: "#/components/responses/Response404"
+##        405:
+##          $ref: "#/components/responses/Response405"
+##        406:
+##          $ref: "#/components/responses/Response406"
+##        409:
+##          $ref: "#/components/responses/Response409"
+##        410:
+##          $ref: "#/components/responses/Response410"
+##        413:
+##          $ref: "#/components/responses/Response413"
+##        414:
+##          $ref: "#/components/responses/Response414"
+##        415:
+##          $ref: "#/components/responses/Response415"
+##        422:
+##          $ref: "#/components/responses/Response422"
+##        429:
+##          $ref: "#/components/responses/Response429"
+##        500:
+##          $ref: "#/components/responses/Response500"
+##        501:
+##          $ref: "#/components/responses/Response501"
+##        502:
+##          $ref: "#/components/responses/Response502"
+##        503:
+##          $ref: "#/components/responses/Response503"
+##        504:
+##          $ref: "#/components/responses/Response504"
+
+
+
+################################################################################
+
+  /appliedCustomerBillTaxLineItem: 
+
+    get:
+      operationId: list-appliedCustomerBillTaxLineItem
+      summary: List or find appliedCustomerBillTaxLineItem objects
+      description: This operation list or find appliedCustomerBillTaxCategoryItem entities
+      tags:
+        - appliedCustomerBillTaxLineItem
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillTaxLineItem"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillTaxLineItem"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /appliedCustomerBillTaxLineItem/{id}:
+    get:
+      operationId: retrieve-appliedCustomerBillTaxLineItem
+      summary: Retrieves a appliedCustomerBillTaxLineItem by ID
+      description: This operation retrieves a appliedCustomerBillTaxLineItem entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - appliedCustomerBillTaxLineItem
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/AppliedCustomerBillTaxLineItem"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+################################################################################
+
+  /appliedCustomerBillGlcodeLineItem: 
+
+    get:
+      operationId: list-appliedCustomerBillGlcodeLineItem
+      summary: List or find appliedCustomerBillGlcodeLineItem objects
+      description: This operation list or find appliedCustomerBillGlcodeLineItem entities
+      tags:
+        - appliedCustomerBillGlcodeLineItem
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillGlcodeLineItem"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillGlcodeLineItem"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /appliedCustomerBillGlcodeLineItem/{id}:
+    get:
+      operationId: retrieve-appliedCustomerBillGlcodeLineItem
+      summary: Retrieves a appliedCustomerBillGlcodeLineItem by ID
+      description: This operation retrieves a appliedCustomerBillGlcodeLineItem entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - appliedCustomerBillGlcodeLineItem
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/AppliedCustomerBillGlcodeLineItem"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+################################################################################
+
+  /appliedCustomerBillCostAllocationLineItem: 
+
+    get:
+      operationId: list-appliedCustomerBillCostAllocationLineItem
+      summary: List or find appliedCustomerBillCostAllocationLineItem objects
+      description: This operation list or find appliedCustomerBillCostAllocationLineItem entities
+      tags:
+        - appliedCustomerBillCostAllocationLineItem
+
+      parameters:
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillCostAllocationLineItem"
+
+        206:
+          description: "Partial Content"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/AppliedCustomerBillCostAllocationLineItem"
+
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+  /appliedCustomerBillCostAllocationItem/{id}:
+    get:
+      operationId: retrieve-appliedCustomerBillCostAllocationLineItem
+      summary: Retrieves a appliedCustomerBillCostAllocationLineItem by ID
+      description: This operation retrieves a appliedCustomerBillCostAllocationLineItem entity. Attribute selection is enabled for all first level attributes.
+      tags:
+        - appliedCustomerBillCostAllocationLineItem
+      parameters:
+        - $ref: "#/components/parameters/id"
+        
+        - $ref: "#/components/parameters/site"
+        - $ref: "#/components/parameters/company"
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/application"
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/sessionId"
+        - $ref: "#/components/parameters/businessInteractionId"
+        - $ref: "#/components/parameters/transactionId"  
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/depth"
+        - $ref: "#/components/parameters/expand"
+
+
+      responses:
+        200:
+          description: "Success"
+          headers:
+            site:
+              $ref:  "#/components/headers/site"
+            company:
+              $ref:  "#/components/headers/company"
+            channel:
+              $ref:  "#/components/headers/site"
+            application:
+              $ref:  "#/components/headers/application"
+            user:
+              $ref:  "#/components/headers/user"
+            sessionId:
+              $ref:  "#/components/headers/sessionId"
+            businessInteractionId:
+              $ref:  "#/components/headers/businessInteractionId"
+            transactionId:
+              $ref:  "#/components/headers/transactionId"
+            X-Total-Count:
+              $ref: "#/components/headers/X-Total-Count"
+
+          content:
+            'application/json':
+              schema:
+                type: object
+                $ref: "#/components/schemas/AppliedCustomerBillCostAllocationLineItem"
+        400:
+          $ref: "#/components/responses/Response400"
+        401:
+          $ref: "#/components/responses/Response401"
+        403:
+          $ref: "#/components/responses/Response403"
+        404:
+          $ref: "#/components/responses/Response404"
+        405:
+          $ref: "#/components/responses/Response405"
+        406:
+          $ref: "#/components/responses/Response406"
+        409:
+          $ref: "#/components/responses/Response409"
+        410:
+          $ref: "#/components/responses/Response410"
+        414:
+          $ref: "#/components/responses/Response414"
+        415:
+          $ref: "#/components/responses/Response415"
+        422:
+          $ref: "#/components/responses/Response422"
+        429:
+          $ref: "#/components/responses/Response429"
+        500:
+          $ref: "#/components/responses/Response500"
+        501:
+          $ref: "#/components/responses/Response501"
+        502:
+          $ref: "#/components/responses/Response502"
+        503:
+          $ref: "#/components/responses/Response503"
+        504:
+          $ref: "#/components/responses/Response504"
+
+
+
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+
+
+
+
+################################################################################
+
+################################################################################
+
+          
+#############################################################################
+
+#############################################################################
+## 5. COMPONENTS
+#############################################################################
+components:
+
+#############################################################################
+## 5.x. SECURITY SCHEMES
+#############################################################################
+  securitySchemes:
+    JWT_Bearer:
+      type: http
+      scheme: bearer 
+      bearerFormat: JWT
+    IAM_OAuth:
+      type: oauth2
+      description: |
+        **OAuth Grant Type: Password Credentials**
+      flows:
+        password:
+          tokenUrl: https://iam.monetizehub.io/oauth/v1/token
+          scopes:
+            write:resources: modify resources
+            read:resources: read resources
+
+
+#############################################################################
+## 5.x. HEADERS
+#############################################################################
+  headers:
+
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/transactionId'
+    X-Total-Count:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/X-Total-Count'
+    Location:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/headers/Location'
+
+
+
+#############################################################################
+## 5.x. PARAMETERS
+#############################################################################
+  parameters:
+    id:
+      name: id
+      in: path
+      description: ID of Entity
+      required: true
+      schema:
+        type: string
+
+    
+    site:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/site'
+    company:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/company'
+    channel:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/channel'
+    application:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/application'
+    user:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/user'
+    sessionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sessionId'
+    businessInteractionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/businessInteractionId'
+    transactionId:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/transactionId'   
+    fields:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/fields'
+    limit:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/limit'
+    offset:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/offset'
+    sort:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/sort'
+    depth:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/depth'
+    expand:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/parameters/expand'
+
+
+#############################################################################
+## 5.x. RESPONSES
+#############################################################################
+
+
+  responses:
+
+    Response400:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response400'
+    Response401:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response401'
+    Response403:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response403'
+    Response404:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response404'
+    Response405:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response405'
+    Response406:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response406'
+    Response409:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response409'
+    Response410:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response410'
+    Response411:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response411'
+    Response412:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response412'
+    Response413:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response413'
+    Response414:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response414'
+    Response415:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response415'
+    Response422:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response422'
+    Response429:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response429'
+    Response500:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response500'
+    Response501:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response501'
+    Response502:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response502'
+    Response503:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response503'
+    Response504:
+      $ref:  '/INTERFACES/API-SPECIFICATION/YAML/PUBLIC/common_public_ws_api_schemas.yaml#/components/responses/Response504'
+
+
+
+
+#############################################################################
+## 5.x. SCHEMA DEFINITIONS
+#############################################################################
+  schemas:
+
+#############################################################################
+
+
+#############################################################################
+##  5.x Event TYPES
+#############################################################################
+
+    CustomerBillManagement_EventsType:
+      description:
+        CustomerBillManagement_EventsType
+      oneOf:
+        - $ref: "#/components/schemas/CustomerBillOnDemandEvent"
+        - $ref: "#/components/schemas/CustomerBillEvent"
+
+    CustomerBillOnDemandEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/CustomerBillOnDemand"
+
+
+
+    CustomerBillEvent:
+      description:
+        Entity Change Event. See **event.notificationType** to find whether event created related to create/update/delete/statusChange
+      allOf:
+        - $ref: "#/components/schemas/Event"
+        - type: object
+          properties:
+            payload: 
+              $ref: "#/components/schemas/CustomerBill"
+
+#############################################################################
+## 5.x. EXTERNAL COMMON DATA TYPE REFERENCES
+#############################################################################
+
+    Entity:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Entity'
+    EntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/EntityRef'
+    RelatedEntityRef:
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/RelatedEntityRef'
+    Characteristic:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Characteristic'
+
+    CustomerBillOnDemand:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/CustomerBillOnDemand'
+
+    CustomerBill:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/CustomerBill'
+
+
+    AppliedCustomerBillingRate:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/AppliedCustomerBillingRate'
+
+
+    AppliedCustomerBillLineItem:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/AppliedCustomerBillLineItem'
+    AppliedCustomerBillTaxLineItem:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/AppliedCustomerBillTaxLineItem'
+    AppliedCustomerBillGlcodeLineItem:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/AppliedCustomerBillGlcodeLineItem'
+    AppliedCustomerBillCostAllocationLineItem:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_billing_type_schemas.yaml#/components/schemas/AppliedCustomerBillCostAllocationLineItem'
+
+
+    Hub:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_tmforum_openapi_schemas.yaml#/components/schemas/Hub'
+    Event:  
+      $ref: '/INTERFACES/API-SPECIFICATION/YAML/PRIVATE/common_private_type_schemas.yaml#/components/schemas/Event'
+
+
+
+#############################################################################
+## 5.x. EXTERNAL COMMON API TYPE REFERENCES
+#############################################################################
+
+
+#############################################################################
+## 6. SECURITY
+#############################################################################
+security:
+  - JWT_Bearer: []
+  - IAM_OAuth: []    
+
+#############################################################################
+## 7. TAGS
+#############################################################################
+
+#############################################################################
+## 8. EXTERNAL DOCS
+#############################################################################
+externalDocs:
+  description:
+    Find more information here.
+  url: https://monetizehub.io/docs/home/
+
+
+
+#############################################################################
+#############################################################################      
