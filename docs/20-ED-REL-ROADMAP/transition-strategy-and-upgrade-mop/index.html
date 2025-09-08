@@ -1,0 +1,2398 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../cadenzaflow-roadmap/">
+      
+      
+        <link rel="next" href="../../30-PLATFORM/31-OVERVIEW/ai-agentic-starter/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.4.12">
+    
+    
+      
+        <title>Transition Strategy & Upgrade MoP - CadenzaFlow 360-Library(v1.1.0)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transition-strategy-upgrade-mop-blueprint-camunda-7x-to-cadenzaflow-v110" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-header__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CadenzaFlow 360-Library(v1.1.0)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transition Strategy & Upgrade MoP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../editions-and-release-cycles-ov/" class="md-tabs__link">
+          
+  
+  Editions, Releases & Roadmap
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../30-PLATFORM/31-OVERVIEW/ai-agentic-starter/" class="md-tabs__link">
+          
+  
+  Platform
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../40-SOLUTIONS/solutions-starter/" class="md-tabs__link">
+          
+  
+  Solutions
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../50-RESOURCES/resources-starter/" class="md-tabs__link">
+          
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../60-PRICING/pricing-starter/" class="md-tabs__link">
+          
+  
+  Pricing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../10-HOME/contact-us/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../10-HOME/login/" class="md-tabs__link">
+        
+  
+    
+  
+  Login
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CadenzaFlow 360-Library(v1.1.0)" class="md-nav__button md-logo" aria-label="CadenzaFlow 360-Library(v1.1.0)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CadenzaFlow 360-Library(v1.1.0)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/CadenzaFlow/CadenzaFlow_Library" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Editions, Releases & Roadmap
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Editions, Releases & Roadmap
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../editions-and-release-cycles-ov/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editions & Releases Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../categorization-of-repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Categorization of SW repositories
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cadenzaflow-roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Transition Strategy & Upgrade MoP
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Platform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Platform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/31-OVERVIEW/ai-agentic-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI & Agentic Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/31-OVERVIEW/design-implement-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Design & Implement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/31-OVERVIEW/integrations-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integrations & Connectivity
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/31-OVERVIEW/observability-oam-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability, O&AM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/31-OVERVIEW/test-deploy-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test & Deploy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features & Marketplace
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Features & Marketplace
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/32-FEATURES-MARKETPLACE/ai-features-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Artifical Intelligence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/32-FEATURES-MARKETPLACE/humantasks-forms-backoffice-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Human Tasks, Forms & Backoffice Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/32-FEATURES-MARKETPLACE/notification-communication-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Notification & Communication Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../30-PLATFORM/32-FEATURES-MARKETPLACE/rpa-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RPA (Robotic Process Automation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/solutions-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutions Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    By Industry
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            By Industry
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/telecommunications-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telecommunciations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/public-sector-government-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Public Sector & Government
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/finance-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Finance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/insurance-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Insurance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/healthcare-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Healthcare
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/media-entertainment-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Media & Entertainment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/manufacturing-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manufacturing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/technology-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technology
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/41-BY-INDUSTRY/other-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    By Purpose
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            By Purpose
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/transition-camunda7-cadenzaflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Transition from Camunda 7 to CadenzaFlow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/enterprise-process-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enterprise Process Optimization & Build a Centralized Automation Platform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/commercial-order-mgmt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Commercial Order Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/service-order-mgmt-orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service Order Mgmt & Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/case-mgmt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Mgmt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/workforce-augmentation-human-task-automation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workforce Augmentation & Human Task Automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/microservice-orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microservice Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/api-orchestration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Orchestration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../40-SOLUTIONS/42-BY-PURPOSE/legacy-systems-modernization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Legacy Systems Modernization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/resources-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/51-DOWNLOAD/download-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Download
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/52-DOC/documentation-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/53-COMMUNITY-HUB/community-hub-starter.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Community Hub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/54-MARKETPLACE/marketplace-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Marketplace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/55-EVENTS/events-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/56-WP-CS/white-papers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    White Papers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/56-WP-CS/case-studies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Case Studies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/57-SERVICES-SUPPORT/services-support-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services & Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../50-RESOURCES/58-TRAINING-CERT/training-certification-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Training & Certification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Pricing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Pricing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../60-PRICING/pricing-starter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pricing Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-HOME/contact-us/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact Us
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-HOME/login/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Login
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<p><img alt="" src="/helloWorld/assets/header.png" /></p>
+<h1 id="transition-strategy-upgrade-mop-blueprint-camunda-7x-to-cadenzaflow-v110">Transition Strategy &amp; Upgrade MoP Blueprint: Camunda 7.x to CadenzaFlow v1.1.0</h1>
+<h1 id="1-executive-summary-and-introduction">1. Executive Summary and Introduction</h1>
+<h2 id="about-cadenzaflow-v11x">About CadenzaFlow v1.1.x</h2>
+<p>In response to Camunda's recent strategic shift - including the discontinuation of support for Camunda 7 Community Edition and renounce of some <strong>key principles</strong> - CadenzaFlow is a modern, <strong>stable fork of Camunda 7.24</strong> with a robust Enterprise grade roadmap fully supported and maintained by PiA commited to retain the best features and to-be discountinued open source freedom of Camunda.</p>
+<h2 id="about-dnextdbss-digital-bss">About DNext/DBSS (Digital BSS)</h2>
+<p>DNext (the Next) is the Cloud-Native Customer Engagement, Order Orchestration and Catalog/Inventory Management Platform by PiA that comprises suite of Lego-stye modules where each modules fulfills a specific functionality.</p>
+<p>Within Vodafone Group, DNext is branded as <strong>DBSS</strong> , a globally registered and deployed Vodafone product, with its features and roadmap co-managed in partnership with Vodafone GCU.</p>
+<p>Thus, DBSS leveraging CadenzaFlow as the orchestrator across Product, Service, and Resource Order Management components, will continue beyond October 2025 to uphold its core principles and maintain its commitment to open-source freedom for production use.</p>
+<p>For further details, please refer to <a href="https://www.cadenzaflow.com">CadenzaFlow Web Site</a>.</p>
+<h2 id="baseline-factsaccepted-constraints-for-cadenzaflow-v110-transition-vs-camunda-724-transition">Baseline Facts/Accepted Constraints for CadenzaFlow v1.1.0 transition (vs Camunda 7.24 transition)</h2>
+<ul>
+<li><strong>The upcoming release CadenzaFlow v1.1.0 is delivered by PiA as a forked and package-renamed distribution of Camunda 7.24. Other than vendor branding and packaging differences,it remains functionally and non-functionally (until 2027) equivalent to Camunda 7.24.</strong></li>
+<li><strong>Accordingly, the same upgrade path and operational procedures applicable to a rolling update (for Cluster deployments) or a single node update for Camunda 7.24 also apply to CadenzaFlow v1.1.0.</strong></li>
+<li><strong>In other words, at a high level, the upgrade approach outlined in both <a href="https://docs.camunda.org/manual/latest/update/rolling-update/">Camunda docs.camunda.org/rolling-update</a> or <a href="https://docs.cadenzaflow.com/manual/latest/update/rolling-update/">CadenzaFlow docs.camunda.org/rolling-update</a> are valid/applicable.</strong></li>
+<li><strong>Fully on par with the standard minor Camunda release upgrade executions, the transition to CadenzaFlow v1.1.0 introduces NO expected changes to BPMN process models, client code (for external service task handler), or Workflow client integration APIs (start/stop/suspend/resume/query deploy Workflows/ProcessInstance information and alike).</strong></li>
+<li><strong>For sure, depending on the version gap between the current production Camunda release and CadenzaFlow v1.1.0 (Camunda 7.24 equivalent), all third-party software and library dependencies must be aligned accordingly. This is not specific to CadenzaFlow, but a standard requirement for any software upgrade.</strong></li>
+<li><strong>The minimum Camunda release to be considered for CadenzaFlow v1.1.0 transition must be 7.16. If NOT, prior to this MoP execution, the Camunda version upgrade to 7.16 must be addressed outside the context of this MoP Blueprtint document.</strong></li>
+</ul>
+<h2 id="purpose-and-why-this-upgrade-strategy-mop-blueprint-document">Purpose and Why this Upgrade Strategy &amp; MoP Blueprint document?</h2>
+<ul>
+<li>
+<p>Nevertheless, <strong>even though CadenzaFlow v1.1.0 being functionally equivalent to Camunda 7.24, this detailed Upgrade MoP Blueprint detailed in following sections is provided as a precautionary guideline, ensuring that standard pre-production checks and additional controls are performed</strong>. </p>
+</li>
+<li>
+<p>This reflects the fact that CadenzaFlow is delivered by a different vendor, even though it is technically aligned and equivalent to the latest final (end of life) upstream Camunda community edition distribution.</p>
+</li>
+<li>
+<p>Thus, the main objective is to provide a repeatable, low-risk detailed Camunda <strong>7.x</strong> to <strong>CadenzaFlow v1.1.x</strong> transition MoP (Method of Procedure) and Process approach that can be used as a baseline for use by multiple IT teams.</p>
+</li>
+</ul>
+<hr />
+<h1 id="2-preparation-before-mop-execution">2. Preparation before MoP Execution</h1>
+<p>This section outlines the recommended planning and alignment steps, along with optional staging validation, to be completed before MoP execution. Detailed execution procedures are provided in the next section <strong>3. MoP Blueprint.</strong></p>
+<h2 id="21-plan-strategy">2.1. Plan (strategy)</h2>
+<p>This section defines the key planning and alignment requirements that must be settled ahead of production changes <strong>- planning &amp; what to align on before anyone touches prod -</strong></p>
+<ul>
+<li><strong>Determine update strategy:</strong></li>
+<li><strong>Cluster, zero/low downtime:</strong> do a <strong>rolling update</strong> (DB first, then nodes one-by-one; only one minor version at a time). Approach outlined in both <a href="https://docs.camunda.org/manual/latest/update/rolling-update/">Camunda docs.camunda.org/rolling-update</a> or <a href="https://docs.cadenzaflow.com/manual/latest/update/rolling-update/">CadenzaFlow docs.camunda.org/rolling-update</a> are valid/applicable. Please refer to next section <strong>3. Reference Scenario and Workflow Landscape</strong> for further details on an actual real-life</li>
+<li>
+<p><strong>Single node or maintenance window:</strong> you can still apply DB scripts sequentially and then deploy the 7.24 app in one shot.</p>
+</li>
+<li>
+<p><strong>Workflow dependent APPs Inventory Planning:</strong> Determine/list and create an inventory of every impacted component:</p>
+</li>
+<li>BSS/OSS applications that utilize Workflow Engine (Camunda) via deploymed workflows/BPMNs, </li>
+<li>Operational Apps, Web UIs that use related Camunda 7.x http-REST operational APIs</li>
+<li>External Task/Handler Client Apps (Java or Javascript based) that implement the logic of some deployed BPMN workflow tasks of type=external (task logic running outside of Camunda)</li>
+<li>Human/User Task Client Apps that use related Camunda 7.x http-REST operational APIs</li>
+<li>
+<p>All impacted set of software packages deployed as JARs onto Camunda worker nodes that implement the logic of some deployed BPMN workflow tasks of type=Java or Delegate Expression (task logic running on Camunda nodes)</p>
+</li>
+<li>
+<p><strong>Freeze Planning</strong>: Even though a rolling deployment at high level may be planned, still consider PLAN to <strong>freeze new BPMN/DMN deployments</strong></p>
+</li>
+<li>
+<p><strong>Define and finalize go/no-go gates:</strong></p>
+</li>
+<li>Every DNext/DBSS release aligned with Camunda 7.24 and/or CadenzaFlow will have successfully passed system-level product tests, including:<ul>
+<li>Successful deployment of all product BPMN flows</li>
+<li>Order Fulfillment test cases executed with external task handler components</li>
+<li>Panoramic Order Operations Web UI (and dependent back-end) tests, validating all operational APIs for process management and governance</li>
+<li>BackOffice User Ticket UI (and dependent back-end) tests, validating all human task management APIs</li>
+</ul>
+</li>
+<li><strong>Extend with customer-specific validations:</strong><ul>
+<li>Similarly for each impacted component <strong>as per Inventory Planning step above</strong>, determine, design a test plan and execute test cases that cover project-specific BPMN processes, integrations, and UI/operational flows to ensure fitness for your production environment. </li>
+<li>Please note that irrelevant of CadenzaFlow transition, for a major or multilevel Camunda upgrade, the same should be applied.</li>
+</ul>
+</li>
+</ul>
+<h2 id="22-align-environment-3pp-swlib-dependencies">2.2. Align (environment, 3PP SW/LIB dependencies)</h2>
+<ul>
+<li><strong>Read “minor update” notes for each hop</strong> (7.20→7.21, …, 7.23→7.24/CadenzaFlow 1.0) and extract any <em>mandatory</em> steps or config toggles.</li>
+<li>
+<p><strong>Sources:</strong> <a href="https://docs.cadenzaflow.com/manual/latest/update/">docs.cadenzaflow.com/update</a> OR <a href="https://docs.camunda.org/manual/latest/update/">docs.camunda.org/update</a> (equivalent to CadenzaFlow documentation)</p>
+</li>
+<li>
+<p><strong>Determine current Camunda version:</strong> </p>
+</li>
+<li>
+<p><strong>The minimum Camunda release to be considered for CadenzaFlow v1.1.0 transition must be 7.16.</strong> If NOT, prior to MoP execution, the Camunda version upgrade to 7.16 must be addressed.</p>
+</li>
+<li>
+<p><strong>Check supported environments and 3PP package/library versions</strong> for CadenzaFlow v1.1.0 (equivalent to Camunda 7.24) (JDK, app server, DB). Some examples: Java 11/17/21; Tomcat 9/10.1; PostgreSQL 14-17; etc.</p>
+</li>
+<li><strong>Sources:</strong> <a href="https://docs.cadenzaflow.com/manual/latest/introduction/supported-environments/">docs.cadenzaflow.com/supported-environments</a> OR <a href="https://docs.camunda.org/manual/latest/introduction/supported-environments/">docs.camunda.org/supported-environments</a> (equivalent to CadenzaFlow documentation)</li>
+<li>
+<p><strong>!!! Important:</strong>  Any environment mismatch is a to be planned and MUST be addressed/resolved <strong>prior to MoP Execution.</strong> Please refer to next <strong>3. MoP Blueprint</strong> section <strong>Pre-Checks</strong></p>
+</li>
+<li>
+<p><strong>External Task Clients Lib/Package Version Alignment:</strong> Workflows BPMNs with Service Tasks of type=External allows execution/handling of task logic to be executed outside of Workflow Engine (remote). Such clients can be developed with Java or NodeJS.</p>
+</li>
+<li>Java External Task clients. Camunda provides Spring Boot Starter for the External Task Clients. Check for Springboot version compatibility.<ul>
+<li><strong>Sources:</strong> <a href="https://docs.cadenzaflow.com/manual/latest/update/">docs.cadenzaflow.com/spring-boot-integration/version-compatibility</a> OR <a href="https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/version-compatibility">docs.camunda.org/spring-boot-integration/version-compatibility</a> (equivalent to CadenzaFlow documentation)</li>
+</ul>
+</li>
+<li>
+<p>Javascript/NodeJS External Task clients.  Check for NodeJS version compatibility.</p>
+<ul>
+<li><strong>Sources:</strong> <a href="https://docs.cadenzaflow.com/manual/latest/user-guide/ext-client/compatibility-matrix/">docs.cadenzaflow.com/ext-client-NodeJS/compatibility-matrix/</a> OR <a href="https://docs.camunda.org/manual/latest/user-guide/ext-client/compatibility-matrix/">docs.camunda.org/ext-client-NodeJS/compatibility-matrix/</a> (equivalent to CadenzaFlow documentation)  </li>
+</ul>
+</li>
+<li>
+<p><strong>Plan database migrations:</strong> Equivalent to Camunda, CadenzaFlow requires <strong>sequential DB schema updates</strong> per minor; via Liquibase with curated changelog (available since 7.16) prepare the liquibase execution envrinment to apply them in order. </p>
+</li>
+<li><strong>Sources:</strong> <a href="https://docs.cadenzaflow.com/manual/latest/installation/database-schema/">docs.cadenzaflow.com/database-schema</a> OR <a href="https://docs.camunda.org/manual/latest/installation/database-schema/">docs.camunda.org/database-schema</a> (equivalent to CadenzaFlow documentation)</li>
+<li><strong>Heads-up about current Camunda in-production version:</strong> Camunda 7.24 is the <strong>last minor</strong> of Camunda 7 (CE reaches end of updates around Oct 2025). CadenzaFlow v1.1.0 is equivalent to Camunda 7.24. </li>
+<li>
+<p>So, if current Camunda version in production is already v7.24, THEN no need for running DB migration scripts. Leaving the already Camunda 7.24 level DB intact, and upgrading the Workflow Engine node executables with CadenzaFlow v1.1.0 is enough. </p>
+</li>
+<li>
+<p><strong>Risk &amp; rollback:</strong> For muti-level sequential DB upgrades, CadenzaFlow (equivalent to Camunda) guarantees <strong>DB schema backward compatibility</strong> (old engine working on new schema is OK), which simplifies rollback to previous binaries if needed. Still plan for a full DB backup/restore. </p>
+</li>
+</ul>
+<h2 id="23-raci">2.3. RACI</h2>
+<p>The following is a skeleton RACI. The following RACI must be tailored and approved to match your IT organization.</p>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align: center;">Change Mgr</th>
+<th style="text-align: center;">DB Admin</th>
+<th style="text-align: center;">App/Workflow Engine Owner</th>
+<th style="text-align: center;">Platform/Site Engineer</th>
+<th style="text-align: center;">QA/Test</th>
+<th style="text-align: center;">Security</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approve window</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr>
+<td>Pre-checks &amp; freeze</td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr>
+<td>DB backup &amp; Liquibase run</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;"><strong>R/A</strong></td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr>
+<td>Node rotation / deploy</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>R/A</strong></td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr>
+<td>Post-deploy validation</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;"><strong>R/A</strong></td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr>
+<td>Decision (Go/No-Go)</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">C</td>
+</tr>
+<tr>
+<td>Rollback (if needed)</td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">I</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>R</strong> = Responsible • <strong>A</strong> = Accountable • <strong>C</strong> = Consulted • <strong>I</strong> = Informed</p>
+</blockquote>
+<h2 id="24-prove-in-staging-dry-run-rehearsal">2.4. Prove in Staging (dry-run &amp; rehearsal)</h2>
+<p>Regarding the detailed MoP Blueprint provided in next section <strong>3. MoP Blueprint</strong>, consider planning for prove in staging and rehersals.</p>
+<ol>
+<li><strong>Clone prod setup</strong> (same JDK, DB major/minor, app server, plugins, telemetry, history levels, auth).</li>
+<li><strong>Run/Execute required environment, 3PP package/library version upgrades</strong> as per details provided in previous section 2.2.). </li>
+<li><strong>Run DB migrations sequentially</strong> (7.21 → 7.22 → 7.23 → 7.24)</li>
+<li><strong>Build/re-package external Task worker/handler client app(s):</strong>  Build/package with CadenzaFlow v1.1 (same as Camunda 7.24) compliant versions of SpringBoot and/or NodeJS as per details provided in previous section 2.2. </li>
+<li><strong>Functional &amp; non-functional tests:</strong> deploy typical processes, start/complete instances, check job executor throughput, timers, history writes, incidents, authorization checks, and any Cockpit/Admin webapp plugins.</li>
+<li><strong>Rehearsal activities</strong>: Detail and plan for additional rehearsal activities of the MOP Blueprint detailed in next section <strong>3. MoP Blueprint</strong> below (simulate Load Balancer drain, node rotation), measure timings.</li>
+</ol>
+<hr />
+<h1 id="3-reference-scenario-and-workflow-landscape">3. Reference Scenario and Workflow Landscape</h1>
+<p>For the sake of practicality, clarity and exemplification, the MoP is written considering the following scenario and assumptions. Typically the actual deployments may be simpler or may slightly vary and thus the MoP provided in further sections is expected to be adapted by the relevant IT teams to suit the actual production environment.</p>
+<ul>
+<li>No Environment 3PP component/library version upgrade details as detailed in previous section <strong>2. Preparation before MoP Execution</strong> provided in this MoP. As a prerequisite, all related prerequisite alignment has to be executed business as usual, prior to the application of this MoP.</li>
+<li>An upgrade is envisioned from Camunda Engine binaries from <strong>7.20 → CadenzaFlow v1.1.0 (equivalent to Camunda7.24)</strong>. No new features used until all nodes are on CadenzaFlow v1.1.0.</li>
+<li><strong>DB schema upgraded explicitly&amp;sequentially</strong> to CadenzaFlow v1.1.0 using Liquibase (equivalent to Camunda 7.24). More clearly, if current version is 7.20, sequentially all DB upgrades will be executed sequentially using the Liquibase and provided set of scripts: 7.20 → 7.21, 7.21 → 7.22, 7.22 → 7.23, 7.23 → 7.24 (CadenzaFlow v1.1 level)</li>
+<li>An upgrade is envisioned on a 6 node Camunda Cluster, where:</li>
+<li>WebApps-Only Node-1:  Node hosts only Camunda Web Apps (Admin/Tasklist/Cockpit)</li>
+<li>WebApps-Only Node-2:  Node hosts only Camunda Web Apps (Admin/Tasklist/Cockpit)</li>
+<li>API / Job Executor Node-3:  Node hosts Camunda http-REST APIs,  Job Acquisition/Execution</li>
+<li>API / Job Executor Node-4:  Node hosts Camunda http-REST APIs,  Job Acquisition/Execution</li>
+<li>Worker Only/Job Executor Node-5: Node hosts only  Job Acquisition/Execution</li>
+<li>Worker Only/Job Executor Node-6: Node hosts only  Job Acquisition/Execution</li>
+<li>Rollout style is described for a cluster deployment. But if it is embedded/single node, this MoP can be applied for that single node in a simplified manner.</li>
+</ul>
+<p>The following diagram depicts the envisioned sample scenario as detailed above.</p>
+<p><img alt="Figure-1: Workflow Landscape Overview" src="../assets/Workflow_Landscape_OV.png" /></p>
+<p><strong>Figure: Workflow Landscape Overview</strong></p>
+<hr />
+<h1 id="4-mop-upgrade">4. MoP Upgrade</h1>
+<ul>
+<li><strong>Change ID#:</strong> ___</li>
+<li><strong>Environment(s):</strong> [Dev/Test/PreProd/Prod]</li>
+<li><strong>Region/Upgrade Window:</strong></li>
+<li><strong>Timezone:</strong> ____</li>
+<li><strong>Start:</strong> [YYYY/MM/DD HH:MM:SS ]</li>
+<li><strong>End:</strong> [YYYY/MM/DD HH:MM:SS ]</li>
+<li><strong>Rollout Style:</strong> </li>
+<li>[ ] Rolling (cluster)  </li>
+<li>[ ] Maintenance window (single node)</li>
+<li><strong>Approver:</strong> ___</li>
+</ul>
+<h2 id="41-pre-checks-must-be-all-green">4.1. Pre-Checks (must be <strong>ALL green</strong>)</h2>
+<ul>
+<li>[ ] <strong>Backups:</strong> Verified restore of the Camunda DB snapshot.</li>
+<li>[ ] <strong>Freeze:</strong> Pause new BPMN/DMN deployments &amp; mass operations during upgrade window.</li>
+<li>[ ] <strong>Env compatibility:</strong> JDK, app server, drivers, and DB versions updated to supported by 7.24.</li>
+<li>[ ] <strong>Artifacts staged:</strong> CadenzaFlow v1.1 app images/bundles; Liquibase CLI; etc.</li>
+<li>[ ] <strong>Auto-DDL off:</strong><code>databaseSchemaUpdate=false</code>. Check if databaseSchemaUpdate=false in ALL apps so that Camunda doesn’t try to create/alter tables itself</li>
+<li>IF Springboot =&gt; application.yaml
+    <div class="highlight"><pre><span></span><code><span class="nt">camunda</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">bpm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">database</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">schema-update</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></li>
+<li>IF standalone Tomcat =&gt; bpm-platform.xml
+    <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&lt;process-engine</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;default&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;databaseSchemaUpdate&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/property&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- other properties --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/process-engine&gt;</span>
+</code></pre></div></li>
+<li>IF embedded =&gt; process-engine.cfg.xml
+    <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&lt;beans&gt;</span>
+<span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;processEngineConfiguration&quot;</span>
+<span class="w">          </span><span class="na">class=</span><span class="s">&quot;org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;databaseSchemaUpdate&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="cm">&lt;!-- other properties --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/bean&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></li>
+<li>IF K8s / Containerized SpringBoot =&gt; env var mapped to SPringboot property
+    <div class="highlight"><pre><span></span><code><span class="w">  </span>-e<span class="w"> </span><span class="nv">CAMUNDA_BPM_DATABASE_SCHEMA_UPDATE</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div></li>
+<li>[ ] <strong>Monitoring:</strong> Dashboards/alerts for job executor, incidents, external task failures running/ready.</li>
+<li>[ ] <strong>Test plan ready:</strong> Synthetic flows + go/no-go criteria (see Acceptance below).</li>
+</ul>
+<hr />
+<h2 id="42-execution-tick-as-you-go">4.2. Execution (tick as you go)</h2>
+<h3 id="step-1-database-schema-upgrade-no-binary-change">Step-1: Database Schema Upgrade (no binary change)</h3>
+<p>The first step consists of updating the database schema to CadenzaFlow v1.1.0 (equivalent to Camunda 7.24. Information on where to find the update scripts and how to apply them can be found in the CadenzaFlow documentation on how to perform updates. </p>
+<p>When this step completed, the database schema version will be upgraded to CadenzaFlow v1.1 level (Camunda 7,24) while the Camunda Nodes are still in their current versions (not upgraded).</p>
+<ul>
+<li>[ ] 1. <strong>Announce start;</strong> set change to <strong>In Progress</strong>.</li>
+<li>[ ] 2. <strong>Pause all risky traffic</strong> (bulk ops/migrations) during upgrade.</li>
+<li>[ ] 3. <strong>Backup DB</strong> (record snapshot ID/TS: ___).</li>
+<li>[ ] 4. <strong>Liquibase update</strong> to 7.24 (sequential):</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1"># Preconditions:</span>
+<span class="w">  </span><span class="c1"># - Production Camunda version is 7.minor (minor ≥ 16). See section 2. for details.</span>
+
+<span class="w">  </span>LET<span class="w"> </span>currentMinor<span class="w">  </span>←<span class="w"> </span><span class="o">[</span><span class="nb">read</span><span class="w"> </span>from<span class="w"> </span>Production<span class="o">]</span><span class="w">      </span><span class="c1"># e.g., 20 for 7.20</span>
+
+<span class="w">  </span><span class="c1">## BASELINE liquibase to be on the safe side</span>
+<span class="w">  </span>liquibase<span class="w"> </span>--defaultsFile<span class="o">=</span>liquibase.properties<span class="w"> </span>changelogSyncToTag<span class="w"> </span><span class="m">7</span>.20.0
+
+<span class="w">  </span><span class="c1">## Preview everything needed to reach 7.24</span>
+<span class="w">  </span>liquibase<span class="w"> </span>--defaultsFile<span class="o">=</span>liquibase.properties<span class="w"> </span>updateToTagSql<span class="w"> </span><span class="m">7</span>.24.0<span class="w"> </span>&gt;<span class="w"> </span>/tmp/camunda-7.24.sql
+
+<span class="w">  </span><span class="c1">## Execute the migration</span>
+<span class="w">  </span>liquibase<span class="w"> </span>--defaultsFile<span class="o">=</span>liquibase.properties<span class="w"> </span>updateToTag<span class="w"> </span><span class="m">7</span>.24.0
+</code></pre></div>
+<ul>
+<li>[ ] 5. <strong>Go/No-Go #1</strong> (DB only). If <strong>No-Go</strong>, restore snapshot OR execute <strong>Rollback Plan</strong> below.</li>
+</ul>
+<p><br><br></p>
+<p>The following Diagram depicts the impacted sub domain in this step.</p>
+<p><img alt="Upgrade Step-1" src="../assets/Upgrade_Step1.png" /></p>
+<p><strong>Figure: Upgrade Step-1</strong></p>
+<h3 id="step-2-application-nodes-upgrade-by-pools-of-node-types">Step-2: Application / Nodes Upgrade (by pools of node types)</h3>
+<p><strong>Considering a rolling update and the MoP Blueprint: Reference Scenario detailed in section 3.1 the order in which nodes considering their types will be as the following:</strong>
+* <strong>Step-2.1. WebApps Only Nodes Upgrade</strong> ( we prefer to assure at least one Job Executor active at all times)
+* <strong>Step-2.2. REST API+Worker Nodes Upgrade</strong>
+* <strong>Step-2.3. Worker Only Nodes Upgrade</strong></p>
+<h4 id="step-21-webapps-only-nodes-upgrade">Step-2.1: WebApps Only Nodes Upgrade</h4>
+<p>For nodes <strong>Node-1, Node-2</strong> accessible via LoadBalancer behind WebApps LB-Pool with sticky sessions:
+* [ ] <strong>1. Prep:</strong> Ensure databaseSchemaUpdate=false is live in configs. Optionally reduce session TTL (e.g., to 5-10 min) before the window.
+* [ ] <strong>2. Drain Node from LB</strong> (no new sessions); wait until active sessions ≤ threshold or TTL expires.
+* [ ] <strong>3. Stop Node:</strong> Stop service/shutdown
+* [ ] <strong>4. Deploy CadenzaFlow on Node</strong>; start service with <strong>WebApps Only</strong> config.
+* [ ] <strong>5. Smoke test Node:</strong> login to Cockpit/Tasklist, check version banner, validate plugins.
+* [ ] <strong>6. Re-add Node to LB;</strong> Observe X min (http status codes 200/5xx, UX checks).
+* [ ] <strong>7. Repeat steps 2-6 for next Node;</strong> exit if ALL Nodes completed</p>
+<p>The following Diagram depicts the impacted sub domain in this step.</p>
+<p><img alt="Upgrade Step-2.1" src="../assets/Upgrade_Step2.1.png" /></p>
+<p><strong>Figure: Upgrade Step-2.1</strong></p>
+<h4 id="step-22-rest-apiworker-nodes-upgrade">Step-2.2: REST API+Worker Nodes Upgrade</h4>
+<p>For nodes <strong>Node-3, Node-4</strong> accessible via LoadBalancer behind REST-API LB-Pool with NO sticky sessions:
+* [ ] <strong>1. Ensure capacity:</strong> For rolling live upgrade, ensure there is at least one other Worker Node (Node with Job Executor) remains active at all times (either oneOf {Node-3, Node-4} or oneOf {Node-5, Node-6}).
+* [ ] <strong>2. Drain Node from LB</strong>; wait for in-flight requests to complete (zero active).
+* [ ] <strong>3. Stop Node:</strong> Stop service/shutdown (or quiesce JobExecutor first if a controlled shutdown is used/applicable)
+* [ ] <strong>4. Deploy CadenzaFlow on Node</strong>; start service with <strong>REST API+Worker</strong> config.
+* [ ] <strong>5. Smoke test Node:</strong>
+    - REST: <code>GET /engine</code>, start a trivial process instance, <code>GET /engine/version</code>.
+    - JobExecutor: monitor job acquisition/backlog, failed jobs, incident rate for X min.
+* [ ] <strong>6. Re-add Node to LB;</strong> Observe X min ((throughput, errors, incidents).
+* [ ] <strong>7. Repeat steps 2-6 for next Node;</strong> exit if ALL Nodes completed</p>
+<p>The following Diagram depicts the impacted sub domain in this step.</p>
+<p><img alt="Upgrade Step-2.2" src="../assets/Upgrade_Step2.2.png" /></p>
+<p><strong>Figure: Upgrade Step-2.2</strong></p>
+<h4 id="step-23-worker-only-nodes-upgrade">Step-2.3: Worker Only Nodes Upgrade</h4>
+<p>For nodes <strong>Node-5, Node-6</strong> (no LB-Load Balancer; these nodes are Worker/JobExecutor only)
+* [ ] <strong>1. Ensure capacity:</strong> For rolling live upgrade, ensure there is at least one other Worker Node (Node with Job Executor) remains active at all times (either oneOf {Node-3, Node-4} or oneOf {Node-5, Node-6}).
+* [ ] <strong>2. Isolate Node</strong>; mark under maintenance in monitoring; stop service (or quiesce JE first if you use a controlled shutdown).
+* [ ] <strong>3. Stop Node:</strong> Stop service/shutdown (or quiesce JobExecutor first if a controlled shutdown is used/applicable)
+* [ ] <strong>4. Deploy CadenzaFlow on Node</strong>; start service with <strong>Worker Only</strong> config.
+* [ ] <strong>5. Smoke test Node:</strong>
+    - JobExecutor: monitor job acquisition/backlog, failed jobs, incident rate for X min.
+* [ ] <strong>6. Repeat steps 2-5 for next Node;</strong> exit if ALL Nodes completed</p>
+<p>The following Diagram depicts the impacted sub domain in this step.</p>
+<p><img alt="Upgrade Step-2.3" src="../assets/Upgrade_Step2.3.png" /></p>
+<p><strong>Figure: Upgrade Step-2.3</strong></p>
+<h3 id="step-3-project-external-apps-update">Step-3: Project External APPs Update</h3>
+<h4 id="step-31-update-external-taskhandler-client-apps-align-upgrade-restart">Step-3.1: Update External Task/Handler Client APPs (align, upgrade, restart)</h4>
+<p><strong>Scope:</strong> All project specific external task Task/Handler client apps (Java/Spring Boot or Node.js) that fetch-and-lock and execute work in their own process memory.</p>
+<h5 id="prepare-align-no-restarts-yet">Prepare &amp; align (no restarts yet)</h5>
+<ul>
+<li>[ ] <strong>Inventory</strong> workers by topic(s), namespace, and deployment (Kubernetes/VM/service).  </li>
+<li>[ ] <strong>External Task Clients Lib/Package Version Alignment:</strong>  </li>
+<li><strong>Java:</strong> set External Task Client library to <strong>7.24.x</strong> (match engine).  </li>
+<li><strong>Node.js:</strong> set package version to <strong>7.24.x</strong> (match engine).  </li>
+<li>[ ] <strong>Runtime baselines:</strong> confirm supported <strong>JDK LTS</strong> for Java workers and <strong>Node.js LTS</strong> for JS workers.  </li>
+<li>[ ] <strong>Config sanity:</strong> <code>baseUrl</code> points to <strong>REST LB</strong>; TLS/certs OK; auth tokens/creds valid.  </li>
+<li>[ ] <strong>Fetch-and-lock parameters:</strong> standardize <code>maxTasks</code>, <code>lockDuration</code>, <code>asyncResponseTimeout</code>, and backoff/jitter.  </li>
+<li>[ ] <strong>Observability:</strong> dashboards/alerts for worker success/failure counts, retries, and latency.</li>
+</ul>
+<h5 id="rolling-upgrade-per-app">Rolling upgrade (per APP)</h5>
+<ul>
+<li>[ ] <strong>Canary one APP deployment at a time</strong><br />
+  1) scale down (or drain) one instance;<br />
+  2) deploy new build with aligned client lib/package + runtime;<br />
+  3) start; confirm <strong>fetch-and-lock → complete</strong> loop succeeds on a known task.  </li>
+<li>[ ] <strong>Ramp:</strong> roll remaining replicas gradually; keep at least <strong>one healthy worker per critical topic</strong> at all times.  </li>
+<li>[ ] <strong>Throughput guardrails:</strong> temporarily reduce <code>maxTasks</code> during rollout; restore once stable.  </li>
+<li>[ ] <strong>Error budget:</strong> watch <code>BPMN Error</code>/<code>Incident</code> spikes; halt ramp if thresholds are exceeded.</li>
+</ul>
+<h5 id="worker-readiness-pre-validation">Worker readiness (pre-validation)</h5>
+<ul>
+<li>[ ] <strong>Topic coverage:</strong> each <strong>critical topic</strong> has ≥1 healthy worker consuming.  </li>
+<li>[ ] <strong>Functional probe:</strong> canary task <strong>fetch-and-lock → complete</strong> succeeds.  </li>
+<li>[ ] <strong>Health signals:</strong> liveness/readiness green; no auth/timeout noise in logs.  </li>
+<li>[ ] <strong>Config pinned:</strong> versions/params checked in to IaC (Helm/Ansible/Terraform); image tags pinned.</li>
+</ul>
+<h4 id="step-32-update-other-project-specific-operational-client-apps-if-exists">Step-3.2: Update Other Project Specific Operational Client APPs if exists</h4>
+<p><strong>!!! This step is optional if DBSS/DNext DPANO-Panaromic Operations UI is being used for and2end process management operations.</strong></p>
+<ul>
+<li><strong>Scope:</strong> All project specific OPERATIONAL client APPs that use Camunda http-REST Operational API and now will be accessing the already deployed/activate (via Step-2) CadenzaFlow REST-APIs</li>
+<li><strong>Approach</strong>: Follow similar approach to Step-3</li>
+</ul>
+<h4 id="step-33-update-other-project-specific-humanuser-task-client-apps-if-exists">Step-3.3: Update Other Project Specific Human/User Task Client APPs if exists</h4>
+<p><strong>!!! This step is optional if DBSS/DNext DBO-UserTicket-UI (BackOffice-UI) is being used for and2end user task interaction management.</strong></p>
+<ul>
+<li><strong>Scope:</strong> All project specific Human/User Task Mgmt client APPs that use Camunda http-REST Operational (/task related) API subset and now will be accessing the already deployed/activate (via Step-2) CadenzaFlow REST-APIs</li>
+<li><strong>Approach</strong>: Follow similar approach to Step-3</li>
+</ul>
+<p>The following Diagram depicts the impacted sub domain in this step.</p>
+<p><img alt="Upgrade Step-3" src="../assets/Upgrade_Step3.png" /></p>
+<p><strong>Figure: Upgrade Step-3</strong></p>
+<hr />
+<h3 id="step-4-validation-handback">Step-4 - Validation &amp; Handback</h3>
+<ul>
+<li>[ ] <strong>WebApps Cockpit/Admin/TaskList &amp; plugin checks:</strong> access OK; plugin UIs render; version banner shows CadenzaFlow v1.1  </li>
+<li>[ ] <strong>Regression-test a representative subset of critical workflows</strong> by starting process instances and verifying end-to-end execution (tasks, timers, external tasks, history). <em>(Process definition keys: ___)</em>  </li>
+<li>[ ] <strong>System-wide soak (10-15 min):</strong> failed jobs/incidents stable; retries normal; worker error rate steady; job backlog not growing.  </li>
+<li>[ ] <strong>Throughput restore:</strong> undo any temporary external task/handler client throttling settings during the rollout. For example;</li>
+<li>maxTasks: set the worker’s “tasks per fetch” back to its normal value (e.g., from 5 → 20).</li>
+<li>backoff: set the worker’s delay between polls/errors back to normal (e.g., from 2000 ms → 200 ms).</li>
+<li>[ ] <strong>Check/Confirm SLO-Objectives</strong> (95%–99%) hold = after restoring normal throughput, verify your latency/error targets are still met</li>
+<li>end-to-end latency for key workflows are ≤ your targets.</li>
+<li>Error rate/5xx, failed jobs/incidents, and job backlog remain stable (not growing).</li>
+<li>[ ] <strong>Unfreeze deployments</strong> once every node is on 7.24.  </li>
+<li>[ ] <strong>Go/No-Go #2:</strong> If <strong>No-Go</strong>, execute <strong>Rollback Plan</strong> below.</li>
+<li>[ ] <strong>Close change</strong>; circulate completion note + metrics.</li>
+</ul>
+<hr />
+<h2 id="43-post-verifications-gono-go-criteria">4.3. Post verifications; Go/No-Go Criteria</h2>
+<p>The following are examples. The exact list of items must be determined by project teams. 
+All items below must be <strong>GREEN</strong>. If any item fails or <strong>No-Go</strong>, execute <strong>Rollback Plan</strong> below.</p>
+<p>FOR EACH impacted APP, check</p>
+<h3 id="functionality">Functionality</h3>
+<ul>
+<li>[ ] <strong>All automated unit tests pass.</strong></li>
+<li>[ ] <strong>All automated system/end2end product tests.</strong></li>
+<li>[ ] <strong>Outcomes match expected results</strong> (response payloads, follow-up expected checks, task completion, variables, message/timer paths, etc.).  </li>
+<li>[ ] <strong>end-to-end latency is as expected</strong> 95% of requests <strong>≤ ___ ms</strong>.  </li>
+<li>[ ] <strong>Timers</strong> fire within <strong>± ___ sec</strong> of schedule; no drift accumulation.  </li>
+<li>[ ] <strong>History/audit</strong> events persisted and visible in queries/Cockpit.</li>
+</ul>
+<h3 id="reliability-incidents">Reliability &amp; incidents</h3>
+<ul>
+<li>[ ] <strong>Incidents/min ≤ ___</strong>, <strong>Failed jobs = 0</strong>, <strong>Retries stable</strong> after <strong>___ min</strong> soak.  </li>
+<li>[ ] <strong>Job backlog</strong> not growing; acquisition cycles steady.  </li>
+<li>[ ] <strong>External task task/handler client APPs</strong>: success rate ≥ <strong>___%</strong>; no auth/timeout spikes.</li>
+</ul>
+<h3 id="performance-capacity">Performance &amp; capacity</h3>
+<ul>
+<li>[ ] <strong>Throughput</strong> under representative load ≥ <strong>___ rps</strong> (or <strong>___ process instances/min</strong>).  </li>
+<li>[ ] <strong>DB CPU/IO within safe headroom (&lt; ___%)</strong>.</li>
+</ul>
+<h3 id="security-access">Security &amp; access</h3>
+<ul>
+<li>[ ] No auth/authorization regressions on <strong>REST/Cockpit/Admin</strong>; SLOs unchanged.  </li>
+<li>[ ] TLS/certs valid; no new warnings in logs.</li>
+</ul>
+<h3 id="operations-observability">Operations &amp; Observability</h3>
+<ul>
+<li>[ ] Dashboards/alerts healthy (errors, latency, queue depth, GC).  </li>
+<li>[ ] No elevated 5xx from REST LB; WebApps UX smoke passes.</li>
+</ul>
+<h3 id="evidence-sign-off">Evidence &amp; sign-off</h3>
+<ul>
+<li>
+<p>[ ] Attach links/screenshots: dashboards, logs, <code>ACT_GE_SCHEMA_LOG</code> top row, Liquibase tag.  </p>
+</li>
+<li>
+<p><strong>Sign-offs:</strong> App Owner ✅ • SRE/Platform ✅ • DBA ✅ • QA/Test ✅</p>
+</li>
+</ul>
+<h3 id="no-go-rollback-decision">NO-GO / Rollback Decision</h3>
+<ul>
+<li><strong>Triggers Rollback:</strong> failed smoke tests, incident spike (&gt; ___/min), growing job backlog, auth/timeout storms, or DB migration errors.  </li>
+<li><strong>Timebox:</strong> if stabilization exceeds <strong>___ min</strong> after any pool rollout, <strong>initiate rollback</strong>.</li>
+<li><strong>If NO-GO &amp; Rollback:</strong> Notify upgrade war-room/stakeholders about NO-GO &amp; Rollback decision.</li>
+<li><strong>If SUCCESS:</strong> Notify upgrade war-room/stakeholders about GO decision.</li>
+</ul>
+<hr />
+<h1 id="5-mop-rollback">5. MoP Rollback</h1>
+<h2 id="51-pre-checks">5.1. Pre-Checks</h2>
+<ul>
+<li>[ ] <strong>Freeze:</strong> Pause new BPMN/DMN deployments &amp; mass operations during *upgrade window. (already done prior to upgrade, see section 4.1.)</li>
+<li>[ ] <strong>Snapshot logs/metrics for forensics</strong>; record current <code>ACT_GE_SCHEMA_LOG</code> top row and Liquibase tag.  </li>
+<li>[ ] <strong>Notify</strong> upgrade war-room/stakeholders about Rollback start.</li>
+</ul>
+<h2 id="52-binary-backout-or-full-restore">5.2. Binary backout or Full restore</h2>
+<p>Determine if binary <strong>Binary backout</strong> or <strong>Full restore</strong></p>
+<h3 id="521-binary-backout">5.2.1. Binary backout</h3>
+<ul>
+<li>[ ] <strong>Backout Order:</strong> (prioritize restoring stable job execution)</li>
+<li>[ ] REST API+Worker Nodes</li>
+<li>[ ] Worker-Only Nodes</li>
+<li>[ ] WebApps Only Nodes</li>
+<li>Applicable forREST API nodes and WebApps nodes, for each LB pool: <strong>drain → deploy 7.20 images → start → smoke → re-add to LB</strong>. (reverse of approach used for upgrade detailed in orevious section 4.)</li>
+<li>[ ] <strong>Keep upgraded schema; do not</strong> run Liquibase rollback.  </li>
+<li>[ ] <strong>External apps</strong>; External task/handler client APPs, and if exists other project specific Operational Client APPs, and if exists other project specific Human/User Task Client APPs <strong>can stay on 7.24 client libs</strong> (7.x compatible). </li>
+<li>Only if incompatibilities observed (such as there is a BIG delta between CadenzaFlow v1.1/Camunda 7.24 versions versus previous product Client Apps Camunda version), <strong>downgrade clients</strong> to their previous 7.x during the same wave.</li>
+</ul>
+<h3 id="522-full-restore">5.2.2. Full restore</h3>
+<p><strong>Alternatively, instead of 5.2 Binary backout, a Full restore may be preferred.</strong>
+- <strong>Stop all apps</strong> (REST, JE, WebApps, external workers).<br />
+- <strong>Restore DB snapshot [snapshot ID ___]</strong> (includes <code>DATABASECHANGELOG*</code> tables).<br />
+- <strong>Verify <code>ACT_GE_SCHEMA_LOG</code> shows pre-upgrade version</strong>; Liquibase state matches.
+  - ACT_GE_SCHEMA_LOG is the table where Camunda records each schema update. Run following query to make sure that restored DB snapshot is OK
+  <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">VERSION_</span><span class="p">,</span><span class="w"> </span><span class="n">TIMESTAMP_</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">ACT_GE_SCHEMA_LOG</span>
+<span class="w">  </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">TIMESTAMP_</span><span class="w"> </span><span class="k">DESC</span>
+<span class="w">  </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">-- Expect VERSION_ = &#39;7.20.x&#39; before upgrade (or after rollback)</span>
+</code></pre></div>
+- <strong>Redeploy Camunda 7.20 version</strong> apps to nodes; bring up pools in this order: WebApps Only Nodes → REST API+Worker Nodes → Worker Only Nodes.<br />
+- <strong>Re-enable project specific APPs and project specific external task/handler client APPs last</strong>; verify fetch-and-lock.</p>
+<h2 id="53-post-verifications">5.3. Post verifications</h2>
+<ul>
+<li>[ ] Start <strong>baseline test flow</strong>; confirm incidents = 0, timers fire, job executor stable, backlog not growing.  </li>
+<li>[ ] Cockpit/Admin reachable; version banner shows <strong>7.20.x</strong>.  </li>
+<li>[ ] Close change as <strong>Rolled Back</strong>; attach metrics, root-cause notes, and next-steps plan.</li>
+<li>[ ] Notify upgrade war-room/stakeholders about NO-GO &amp; Rollback decision.</li>
+</ul>
+<h2 id="54-guardrails-notes">5.4. Guardrails &amp; notes</h2>
+<ul>
+<li>Prefer <strong>snapshot restore</strong> over <code>liquibase rollback</code> unless you have authored rollbacks for every changeSet.  </li>
+<li>Keep <code>databaseSchemaUpdate=false</code>- don't let Camunda engines attempt schema changes during rollback.  </li>
+<li>Document the <strong>forward-fix plan</strong> (what must change before the next upgrade attempt) and schedule a new window.</li>
+</ul>
+<hr />
+<h1 id="6-dbssdnext-transition-strategy-mop-and-release-validations-gono-go-to-cadenzaflow">6. DBSS/DNext: Transition Strategy, MoP and Release Validations (Go/No-Go) to CadenzaFlow</h1>
+<h2 id="61-dbssdnext-reference-scenarion-and-workflow-landscape">6.1. DBSS/DNext Reference Scenarion and Workflow Landscape</h2>
+<p>The detailed MoP blueprint and reference scenario provided in previous sections also APPLY to DBSS/DNext.</p>
+<p>Compared to previous <strong>Figure: Workflow Landscape Overview</strong> provided in section 3. as a reference Landscape, the same principles also apply for DBSS/DNext. The following diagram depicts the workflow landscape from DBSS/DNext perspective. It shall be noted that considering the impacted components inventory for DBSS/DNext, there is NO direct dependency of DNext components to Camunda APIs. So, adaptation of <strong>DNext Decoupling Common Framework Components</strong> decouples the higher level of actual BSS DBSS/DNExt App Components like Order Mgmt, Operational Web UIs etc.</p>
+<p><img alt="Figure: DNext Workflow Landscape Overview" src="../assets/DNext_Workflow_Landscape_OV.png" /></p>
+<p><strong>Figure: DNext Workflow Landscape Overview</strong></p>
+<p>So, just like for any Camunda upgrade that is certified and deaclared to be supported for DBSS/DNext, Cadenzaflow will also be verified as detailed in next section prior to DBSS/Dnext Release that supports CadenzaFlow.</p>
+<h2 id="62-dbssdnext-release-verifiations">6.2. DBSS/DNext Release Verifiations</h2>
+<p>In line with the DBSS/DNext specific workflow landscape, after the execution of the MoP blueprint as detailed in previous sections, the following will be tested prior to DNext release that supports CadenzaFlow.</p>
+<h3 id="dnext-decoupling-common-framework-components-validations">DNext Decoupling Common Framework Components Validations</h3>
+<ul>
+<li><strong>!!! SINCE ALL DBSS/DNext upper BSS/OSS business capability exposing API and Web UI layers depend on Common Framework Components, the completion of the validations in this section are vital and the MOST critical.</strong> </li>
+<li><strong>ALL OF THE FOLLOWING MUST PASS</strong></li>
+</ul>
+<h4 id="dbpm-operate-ms-validations">DBPM-Operate-MS Validations</h4>
+<ul>
+<li>[ ] <strong>All automated unit tests pass.</strong></li>
+<li>[ ] <strong>Component integration tests pass</strong>: All REST APIs exposed/served by DBPM-Operate-MS integrated to CadenzaFlow REST-APIs match expected results</li>
+<li>[ ] <strong>Outcomes match expected results</strong> (unit test response payloads, follow-up expected checks, variables, message/timer paths, etc.).  </li>
+<li>[ ] <strong>end-to-end latency is as expected</strong> 95% of requests <strong>≤ ___ ms</strong>.  </li>
+</ul>
+<h4 id="dbpm-usertask-ms-validations">DBPM-UserTask-MS Validations</h4>
+<ul>
+<li>[ ] <strong>All automated unit tests pass.</strong></li>
+<li>[ ] <strong>Component integration tests pass</strong>: All REST APIs exposed/served by DBPM-Operate-MS integrated to CadenzaFlow REST-APIs match expected results</li>
+<li>[ ] <strong>Outcomes match expected results</strong> (unit test response payloads, follow-up expected checks, task completion, variables, message/timer paths, etc.).  </li>
+<li>[ ] <strong>end-to-end latency is as expected</strong> 95% of requests <strong>≤ ___ ms</strong>.  </li>
+</ul>
+<h4 id="dnext-common-lib-validations">DNext Common-LIB Validations</h4>
+<ul>
+<li>[ ] <strong>All automated unit tests pass.</strong></li>
+<li>[ ] <strong>Component integration tests pass</strong>: Process instantiation, external task/handler client API calls</li>
+<li>[ ] <strong>Outcomes match expected results</strong> (unit test response payloads, follow-up expected checks, task completion, variables, message/timer paths, etc.).  </li>
+<li>[ ] <strong>end-to-end latency is as expected</strong> 95% of requests <strong>≤ ___ ms</strong>.</li>
+</ul>
+<h3 id="dnext-order-mgmt-apps-validations">DNext Order Mgmt Apps Validations</h3>
+<p>Via the DNext-Common-LIB decoupling these components from workflow management, these APPs act as external task/handler client APPs and are responsible for instantiating the Order ROOT DNext order-process, responsible for starting the catalog driven order fulfillment orchestration.</p>
+<p>FOR EACH-OFF { DPOM-OFS, DSOM-OFS, DROM-OFS }
+- [ ] <strong>1. All automated unit tests pass.</strong>
+- [ ] <strong>2. All end2end automated Order Mgmt Tests pass</strong>: As an example, single and a LOAD of orders generated on standard automated pre-release tests of DBSS/DNext that contains a complex order of sub order items
+  - Survelliance Bundle (with in-bundle dependency of sub bundle items)
+  - Additional 3 add-ons with cascade dependency
+  - Additional 3 add-ons with parallel dependency
+  - Other test orders that also generate nested (dependent) service and/or resource orders
+- [ ] <strong>3. Outcomes match expected results</strong> (orders fulfilled as expected, no BPMN errors, no incidents).<br />
+- [ ] <strong>4. end-to-end latency is as expected</strong> 95% of requests <strong>≤ ___ ms</strong>.<br />
+- [ ] <strong>5. end-to-end throughput as expected</strong> such as ** &gt; ___ TPS<strong>.<br />
+- [ ] </strong>6. CancelOrder: Apply 2.-5. for cancelOrder<strong>
+- [ ] </strong>7. In-Flight-OrderChange:<strong> Apply automated tests. Outcomes match expected results</strong> (in-flight-order change requests fulfilled as expected, no BPMN errors, no incidents).  </p>
+<h3 id="operations-observability-validations">Operations &amp; Observability Validations</h3>
+<ul>
+<li>[ ] <strong>DPANO-UI is accessible and can access CadenzaFlow</strong></li>
+<li>[ ] <strong>DPANO-UI tests</strong> Repeat/rerun a subset of some successful tests from <strong>DNext Order Mgmt Apps Validations</strong>. Verify:</li>
+<li>DPANO-UI can access all order information</li>
+<li>DPANO-UI can access all order related process instance information</li>
+<li>DPANO-UI can view executed/running provces instance diagrams</li>
+<li>DPANO-UI can access/alter variables of process instances</li>
+<li>DPANO-UI can suspend/resume/kill process instances</li>
+<li>DPANO-UI can access/manage process instance related errors/incidents</li>
+</ul>
+<h3 id="humanuser-task-backoffice-validations">Human/User Task (BackOffice) Validations</h3>
+<ul>
+<li>[ ] <strong>DBO-UserTicket-UI is accessible and can access CadenzaFlow</strong></li>
+<li>[ ] <strong>DBO-User-Ticket tests</strong> Run DNext release tests for human task managent (creating process instance with user tasks and backing forms configured). Verify:</li>
+<li>Generated Tasks accessible/viewed via DBO-UserTicket-UI</li>
+<li>Task can be claimed via DBO-UserTicket-UI</li>
+<li>Task can be completed via DBO-UserTicket-UI (interacting with backing form)</li>
+<li>Form Data  can be saved (without completion) via DBO-UserTicket-UI</li>
+<li>Saved From Dat for the task can be retrieved and Task can be completed via DBO-UserTicket-UI (interacting with backing form)</li>
+</ul>
+<h2 id="64-evidence-sign-off-gono-go-for-release">6.4. Evidence &amp; sign-off (Go/No-Go for release)</h2>
+<ul>
+<li>[ ] Test report: results, screenshots</li>
+<li>[ ] Go/No-Go for DBSS/DNext Release based on results</li>
+</ul>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2025 PiA-TEAM INC. USA<br> All rights reserved. Proprietary and confidential material. No part of this document may be reproduced, used or disclosed in any form without written permission of PiA-TEAM INC. All trademarks referenced are the property of their respective owners.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.expand", "navigation.sections"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../javascripts/external-links.js"></script>
+      
+    
+  </body>
+</html>
